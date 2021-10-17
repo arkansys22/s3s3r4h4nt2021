@@ -592,7 +592,13 @@ class Aspanel extends CI_Controller {
 			$proses = $this->As_m->edit('identitas', array('id_identitas' => 1))->row_array();
 			$data = array('record' => $proses);
 			$data['tag'] = $this->Crud_m->view_ordering('keyword','keyword_id','DESC');
+			if ($this->session->level=='1'){
 			cek_session_akses('identitaswebsite',$this->session->id_session);
+				}elseif ($this->session->level=='2'){
+				cek_session_akses_admin('identitaswebsite',$this->session->id_session);
+			}else{
+				
+			}
 			$this->load->view('backend/identitas/views', $data);
 		}
 	}

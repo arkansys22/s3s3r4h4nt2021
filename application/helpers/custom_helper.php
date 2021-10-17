@@ -2,7 +2,7 @@
 function cek_session_akses($id){
   $ci = & get_instance();
   $session = $ci->db->query("SELECT * FROM user WHERE user.id_session='$id'")->num_rows();
-  if ($session == '0' AND $ci->session->userdata('level') != '1' AND $ci->session->userdata('level') != '2'){
+  if ($session == '0' AND $ci->session->userdata('level') != '1'){
     redirect(base_url().'aspanel/home');
   }
 }
@@ -10,7 +10,7 @@ function cek_session_akses($id){
 function cek_session_akses_admin($id){
   $ci = & get_instance();
   $session = $ci->db->query("SELECT * FROM user WHERE user.id_session='$id'")->num_rows();
-  if ($session == '0' AND $ci->session->userdata('level') != '1'){
+  if ($session == '0' AND $ci->session->userdata('level') != '2'){
     redirect(base_url().'aspanel/home');
   }
 }
