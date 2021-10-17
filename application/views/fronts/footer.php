@@ -9,7 +9,7 @@
 									</div>
 							</div>
                 <div class="col-lg-3 col-md-6 mb-4 mb-lg-0">
-
+										<h6 class="widget_title"><?php echo $identitas->nama_website?></h6>
                     <p><?php echo $identitas->meta_deskripsi?></p>
                     <ul class="contact_info contact_info_light list_none">
                         <li>
