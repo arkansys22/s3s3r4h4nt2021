@@ -3423,8 +3423,6 @@ class Aspanel extends CI_Controller {
 				if ($this->session->level=='1'){
 					cek_session_akses('divisi',$this->session->id_session);
 					$data['record'] = $this->Crud_m->view_where_ordering('divisi',array('divisi_status'=>'publish'),'divisi_id','DESC');
-					}elseif ($this->session->level=='2'){
-						cek_session_akses_admin('divisi',$this->session->id_session);
 					}else{
 					}
 

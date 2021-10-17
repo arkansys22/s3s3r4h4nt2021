@@ -119,6 +119,7 @@
             </p>
           </a>
         </li>
+        <?php  if($this->session->level=='1' OR $this->session->level=='2'){ ?>
         <li class="nav-item ">
           <a href="#" class="nav-link ">
             <i class="nav-icon far fas fa-fw fa-users"></i>
@@ -128,23 +129,25 @@
             </p>
           </a>
           <ul class="nav nav-treeview">
-
+            <?php  if($this->session->level=='1'){ ?>
             <li class="nav-item">
               <a href="<?php echo base_url(); ?>aspanel/divisi" class="nav-link ">
                 <i class="far fa-circle nav-icon"></i>
                 <p>Divisi / Posisi</p>
               </a>
             </li>
-
+            <?php } ?>
+            <?php  if($this->session->level=='1' OR $this->session->level=='2'){ ?>
             <li class="nav-item">
               <a href="<?php echo base_url(); ?>aspanel/data_karyawan" class="nav-link ">
                 <i class="far fa-circle nav-icon"></i>
                 <p>Data Karyawan</p>
               </a>
             </li>
-
+            <?php } ?>
           </ul>
         </li>
+        <?php } ?>
       <li class="nav-item ">
         <a href="<?php echo base_url(); ?>aspanel/profil" class="nav-link">
           <i class="nav-icon fas fa-cogs"></i>
