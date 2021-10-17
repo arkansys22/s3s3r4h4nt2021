@@ -434,7 +434,7 @@ class Aspanel extends CI_Controller {
 
 	function identitaswebsite()
 	{
-		cek_session_akses('identitaswebsite',$this->session->id_session) AND cek_session_akses('identitaswebsite',$this->session->id_session);
+
 		if (isset($_POST['submit'])){
 					$config['upload_path'] = 'assets/frontend/campur/';
 					$config['allowed_types'] = 'gif|jpg|png|JPG|JPEG';
@@ -592,6 +592,7 @@ class Aspanel extends CI_Controller {
 			$proses = $this->As_m->edit('identitas', array('id_identitas' => 1))->row_array();
 			$data = array('record' => $proses);
 			$data['tag'] = $this->Crud_m->view_ordering('keyword','keyword_id','DESC');
+			cek_session_akses('identitaswebsite',$this->session->id_session);
 			$this->load->view('backend/identitas/views', $data);
 		}
 	}
