@@ -28,32 +28,23 @@
 </head>
 <body>
 <?php $this->load->view('fronts/loader.php')?>
+<?php $this->load->view('fronts/home/v_popup')?>
 <?php $this->load->view('fronts/header.php')?>
 <?php $this->load->view('fronts/home/v_slider')?>
-<?php $this->load->view('fronts/home/v_about')?>
-<?php $this->load->view('fronts/home/v_daftar_klien')?>
-<?php $this->load->view('fronts/home/v_counter')?>
-<?php $this->load->view('fronts/home/v_testimonial')?>
-<?php $this->load->view('fronts/home/v_harga')?>
 
-<section class="cta_section_small bg_blue px-0">
-	<div class="container">
-    	<div class="row align-items-center animation" data-animation="fadeInUp" data-animation-delay="0.2s">
-        	<div class="col-md-8 text_white">
-                <h3>Layanan Gratis Konsultasi Kebutuhan Website Bisnis Anda</h3>
 
-            </div>
-            <div class="col-md-4 text-md-right">
-            	<a href="https://api.whatsapp.com/send?phone=<?php echo $identitas->whatsapp?>&text= Halo Crudbiz, mau tanya - tanya tentang bikin website untuk bisnis saya." class="btn btn-outline-white">Chat WhatsApp</a>
-            </div>
-        </div>
-    </div>
-</section>
 <?php $this->load->view('fronts/footer')?>
 <!-- END FOOTER SECTION -->
 
 <a href="#" class="scrollup" style="display: none;"><i class="ion-ios-arrow-up"></i></a>
 
+
+
+
+<!-- jquery.dd.min js -->
+<script src='<?php echo base_url()?>assets/js/jquery.dd.min.js'></script>
+<!-- Demo js -->
+<script src='<?php echo base_url()?>assets/js/demo-shop/js/demo-shop.js'></script>
 <!-- Latest jQuery -->
 <script src="<?php echo base_url()?>assets/js/jquery-1.12.4.min.js"></script>
 <!-- jquery-ui -->
