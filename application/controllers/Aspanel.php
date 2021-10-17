@@ -593,12 +593,11 @@ class Aspanel extends CI_Controller {
 			$data = array('record' => $proses);
 			$data['tag'] = $this->Crud_m->view_ordering('keyword','keyword_id','DESC');
 			if ($this->session->level=='1'){
-			cek_session_akses('identitaswebsite',$this->session->id_session);
+				cek_session_akses('identitaswebsite',$this->session->id_session);
 				}elseif ($this->session->level=='2'){
-				cek_session_akses_admin('identitaswebsite',$this->session->id_session);
-			}else{
-				
-			}
+					cek_session_akses_admin('identitaswebsite',$this->session->id_session);
+				}else{
+				}
 			$this->load->view('backend/identitas/views', $data);
 		}
 	}
@@ -3420,11 +3419,15 @@ class Aspanel extends CI_Controller {
 		$data['produk_category']   = '';
 		$data['produk']   = '';
 		$data['services']   = '';
-				if ($this->session->level=='1' OR $this->session->level=='2'){
-						$data['record'] = $this->Crud_m->view_where_ordering('divisi',array('divisi_status'=>'publish'),'divisi_id','DESC');
-				}else{
-					redirect('aspanel/home');
-				}
+
+				if ($this->session->level=='1'){
+					cek_session_akses('divisi',$this->session->id_session);
+					$data['record'] = $this->Crud_m->view_where_ordering('divisi',array('divisi_status'=>'publish'),'divisi_id','DESC');
+					}elseif ($this->session->level=='2'){
+						cek_session_akses_admin('divisi',$this->session->id_session);
+					}else{
+					}
+
 				$this->load->view('backend/divisi/v_daftar', $data);
 	}
 	public function divisi_storage_bin()
