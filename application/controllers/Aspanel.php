@@ -434,7 +434,7 @@ class Aspanel extends CI_Controller {
 
 	function identitaswebsite()
 	{
-		cek_session_akses('identitaswebsite',$this->session->id_session) OR cek_session_akses_admin('identitaswebsite',$this->session->id_session);
+		cek_session_akses('identitaswebsite',$this->session->id_session) AND cek_session_akses('identitaswebsite',$this->session->id_session);
 		if (isset($_POST['submit'])){
 					$config['upload_path'] = 'assets/frontend/campur/';
 					$config['allowed_types'] = 'gif|jpg|png|JPG|JPEG';
