@@ -32,7 +32,7 @@
               <?php $jmlproducts1 = $this->As_m->view('user')->num_rows(); ?>
               <div class="inner">
                 <h3><?php echo $jmlproducts1; ?></h3>
-                <p>Total Karyawan</p>
+                <p>Total Produk</p>
               </div>
               <div class="icon">
                 <i class="ion ion-person-stalker"></i>

@@ -69,6 +69,56 @@
           </p>
         </a>
       </li>
+        <?php } ?>
+        <li class="nav-item">
+          <a href="<?php echo base_url(); ?>aspanel/produks" class="nav-link" >
+            <i class="nav-icon fas fa-cogs"></i>
+            <p>
+              Produk
+            </p>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="<?php echo base_url(); ?>aspanel/paketharga" class="nav-link" >
+            <i class="nav-icon fas fa-cogs"></i>
+            <p>
+              Harga Paket
+            </p>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="<?php echo base_url(); ?>aspanel/testimoni" class="nav-link" >
+            <i class="nav-icon fas fa-cogs"></i>
+            <p>
+              Testimoni
+            </p>
+          </a>
+        </li>
+
+        <li class="nav-item">
+          <a href="<?php echo base_url(); ?>aspanel/slider" class="nav-link" >
+            <i class="nav-icon fas fa-cogs"></i>
+            <p>
+              Slider
+            </p>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="<?php echo base_url(); ?>aspanel/bisnis" class="nav-link " >
+            <i class="nav-icon fas fa-cogs"></i>
+            <p>
+              Klien
+            </p>
+          </a>
+        </li>
+        <li class="nav-item ">
+          <a href="<?php echo base_url(); ?>aspanel/blogs" class="nav-link">
+            <i class="nav-icon fas fa-blog"></i>
+            <p>
+              Artikel
+            </p>
+          </a>
+        </li>
         <li class="nav-item ">
           <a href="#" class="nav-link ">
             <i class="nav-icon far fas fa-fw fa-users"></i>
@@ -94,55 +144,6 @@
             </li>
 
           </ul>
-        </li>
-        <?php } ?>
-        <li class="nav-item">
-          <a href="<?php echo base_url(); ?>aspanel/paketharga" class="nav-link" >
-            <i class="nav-icon fas fa-cogs"></i>
-            <p>
-              Harga Paket
-            </p>
-          </a>
-        </li>
-        <li class="nav-item">
-          <a href="<?php echo base_url(); ?>aspanel/testimoni" class="nav-link" >
-            <i class="nav-icon fas fa-cogs"></i>
-            <p>
-              Testimoni
-            </p>
-          </a>
-        </li>
-        <li class="nav-item">
-          <a href="<?php echo base_url(); ?>aspanel/templates" class="nav-link" >
-            <i class="nav-icon fas fa-cogs"></i>
-            <p>
-              Templates
-            </p>
-          </a>
-        </li>
-        <li class="nav-item">
-          <a href="<?php echo base_url(); ?>aspanel/slider" class="nav-link" >
-            <i class="nav-icon fas fa-cogs"></i>
-            <p>
-              Slider
-            </p>
-          </a>
-        </li>
-        <li class="nav-item">
-          <a href="<?php echo base_url(); ?>aspanel/bisnis" class="nav-link " >
-            <i class="nav-icon fas fa-cogs"></i>
-            <p>
-              Klien
-            </p>
-          </a>
-        </li>
-        <li class="nav-item ">
-          <a href="<?php echo base_url(); ?>aspanel/blogs" class="nav-link">
-            <i class="nav-icon fas fa-blog"></i>
-            <p>
-              Artikel
-            </p>
-          </a>
         </li>
       <li class="nav-item ">
         <a href="<?php echo base_url(); ?>aspanel/profil" class="nav-link">

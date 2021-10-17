@@ -52,8 +52,8 @@
                   <td>
                     <?php
                     echo"
-                    <a class='btn btn-primary btn-sm' title='Edit Data' href='".base_url()."aspanel/templates_update/$row[templates_judul_seo]'><i class='fas fa-edit'></i></a>
-                    <a class='btn btn-danger btn-sm' title='Delete Data' href='".base_url()."aspanel/templates_delete_temp/$row[templates_id]' onclick=\"return confirm('Are you sure want to delete this data?')\"><i class='fas fa-trash-alt'></i></a>";
+                    <a class='btn btn-primary btn-sm' title='Edit Data' href='".base_url()."aspanel/produks_update/$row[templates_judul_seo]'><i class='fas fa-edit'></i></a>
+                    <a class='btn btn-danger btn-sm' title='Delete Data' href='".base_url()."aspanel/produks_delete_temp/$row[templates_id]' onclick=\"return confirm('Are you sure want to delete this data?')\"><i class='fas fa-trash-alt'></i></a>";
                     ?>
                   </td>
                 </tr>

@@ -10,12 +10,12 @@
     <div class="container-fluid">
       <div class="row mb-2">
         <div class="col-sm-6">
-          <h1>Update templates</h1>
+          <h1>Update Produk</h1>
         </div>
         <div class="col-sm-6">
           <ol class="breadcrumb float-sm-right">
-            <li class="breadcrumb-item"><a href="<?php echo base_url()?>aspanel/templates">templates</a></li>
-            <li class="breadcrumb-item active">Update templates</li>
+            <li class="breadcrumb-item"><a href="<?php echo base_url()?>aspanel/produks">Produk</a></li>
+            <li class="breadcrumb-item active">Update Produk</li>
           </ol>
         </div>
       </div>
@@ -34,7 +34,7 @@
             <!-- /.card-header -->
             <!-- form start -->
             <?php $attributes = array('class'=>'form-horizontal','role'=>'form');
-            echo form_open_multipart('aspanel/templates_update',$attributes); ?>
+            echo form_open_multipart('aspanel/produks_update',$attributes); ?>
 
 
               <div class="card-body">
@@ -43,7 +43,7 @@
                   <div class="row">
                     <div class="col-sm-12">
                       <div class="form-group">
-                        <label>Title</label>
+                        <label>Judul</label>
                         <input type="text" class="form-control" name="templates_judul" value="<?php echo $rows['templates_judul'] ?>">
                       </div>
                     </div>
@@ -51,7 +51,7 @@
                   <div class="row">
                   <div class="col-sm-12">
                   <div class="form-group">
-                    <label for="inputName" class="col-sm-3 col-form-label">Category</label>
+                    <label for="inputName" class="col-sm-3 col-form-label">Kategori</label>
                     <div class="col-sm-12">
                       <select name='templates_cat_id' class="form-control select2" style="width: 100%;">
                         <?php foreach ($records as $row) {

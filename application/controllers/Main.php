@@ -19,8 +19,8 @@ class Main extends CI_Controller {
     $config['per_page_bisnis'] = 10;
     if ($this->uri->segment('4')==''){
       $dari = 0;
-    }else{
-      $dari = $this->uri->segment('4');
+      }else{
+        $dari = $this->uri->segment('4');
     }
 
     if (is_numeric($dari)) {
