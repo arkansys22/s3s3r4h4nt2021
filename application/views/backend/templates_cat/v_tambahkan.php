@@ -49,7 +49,7 @@
                   <div class="row">
                     <div class="col-sm-12">
                       <div class="form-group">
-                        <label>Kategori</label>
+                        <label>Deskripsi</label>
                         <textarea class="textarea"  name ="templates_cat_desk" style="width: 100%; height: 100px;"></textarea>
                       </div>
                     </div>
