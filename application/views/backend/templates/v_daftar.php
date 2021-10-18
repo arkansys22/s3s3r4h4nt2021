@@ -24,19 +24,19 @@
           <div class="card">
             <div class="card-header">
               <h3 class="card-title">
-            <a class="btn btn-success btn-sm" title="Edit Data" href="<?php echo base_url()?>aspanel/templates_tambahkan"><i class="fas fa-plus-circle"></i> Tambah</a>
+            <a class="btn btn-success btn-sm" title="Tambah Data" href="<?php echo base_url()?>aspanel/produks_tambahkan"><i class="fas fa-plus-circle"></i> Tambah</a>
 
-              <a class="btn btn-success btn-sm" title="Edit Data" href="<?php echo base_url()?>aspanel/templates_cat"><i class="fas fa-plus-circle"></i> Kategori</a></h3>
+              <a class="btn btn-success btn-sm" title="Edit Data" href="<?php echo base_url()?>aspanel/produks_cat"><i class="fas fa-plus-circle"></i> Kategori</a></h3>
 
-              <h3 class="text-right"><a class="btn btn-danger btn-sm" title="Edit Data" href="<?php echo base_url()?>aspanel/templates_storage_bin"><i class="fas fa-trash"></i> File Sampah</a></h3>
+              <h3 class="text-right"><a class="btn btn-danger btn-sm" title="Sampah" href="<?php echo base_url()?>aspanel/produks_storage_bin"><i class="fas fa-trash"></i> Sampah</a></h3>
             </div>
             <div class="card-body">
               <table id="example1" class="table table-bordered table-striped">
                 <thead>
                 <tr>
-                  <th>Date</th>
-                  <th>Title</th>
-                  <th>Action</th>
+                  <th>Tanggal</th>
+                  <th>Judul</th>
+                  <th>Aksi</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -62,9 +62,9 @@
                 </tbody>
                 <tfoot>
                 <tr>
-                  <th>Date</th>
-                  <th>Title</th>
-                  <th>Action</th>
+                  <th>Tanggal</th>
+                  <th>Judul</th>
+                  <th>Aksi</th>
                 </tr>
                 </tfoot>
               </table>

@@ -121,7 +121,8 @@ class Aspanel extends CI_Controller {
 									$this->load->view('backend/register',$data);
 								}
 	}
-	function sendemail($email,$saltid,$username){
+	function sendemail($email,$saltid,$username)
+	{
 		  // configure the email setting
 					$config['protocol'] = 'smtp';
 					$config['smtp_host'] = 'ssl://mail.crudbiz.com'; //smtp host name
@@ -141,7 +142,8 @@ class Aspanel extends CI_Controller {
 					$this->email->message($message);
 					return $this->email->send();
 		}
-	public function confirmation($key){
+	public function confirmation($key)
+	{
 					if($this->crud_m->verifyemail($key))
 					{
 						$this->session->set_flashdata('msg','<div class="alert bg-3 text-center">Selamat Anda telah Resmi Bergabung! Silahkan Login.</div>');
@@ -597,6 +599,7 @@ class Aspanel extends CI_Controller {
 				}elseif ($this->session->level=='2'){
 					cek_session_akses_admin('identitaswebsite',$this->session->id_session);
 				}else{
+					redirect('aspanel/home');
 				}
 			$this->load->view('backend/identitas/views', $data);
 		}
@@ -2128,82 +2131,41 @@ class Aspanel extends CI_Controller {
 		}
 		/*	Bagian untuk Bisnis - Penutup	*/
 
-	/*	Bagian untuk templates cat - Pembuka	*/
-	public function templates_cat()
+	/*	Bagian untuk Produks cat - Pembuka	*/
+	public function produks_cat()
 	{
-		$data['karyawan_menu_open']   = '';
 		$data['home_stat']   = '';
-		$data['identitas_stat']   = '';
-		$data['profil_stat']   = '';
-		$data['sliders_stat']   = '';
-		$data['templates_stat']   = '';
-		$data['cat_templates_stat']   = '';
-		$data['slider_stat']   = '';
-		$data['blogs_stat']   = '';
-		$data['message_stat']   = '';
-		$data['gallery_stat']   = '';
-		$data['kehadiran_menu_open']   = '';
-			$data['jamkerja_stat']   = '';
-			$data['absen_stat']   = '';
-			$data['dataabsen_stat']   = '';
-			$data['cuti_stat']   = '';
-			$data['gaji_stat']   = '';
-			$data['pengumuman_stat']   = '';
-			$data['konfig_stat']   = '';
-			$data['produk_menu_open']   = 'menu-open';
-			$data['produk_category']   = 'active';
-			$data['produk']   = '';
-			$data['services']   = '';
-
 				if ($this->session->level=='1'){
-						cek_session_akses ('templates_cat',$this->session->id_session);
+						cek_session_akses('produks_cat',$this->session->id_session);
 						$data['record'] = $this->Crud_m->view_where_ordering('templates_category',array('templates_cat_status'=>'publish'),'templates_cat_id','DESC');
-				}else{
-						cek_session_staff ('templates_cat',$this->session->id_session);
+					}elseif ($this->session->level=='2'){
+						cek_session_akses_admin('produks_cat',$this->session->id_session);
+						$data['record'] = $this->Crud_m->view_where_ordering('templates_category',array('templates_cat_status'=>'publish'),'templates_cat_id','DESC');
+					}else{
+						cek_session_akses_staff('produks_cat',$this->session->id_session);
 						$data['record'] = $this->Crud_m->view_where_ordering('templates_category',array('templates_cat_post_oleh'=>$this->session->username,'templates_cat_status'=>'publish'),'templates_cat_id','DESC');
 				}
-				cek_session_akses('templates_cat',$this->session->id_session);
+
 				$this->load->view('backend/templates_cat/v_daftar', $data);
 	}
-	public function templates_cat_storage_bin()
+	public function produks_cat_storage_bin()
 	{
-		$data['karyawan_menu_open']   = '';
 		$data['home_stat']   = '';
-		$data['identitas_stat']   = '';
-		$data['profil_stat']   = '';
-		$data['sliders_stat']   = '';
-		$data['templates_stat']   = '';
-		$data['cat_templates_stat']   = '';
-		$data['slider_stat']   = '';
-		$data['blogs_stat']   = '';
-		$data['message_stat']   = '';
-		$data['gallery_stat']   = '';
-		$data['kehadiran_menu_open']   = '';
-			$data['jamkerja_stat']   = '';
-			$data['absen_stat']   = '';
-			$data['dataabsen_stat']   = '';
-			$data['cuti_stat']   = '';
-			$data['gaji_stat']   = '';
-			$data['pengumuman_stat']   = '';
-			$data['konfig_stat']   = '';
-			$data['produk_menu_open']   = 'menu-open';
-			$data['produk_category']   = 'active';
-			$data['produk']   = '';
-			$data['services']   = '';
+		if ($this->session->level=='1'){
+				cek_session_akses('produks_cat',$this->session->id_session);
+				$data['record'] = $this->Crud_m->view_where_ordering('templates_category',array('templates_cat_status'=>'delete'),'templates_cat_id','DESC');
+			}elseif ($this->session->level=='2'){
+				cek_session_akses_admin('produks_cat',$this->session->id_session);
+				$data['record'] = $this->Crud_m->view_where_ordering('templates_category',array('templates_cat_status'=>'delete'),'templates_cat_id','DESC');
+			}else{
+				cek_session_akses_staff('produks_cat',$this->session->id_session);
+				$data['record'] = $this->Crud_m->view_where_ordering('templates_category',array('templates_cat_post_oleh'=>$this->session->username,'templates_cat_status'=>'delete'),'templates_cat_id','DESC');
+		}
 
-				if ($this->session->level=='1'){
-						cek_session_akses ('templates_cat',$this->session->id_session);
-						$data['record'] = $this->Crud_m->view_where_ordering('templates_category',array('templates_cat_status'=>'delete'),'templates_cat_id','DESC');
-				}else{
-						cek_session_staff ('templates_cat',$this->session->id_session);
-						$data['record'] = $this->Crud_m->view_where_ordering('templates_category',array('templates_cat_post_oleh'=>$this->session->username,'templates_cat_status'=>'delete'),'templates_cat_id','DESC');
-				}
-				cek_session_akses('templates_cat',$this->session->id_session);
-				$this->load->view('backend/templates_cat/v_daftar_hapus', $data);
+		$this->load->view('backend/templates_cat/v_daftar_hapus', $data);
 	}
-	public function templates_cat_tambahkan()
+	public function produks_cat_tambahkan()
 	{
-
 		if (isset($_POST['submit'])){
 
 					$config['upload_path'] = 'bahan/foto_templates/';
@@ -2276,35 +2238,23 @@ class Aspanel extends CI_Controller {
 								$this->As_m->insert('templates_category',$data);
 								redirect('aspanel/templates_cat');
 				}else{
-					$data['karyawan_menu_open']   = '';
-					$data['home_stat']   = '';
-					$data['identitas_stat']   = '';
-					$data['profil_stat']   = '';
-					$data['sliders_stat']   = '';
-					$data['templates_stat']   = '';
-					$data['cat_templates_stat']   = '';
-					$data['slider_stat']   = '';
-					$data['blogs_stat']   = '';
-					$data['message_stat']   = '';
-					$data['gallery_stat']   = '';
-					$data['kehadiran_menu_open']   = '';
-					$data['jamkerja_stat']   = '';
-					$data['absen_stat']   = '';
-					$data['dataabsen_stat']   = '';
-					$data['cuti_stat']   = '';
-					$data['gaji_stat']   = '';
-					$data['pengumuman_stat']   = '';
-					$data['konfig_stat']   = '';
-					$data['produk_menu_open']   = 'menu-open';
-					$data['produk_category']   = 'active';
-					$data['produk']   = '';
-					$data['services']   = '';
-					cek_session_akses('templates_cat',$this->session->id_session);
-					$data['tag'] = $this->Crud_m->view_ordering('keyword','keyword_id','DESC');
+					if ($this->session->level=='1'){
+							cek_session_akses('produks_cat',$this->session->id_session);
+							$data['home_stat']   = '';
+							$data['tag'] = $this->Crud_m->view_ordering('keyword','keyword_id','DESC');
+						}elseif ($this->session->level=='2'){
+							cek_session_akses_admin('produks_cat',$this->session->id_session);
+							$data['home_stat']   = '';
+							$data['tag'] = $this->Crud_m->view_ordering('keyword','keyword_id','DESC');
+						}else{
+							cek_session_akses_staff('produks_cat',$this->session->id_session);
+							$data['home_stat']   = '';
+							$data['tag'] = $this->Crud_m->view_ordering('keyword','keyword_id','DESC');
+						}
 					$this->load->view('backend/templates_cat/v_tambahkan', $data);
 				}
 	}
-	public function templates_cat_update()
+	public function produks_cat_update()
 	{
 
 		$id = $this->uri->segment(3);
@@ -2382,7 +2332,7 @@ class Aspanel extends CI_Controller {
 											}
 
 						}
-						redirect('aspanel/templates_cat');
+						redirect('aspanel/produks_cat');
 		}else{
 			if ($this->session->level=='1'){
 					 $proses = $this->As_m->edit('templates_category', array('templates_cat_id' => $id))->row_array();
@@ -2390,85 +2340,118 @@ class Aspanel extends CI_Controller {
 					$proses = $this->As_m->edit('templates_category', array('templates_cat_id' => $id, 'templates_cat_post_oleh' => $this->session->username))->row_array();
 			}
 			$data = array('rows' => $proses);
-			$data['karyawan_menu_open']   = '';
-			$data['home_stat']   = '';
-			$data['identitas_stat']   = '';
-			$data['profil_stat']   = '';
-			$data['sliders_stat']   = '';
-			$data['templates_stat']   = '';
-			$data['cat_templates_stat']   = 'active';
-			$data['slider_stat']   = '';
-			$data['blogs_stat']   = '';
-			$data['message_stat']   = '';
-			$data['gallery_stat']   = '';
-			$data['kehadiran_menu_open']   = 'menu-open';
-				$data['jamkerja_stat']   = '';
-				$data['absen_stat']   = '';
-				$data['dataabsen_stat']   = 'active';
-				$data['cuti_stat']   = '';
-				$data['gaji_stat']   = '';
-				$data['pengumuman_stat']   = '';
-				$data['konfig_stat']   = '';
-				$data['produk_menu_open']   = 'menu-open';
-				$data['produk_category']   = 'active';
-				$data['produk']   = '';
-				$data['services']   = '';
-				cek_session_akses('templates_cat',$this->session->id_session);
-			$data['tag'] = $this->Crud_m->view_ordering('keyword','keyword_id','DESC');
+
+			if ($this->session->level=='1'){
+					cek_session_akses('produks_cat',$this->session->id_session);
+					$data['home_stat']   = '';
+					$data['tag'] = $this->Crud_m->view_ordering('keyword','keyword_id','DESC');
+				}elseif ($this->session->level=='2'){
+					cek_session_akses_admin('produks_cat',$this->session->id_session);
+					$data['home_stat']   = '';
+					$data['tag'] = $this->Crud_m->view_ordering('keyword','keyword_id','DESC');
+				}else{
+					cek_session_akses_staff('produks_cat',$this->session->id_session);
+					$data['home_stat']   = '';
+					$data['tag'] = $this->Crud_m->view_ordering('keyword','keyword_id','DESC');
+				}
 			$this->load->view('backend/templates_cat/v_update', $data);
 		}
 	}
-	function templates_cat_delete_temp()
+	public function produks_cat_delete_temp()
 	{
-		cek_session_akses('templates_cat',$this->session->id_session);
-			$data = array('templates_cat_status'=>'delete');
-			$where = array('templates_cat_id' => $this->uri->segment(3));
-			$this->db->update('templates_category', $data, $where);
-			redirect('aspanel/templates_cat');
+		if ($this->session->level=='1'){
+				cek_session_akses('produks_cat',$this->session->id_session);
+				$data = array('templates_cat_status'=>'delete');
+				$where = array('templates_cat_id' => $this->uri->segment(3));
+				$this->db->update('templates_category', $data, $where);
+			}elseif ($this->session->level=='2'){
+				cek_session_akses_admin('produks_cat',$this->session->id_session);
+				$data = array('templates_cat_status'=>'delete');
+				$where = array('templates_cat_id' => $this->uri->segment(3));
+				$this->db->update('templates_category', $data, $where);
+			}else{
+				cek_session_akses_staff('produks_cat',$this->session->id_session);
+				$data = array('templates_cat_status'=>'delete');
+				$where = array('templates_cat_id' => $this->uri->segment(3));
+				$this->db->update('templates_category', $data, $where);
+			}
+			redirect('aspanel/produks_cat');
 	}
-	function templates_cat_restore()
+	public function produks_cat_restore()
 	{
-		cek_session_akses('templates_cat',$this->session->id_session);
-			$data = array('templates_cat_status'=>'Publish');
-			$where = array('templates_cat_id' => $this->uri->segment(3));
-			$this->db->update('templates_category', $data, $where);
-			redirect('aspanel/templates_cat_storage_bin');
+		if ($this->session->level=='1'){
+				cek_session_akses('produks_cat',$this->session->id_session);
+				$data = array('templates_cat_status'=>'Publish');
+				$where = array('templates_cat_id' => $this->uri->segment(3));
+				$this->db->update('templates_category', $data, $where);
+			}elseif ($this->session->level=='2'){
+				cek_session_akses_admin('produks_cat',$this->session->id_session);
+				$data = array('templates_cat_status'=>'Publish');
+				$where = array('templates_cat_id' => $this->uri->segment(3));
+				$this->db->update('templates_category', $data, $where);
+			}else{
+				cek_session_akses_staff('produks_cat',$this->session->id_session);
+				$data = array('templates_cat_status'=>'Publish');
+				$where = array('templates_cat_id' => $this->uri->segment(3));
+				$this->db->update('templates_category', $data, $where);
+			}
+			redirect('aspanel/produks_cat_storage_bin');
 	}
-	public function templates_cat_delete()
+	public function produks_cat_delete()
 	{
-
-			cek_session_akses ('templates_cat',$this->session->id_session);
-			$id = $this->uri->segment(3);
-			$_id = $this->db->get_where('templates_category',['templates_cat_id' => $id])->row();
-			 $query = $this->db->delete('templates_category',['templates_cat_id'=>$id]);
-			if($query){
-							 unlink("./bahan/foto_templates/".$_id->templates_cat_gambar);
-		 }
-		redirect('aspanel/templates_cat_storage_bin');
+		if ($this->session->level=='1'){
+				cek_session_akses('produks_cat',$this->session->id_session);
+				$id = $this->uri->segment(3);
+				$_id = $this->db->get_where('templates_category',['templates_cat_id' => $id])->row();
+				 $query = $this->db->delete('templates_category',['templates_cat_id'=>$id]);
+				if($query){
+								 unlink("./bahan/foto_templates/".$_id->templates_cat_gambar);
+			 }
+			}elseif ($this->session->level=='2'){
+				cek_session_akses_admin('produks_cat',$this->session->id_session);
+				$id = $this->uri->segment(3);
+				$_id = $this->db->get_where('templates_category',['templates_cat_id' => $id])->row();
+				 $query = $this->db->delete('templates_category',['templates_cat_id'=>$id]);
+				if($query){
+								 unlink("./bahan/foto_templates/".$_id->templates_cat_gambar);
+			 }
+			}else{
+				cek_session_akses_staff('produks_cat',$this->session->id_session);
+			}
+		redirect('aspanel/produks_cat_storage_bin');
 	}
-	/*	Bagian untuk Product Category - Penutup	*/
+	/*	Bagian untuk Produks Category - Penutup	*/
 
 	/*	Bagian untuk Product - Pembuka	*/
 	public function produks()
 	{
 		 		$data['home_stat']   = '';
 				if ($this->session->level=='1'){
-						$data['record'] = $this->Crud_m->view_where_ordering('templates',array('templates_status'=>'publish'),'templates_id','DESC');
-				}else{
-						$data['record'] = $this->Crud_m->view_where_ordering('templates',array('templates_post_oleh'=>$this->session->username,'templates_status'=>'publish'),'templates_id','DESC');
-				}
-				cek_session_akses('produks',$this->session->id_session);
+					cek_session_akses('produks',$this->session->id_session);
+					$data['record'] = $this->Crud_m->view_where_ordering('templates',array('templates_status'=>'publish'),'templates_id','desc');
+					}elseif ($this->session->level=='2'){
+						cek_session_akses_admin('produks',$this->session->id_session);
+						$data['record'] = $this->Crud_m->view_where_ordering('templates',array('templates_post_oleh'=>$this->session->username,'templates_status'=>'publish'),'templates_id','desc');
+					}else{
+						cek_session_akses_staff('produks',$this->session->id_session);
+						redirect('aspanel/home');
+					}
+
 				$this->load->view('backend/templates/v_daftar', $data);
 	}
 	public function produks_storage_bin()
 	{
 				$data['home_stat']   = '';
 				if ($this->session->level=='1'){
-						$data['record'] = $this->Crud_m->view_where_ordering('templates',array('templates_status'=>'delete'),'templates_id','DESC');
-				}else{
+					cek_session_akses('produks',$this->session->id_session);
+					$data['record'] = $this->Crud_m->view_where_ordering('templates',array('templates_status'=>'delete'),'templates_id','DESC');
+					}elseif ($this->session->level=='2'){
+						cek_session_akses_admin('produks',$this->session->id_session);
 						$data['record'] = $this->Crud_m->view_where_ordering('templates',array('templates_post_oleh'=>$this->session->username,'templates_status'=>'delete'),'templates_id','DESC');
-				}
-				cek_session_akses('produks',$this->session->id_session);
+					}else{
+						cek_session_akses_staff('produks',$this->session->id_session);
+						redirect('aspanel/home');
+					}
 				$this->load->view('backend/templates/v_daftar_hapus', $data);
 	}
 	public function produks_tambahkan()
@@ -2549,27 +2532,24 @@ class Aspanel extends CI_Controller {
 													'templates_keyword'=>$tag);
 												}
 								$this->As_m->insert('templates',$data);
-								redirect('aspanel/templates');
+								redirect('aspanel/produks');
 				}else{
-					$data['karyawan_menu_open']   = '';
-					$data['home_stat']   = '';
-					$data['identitas_stat']   = '';
-					$data['profil_stat']   = '';
-					$data['sliders_stat']   = '';
-					$data['templates_stat']   = '';
-					$data['cat_templates_stat']   = '';
-					$data['slider_stat']   = '';
-					$data['blogs_stat']   = '';
-					$data['message_stat']   = '';
-					$data['gallery_stat']   = ''; 		$data['kehadiran_menu_open']   = ''; 	    $data['jamkerja_stat']   = ''; 	    $data['absen_stat']   = ''; 	    $data['dataabsen_stat']   = ''; 	    $data['cuti_stat']   = ''; 	    $data['gaji_stat']   = ''; 	    $data['pengumuman_stat']   = ''; 	    $data['konfig_stat']   = '';
-
-					$data['produk_menu_open']   = 'menu-open';
-		 			$data['produk_category']   = '';
-		 			$data['produk']   = 'active';
-		 			$data['services']   = '';
-					$data['records'] = $this->Crud_m->view_ordering('templates_category','templates_cat_id','DESC');
-					$data['tag'] = $this->Crud_m->view_ordering('keyword','keyword_id','DESC');
-					cek_session_akses('templates',$this->session->id_session);
+					if ($this->session->level=='1'){
+							cek_session_akses('produks',$this->session->id_session);
+							$data['home_stat']   = '';
+							$data['records'] = $this->Crud_m->view_where_ordering('templates_category',array('templates_cat_status'=>'Publish'),'templates_cat_id','DESC');
+							$data['tag'] = $this->Crud_m->view_ordering('keyword','keyword_id','DESC');
+						}elseif ($this->session->level=='2'){
+							cek_session_akses_admin('produks',$this->session->id_session);
+							$data['home_stat']   = '';
+							$data['records'] = $this->Crud_m->view_where_ordering('templates_category',array('templates_cat_status'=>'Publish'),'templates_cat_id','DESC');
+							$data['tag'] = $this->Crud_m->view_ordering('keyword','keyword_id','DESC');
+						}else{
+							cek_session_akses_staff('produks',$this->session->id_session);
+							$data['home_stat']   = '';
+							$data['records'] = $this->Crud_m->view_where_ordering('templates_category',array('templates_cat_status'=>'Publish'),'templates_cat_id','DESC');
+							$data['tag'] = $this->Crud_m->view_ordering('keyword','keyword_id','DESC');
+						}
 					$this->load->view('backend/templates/v_tambahkan', $data);
 				}
 	}
@@ -2577,7 +2557,6 @@ class Aspanel extends CI_Controller {
 	{
 		$id = $this->uri->segment(3);
 		if (isset($_POST['submit'])){
-
 			$config['upload_path'] = 'assets/frontend/produk/';
 			$config['allowed_types'] = 'gif|jpg|png|JPG|JPEG';
 			$this->upload->initialize($config);
@@ -2661,39 +2640,88 @@ class Aspanel extends CI_Controller {
 					$proses = $this->As_m->edit('templates', array('templates_judul_seo' => $id, 'templates_post_oleh' => $this->session->username))->row_array();
 			}
 			$data = array('rows' => $proses);
-			$data['home_stat']   = '';
-			$data['records'] = $this->Crud_m->view_ordering('templates_category','templates_cat_id','ASC');
-			$data['tag'] = $this->Crud_m->view_ordering('keyword','keyword_id','DESC');
-			cek_session_akses('produks',$this->session->id_session);
+			if ($this->session->level=='1'){
+					cek_session_akses('produks',$this->session->id_session);
+					$data['home_stat']   = '';
+					$data['records'] = $this->Crud_m->view_where_ordering('templates_category',array('templates_cat_status'=>'Publish'),'templates_cat_id','DESC');
+					$data['tag'] = $this->Crud_m->view_ordering('keyword','keyword_id','DESC');
+				}elseif ($this->session->level=='2'){
+					cek_session_akses_admin('produks',$this->session->id_session);
+					$data['home_stat']   = '';
+					$data['records'] = $this->Crud_m->view_where_ordering('templates_category',array('templates_cat_status'=>'Publish'),'templates_cat_id','DESC');
+					$data['tag'] = $this->Crud_m->view_ordering('keyword','keyword_id','DESC');
+				}else{
+					cek_session_akses_staff('produks',$this->session->id_session);
+					$data['home_stat']   = '';
+					$data['records'] = $this->Crud_m->view_where_ordering('templates_category',array('templates_cat_status'=>'Publish'),'templates_cat_id','DESC');
+					$data['tag'] = $this->Crud_m->view_ordering('keyword','keyword_id','DESC');
+				}
 			$this->load->view('backend/templates/v_update', $data);
 		}
 	}
 	public function produks_delete_temp()
 	{
-			cek_session_akses('produks',$this->session->id_session);
-			$data = array('templates_status'=>'delete');
-      $where = array('templates_id' => $this->uri->segment(3));
-			$this->db->update('templates', $data, $where);
+
+			if ($this->session->level=='1'){
+					cek_session_akses('produks',$this->session->id_session);
+					$data = array('templates_status'=>'delete');
+		      $where = array('templates_id' => $this->uri->segment(3));
+					$this->db->update('templates', $data, $where);
+				}elseif ($this->session->level=='2'){
+					cek_session_akses_admin('produks',$this->session->id_session);
+					$data = array('templates_status'=>'delete');
+		      $where = array('templates_id' => $this->uri->segment(3));
+					$this->db->update('templates', $data, $where);
+				}else{
+					cek_session_akses_staff('produks',$this->session->id_session);
+					$data = array('templates_status'=>'delete');
+		      $where = array('templates_id' => $this->uri->segment(3));
+					$this->db->update('templates', $data, $where);
+				}
 			redirect('aspanel/produks');
 	}
 	public function produks_restore()
 	{
-			cek_session_akses('produks',$this->session->id_session);
-			$data = array('templates_status'=>'Publish');
-      $where = array('templates_id' => $this->uri->segment(3));
-			$this->db->update('templates', $data, $where);
+		if ($this->session->level=='1'){
+				cek_session_akses('produks',$this->session->id_session);
+				$data = array('templates_status'=>'Publish');
+	      $where = array('templates_id' => $this->uri->segment(3));
+				$this->db->update('templates', $data, $where);
+			}elseif ($this->session->level=='2'){
+				cek_session_akses_admin('produks',$this->session->id_session);
+				$data = array('templates_status'=>'Publish');
+	      $where = array('templates_id' => $this->uri->segment(3));
+				$this->db->update('templates', $data, $where);
+			}else{
+				cek_session_akses_staff('produks',$this->session->id_session);
+				$data = array('templates_status'=>'Publish');
+	      $where = array('templates_id' => $this->uri->segment(3));
+				$this->db->update('templates', $data, $where);
+			}
 			redirect('aspanel/produks_storage_bin');
 	}
 	public function produks_delete()
 	{
-			cek_session_akses ('templates',$this->session->id_session);
-			$id = $this->uri->segment(3);
-			$_id = $this->db->get_where('templates',['templates_id' => $id])->row();
-			 $query = $this->db->delete('templates',['templates_id'=>$id]);
-		 	if($query){
-							 unlink("./assets/frontend/produk/".$_id->templates_gambar);
-		 }
-		redirect('aspanel/templates_storage_bin');
+		if ($this->session->level=='1'){
+				cek_session_akses('produks',$this->session->id_session);
+				$id = $this->uri->segment(3);
+				$_id = $this->db->get_where('templates',['templates_id' => $id])->row();
+				 $query = $this->db->delete('templates',['templates_id'=>$id]);
+			 	if($query){
+								 unlink("./assets/frontend/produk/".$_id->templates_gambar);
+			 			 }
+			}elseif ($this->session->level=='2'){
+				cek_session_akses_admin('produks',$this->session->id_session);
+				$id = $this->uri->segment(3);
+				$_id = $this->db->get_where('templates',['templates_id' => $id])->row();
+				 $query = $this->db->delete('templates',['templates_id'=>$id]);
+			 	if($query){
+								 unlink("./assets/frontend/produk/".$_id->templates_gambar);
+			 			 }
+			}else{
+				cek_session_akses_staff('produks',$this->session->id_session);
+			}
+			redirect('aspanel/produks_storage_bin');
 	}
 
 	/*	Bagian untuk Product - Penutup	*/
@@ -2702,32 +2730,17 @@ class Aspanel extends CI_Controller {
 	/*	Bagian untuk Dat Karyawan - Pembuka	*/
 	public function data_karyawan()
 	{
-		$data['karyawan_menu_open']   = 'menu-open';
 		$data['home_stat']   = '';
-		$data['identitas_stat']   = '';
-		$data['profil_stat']   = '';
-		$data['sliders_stat']   = 'active';
-		$data['templates_stat']   = '';
-		$data['cat_templates_stat']   = 'active';
-		$data['slider_stat']   = '';
-		$data['blogs_stat']   = '';
-		$data['message_stat']   = '';
-		$data['gallery_stat']   = ''; 		$data['kehadiran_menu_open']   = ''; 	    $data['jamkerja_stat']   = ''; 	    $data['absen_stat']   = ''; 	    $data['dataabsen_stat']   = ''; 	    $data['cuti_stat']   = ''; 	    $data['gaji_stat']   = ''; 	    $data['pengumuman_stat']   = ''; 	    $data['konfig_stat']   = '';
-
-		$data['produk_menu_open']   = '';
-		$data['produk_category']   = '';
-		$data['produk']   = '';
-		$data['services']   = '';
-
-				if ($this->session->level=='1'){
-						$data['record'] = $this->Crud_m->view_join_where2_ordering('user','user_level','level','user_level_id',array('user_stat'=>'publish'),'id_user','DESC');
-				}elseif($this->session->level=='2'){
-					$data['record'] = $this->Crud_m->view_join_where2_ordering('user','user_level','level','user_level_id',array('user_stat'=>'publish','level'=>'3'),'id_user','DESC');
-				}else{
-					redirect('aspanel/home');
-				}
-				cek_session_akses('data_karyawan',$this->session->id_session);
-				$this->load->view('backend/data_karyawan/v_daftar', $data);
+		if ($this->session->level=='1'){
+			cek_session_akses('data_karyawan',$this->session->id_session);
+			$data['record'] = $this->Crud_m->view_join_where2_ordering('user','user_level','level','user_level_id',array('user_stat'=>'publish'),'id_user','DESC');
+			}elseif ($this->session->level=='2'){
+				cek_session_akses_admin('data_karyawan',$this->session->id_session);
+				$data['record'] = $this->Crud_m->view_join_where2_ordering('user','user_level','level','user_level_id',array('user_stat'=>'publish','level'=>'3'),'id_user','DESC');
+			}else{
+				redirect('aspanel/home');
+			}
+			$this->load->view('backend/data_karyawan/v_daftar', $data);
 	}
 	public function data_karyawan_storage_bin()
 	{

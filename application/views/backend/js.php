@@ -34,6 +34,7 @@
       "ordering": true,
       "info": true,
       "autoWidth": true,
+      "order": [[ 0, 'desc' ]]
     });
     $('#example2').DataTable({
       "paging": true,

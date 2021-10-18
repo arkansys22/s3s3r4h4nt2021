@@ -72,13 +72,13 @@
         <?php } ?>
         <li class="nav-item">
           <a href="<?php echo base_url(); ?>aspanel/produks" class="nav-link" >
-            <i class="nav-icon fas fa-cogs"></i>
+            <i class="nav-icon fas fa-boxes"></i>
             <p>
               Produk
             </p>
           </a>
         </li>
-        <li class="nav-item">
+        <!--<li class="nav-item">
           <a href="<?php echo base_url(); ?>aspanel/paketharga" class="nav-link" >
             <i class="nav-icon fas fa-cogs"></i>
             <p>
@@ -93,11 +93,11 @@
               Testimoni
             </p>
           </a>
-        </li>
+        </li> -->
 
         <li class="nav-item">
           <a href="<?php echo base_url(); ?>aspanel/slider" class="nav-link" >
-            <i class="nav-icon fas fa-cogs"></i>
+            <i class="nav-icon fas fa-images"></i>
             <p>
               Slider
             </p>
@@ -105,7 +105,7 @@
         </li>
         <li class="nav-item">
           <a href="<?php echo base_url(); ?>aspanel/bisnis" class="nav-link " >
-            <i class="nav-icon fas fa-cogs"></i>
+            <i class="nav-icon fas fa-id-badge"></i>
             <p>
               Klien
             </p>
