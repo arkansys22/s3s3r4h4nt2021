@@ -35,6 +35,7 @@
                 <thead>
                 <tr>
                   <th>Tanggal</th>
+                  <th>Kategori</th>
                   <th>Judul</th>
                   <th>Aksi</th>
                 </tr>
@@ -48,7 +49,8 @@
 
                 <tr>
                   <td><?=$tgl_posting?></td>
-                  <td><a href="<?php echo base_url()?>aspanel/templates_disc/<?=$row['templates_id']?>"></a> <?=$row['templates_judul']?></td>
+                  <td><?=$row['templates_cat_judul']?></td>
+                  <td><?=$row['templates_judul']?></td>
                   <td>
                     <?php
                     echo"
@@ -63,6 +65,7 @@
                 <tfoot>
                 <tr>
                   <th>Tanggal</th>
+                  <th>Kategori</th>
                   <th>Judul</th>
                   <th>Aksi</th>
                 </tr>

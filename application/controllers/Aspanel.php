@@ -2428,13 +2428,14 @@ class Aspanel extends CI_Controller {
 		 		$data['home_stat']   = '';
 				if ($this->session->level=='1'){
 					cek_session_akses('produks',$this->session->id_session);
-					$data['record'] = $this->Crud_m->view_where_ordering('templates',array('templates_status'=>'publish'),'templates_id','desc');
+					$data['record'] = $this->Crud_m->view_join_where_ordering('templates','templates_category','templates_cat_id',array('templates_status'=>'publish'),'templates_id','desc');
 					}elseif ($this->session->level=='2'){
 						cek_session_akses_admin('produks',$this->session->id_session);
-						$data['record'] = $this->Crud_m->view_where_ordering('templates',array('templates_post_oleh'=>$this->session->username,'templates_status'=>'publish'),'templates_id','desc');
+						$data['record'] = $this->Crud_m->view_join_where_ordering('templates','templates_category','templates_cat_id',array('templates_status'=>'publish'),'templates_id','desc');
 					}else{
 						cek_session_akses_staff('produks',$this->session->id_session);
-						redirect('aspanel/home');
+						$data['record'] = $this->Crud_m->view_join_where_ordering('templates','templates_category','templates_cat_id',array('templates_post_oleh'=>$this->session->username,'templates_status'=>'publish'),'templates_id','desc');
+
 					}
 
 				$this->load->view('backend/templates/v_daftar', $data);
