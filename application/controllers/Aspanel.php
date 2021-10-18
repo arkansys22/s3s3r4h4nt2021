@@ -2236,7 +2236,7 @@ class Aspanel extends CI_Controller {
 													'templates_cat_keyword'=>$tag);
 												}
 								$this->As_m->insert('templates_category',$data);
-								redirect('aspanel/templates_cat');
+								redirect('aspanel/produks_cat');
 				}else{
 					if ($this->session->level=='1'){
 							cek_session_akses('produks_cat',$this->session->id_session);
