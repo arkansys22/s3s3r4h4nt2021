@@ -841,29 +841,7 @@ class Aspanel extends CI_Controller {
 	/*	Bagian untuk slider - Pembuka	*/
 	public function slider()
 	{
-		$data['karyawan_menu_open']   = '';
 		$data['home_stat']   = '';
-		$data['identitas_stat']   = '';
-		$data['profil_stat']   = '';
-		$data['sliders_stat']   = '';
-		$data['templates_stat']   = '';
-		$data['cat_templates_stat']   = '';
-		$data['slider_stat']   = 'active';
-		$data['blogs_stat']   = '';
-		$data['message_stat']   = '';
-		$data['gallery_stat']   = '';
-		$data['kehadiran_menu_open']   = '';
-		$data['jamkerja_stat']   = '';
-		$data['absen_stat']   = '';
-		$data['dataabsen_stat']   = '';
-		$data['cuti_stat']   = '';
-		$data['gaji_stat']   = '';
-		$data['pengumuman_stat']   = '';
-		$data['konfig_stat']   = '';
-		$data['produk_menu_open']   = '';
-		$data['produk_category']   = '';
-		$data['produk']   = '';
-		$data['services']   = '';
 				if ($this->session->level=='1'){
 						$data['record'] = $this->Crud_m->view_where_ordering('slider',array('slider_status'=>'publish'),'slider_id','DESC');
 				}elseif ($this->session->level=='2'){
@@ -883,30 +861,7 @@ class Aspanel extends CI_Controller {
 				}else{
 						$data['record'] = $this->Crud_m->view_where_ordering('slider',array('slider_post_oleh'=>$this->session->username,'slider_status'=>'delete'),'slider_id','DESC');
 				}
-
-				$data['karyawan_menu_open']   = '';
 				$data['home_stat']   = '';
-				$data['identitas_stat']   = '';
-				$data['profil_stat']   = '';
-				$data['sliders_stat']   = '';
-				$data['templates_stat']   = '';
-				$data['cat_templates_stat']   = '';
-				$data['slider_stat']   = 'active';
-				$data['blogs_stat']   = '';
-				$data['message_stat']   = '';
-				$data['gallery_stat']   = '';
-				$data['kehadiran_menu_open']   = '';
-				$data['jamkerja_stat']   = '';
-				$data['absen_stat']   = '';
-				$data['dataabsen_stat']   = '';
-				$data['cuti_stat']   = '';
-				$data['gaji_stat']   = '';
-				$data['pengumuman_stat']   = '';
-				$data['konfig_stat']   = '';
-				$data['produk_menu_open']   = '';
-				$data['produk_category']   = '';
-				$data['produk']   = '';
-				$data['services']   = '';
 				cek_session_akses('slider',$this->session->id_session);
 				$this->load->view('backend/slider/v_daftar_hapus', $data);
 	}
@@ -984,29 +939,7 @@ class Aspanel extends CI_Controller {
 								$this->As_m->insert('slider',$data);
 								redirect('aspanel/slider');
 				}else{
-					$data['karyawan_menu_open']   = '';
 					$data['home_stat']   = '';
-					$data['identitas_stat']   = '';
-					$data['profil_stat']   = '';
-					$data['sliders_stat']   = '';
-					$data['templates_stat']   = '';
-					$data['cat_templates_stat']   = '';
-					$data['slider_stat']   = 'active';
-					$data['blogs_stat']   = '';
-					$data['message_stat']   = '';
-					$data['gallery_stat']   = '';
-					$data['kehadiran_menu_open']   = '';
-					$data['jamkerja_stat']   = '';
-					$data['absen_stat']   = '';
-					$data['dataabsen_stat']   = '';
-					$data['cuti_stat']   = '';
-					$data['gaji_stat']   = '';
-					$data['pengumuman_stat']   = '';
-					$data['konfig_stat']   = '';
-					$data['produk_menu_open']   = '';
-					$data['produk_category']   = '';
-					$data['produk']   = '';
-					$data['services']   = '';
 					cek_session_akses('slider',$this->session->id_session);
 					$data['tag'] = $this->Crud_m->view_ordering('keyword','keyword_id','DESC');
 					$this->load->view('backend/slider/v_tambahkan', $data);
@@ -1099,29 +1032,7 @@ class Aspanel extends CI_Controller {
 					$proses = $this->As_m->edit('slider', array('slider_id' => $id, 'slider_post_oleh' => $this->session->username))->row_array();
 			}
 			$data = array('rows' => $proses);
-			$data['karyawan_menu_open']   = '';
-			$data['home_stat']   = '';
-			$data['identitas_stat']   = '';
-			$data['profil_stat']   = '';
-			$data['sliders_stat']   = '';
-			$data['templates_stat']   = '';
-			$data['cat_templates_stat']   = '';
-			$data['slider_stat']   = 'active';
-			$data['blogs_stat']   = '';
-			$data['message_stat']   = '';
-			$data['gallery_stat']   = '';
-			$data['kehadiran_menu_open']   = '';
-			$data['jamkerja_stat']   = '';
-			$data['absen_stat']   = '';
-			$data['dataabsen_stat']   = '';
-			$data['cuti_stat']   = '';
-			$data['gaji_stat']   = '';
-			$data['pengumuman_stat']   = '';
-			$data['konfig_stat']   = '';
-			$data['produk_menu_open']   = '';
-			$data['produk_category']   = '';
-			$data['produk']   = '';
-			$data['services']   = '';
+			$data['home_stat']   = '';			
 			cek_session_akses('slider',$this->session->id_session);
 			$data['tag'] = $this->Crud_m->view_ordering('keyword','keyword_id','DESC');
 			$this->load->view('backend/slider/v_update', $data);
