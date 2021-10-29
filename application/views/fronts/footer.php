@@ -12,7 +12,7 @@
 								<p><?php echo $identitas->meta_deskripsi?></p>
 								<ul class="list_none footer_social">
 										<li><a href="<?php echo $identitas->facebook?>"><i class="ion-social-facebook"></i></a></li>
-										<li><a href="<?php echo $identitas->whatsapp?>"><i class="ion-social-whatsapp"></i></a></li>
+										<li><a href="https://api.whatsapp.com/send?phone=<?php echo $identitas->whatsapp?>&text=%20Halo%20Seserahant!"><i class="ion-social-whatsapp"></i></a></li>
 										<li><a href="<?php echo $identitas->youtube?>"><i class="ion-social-youtube-outline"></i></a></li>
 										<li><a href="<?php echo $identitas->instagram?>"><i class="ion-social-instagram-outline"></i></a></li>
 								</ul>
