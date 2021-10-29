@@ -5,7 +5,7 @@
             <div class="row">
 							<div class="col-sm-12 col-lg-3 col-md-6 mb-lg-0">
 								<div class="footer_logo">
-										<a href="<?php echo base_url()?>"><img height="100%" alt="logo" src="<?php echo base_url()?>assets/frontend/campur/<?php echo $identitas->logo?>"></a>
+										<a href="<?php echo base_url()?>"><img alt="logo" src="<?php echo base_url()?>assets/frontend/campur/<?php echo $identitas->logo?>"></a>
 								</div>
 							</div>
                 <div class="col-sm-12 col-lg-3 col-md-6 mb-4 mb-lg-0">
