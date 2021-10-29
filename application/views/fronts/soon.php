@@ -43,7 +43,7 @@
                         <div class="row justify-content-center">
                             <div class="col-md-12 text-center">
                                 <a href="index.html" class="animation" data-animation="fadeInUp" data-animation-delay="0.2s">
-                                    <img src="<?php echo base_url()?>assets/frontend/campur/<?php echo $identitas->logo?>" height="200px" width="200px"alt="logo" />
+                                    <img src="<?php echo base_url()?>assets/frontend/campur/<?php echo $identitas->logo?>" height="90px" width="400px"alt="logo" />
                                 </a>
                                 <h6 class="text-white my-4 my-sm-5 animation" data-animation="fadeInUp" data-animation-delay="0.3s">Website Seserahant Akan Launching Dalam</h6>
                                 <div class="countdown_time countdown_style1 mb-4 countdown_white animation" data-animation="fadeInUp" data-animation-delay="0.4s" data-time="2021/11/30"></div>
