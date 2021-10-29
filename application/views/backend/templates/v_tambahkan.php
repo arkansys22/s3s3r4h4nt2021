@@ -44,7 +44,7 @@
                     <div class="col-sm-12">
                       <div class="form-group">
                         <label>Judul</label>
-                        <input type="text" class="form-control" name="templates_judul" placeholder="Interesting Title Ideas">
+                        <input type="text" class="form-control" name="templates_judul">
                       </div>
                     </div>
                   </div>
@@ -67,18 +67,49 @@
                 </div>
               </div>
                 <div class="row">
-                  <div class="col-sm-12">
+                  <div class="col-sm-8">
                     <div class="form-group">
-                      <label>Template Feature</label>
-                      <input type="text" class="form-control" name="templates_fitur" placeholder="Fitur yang ada di templates">
+                      <label>Harga Normal</label>
+                      <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                          <span class="input-group-text">Rp</span>
+                        </div>
+                        <input type="number" class="form-control" name="templates_harga" placeholder="Hanya nominal angka tanpa tanda titik">
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-sm-4">
+                    <div class="form-group">
+                      <label>Diskon Promo</label>
+                      <div class="input-group mb-3">
+                        <input type="number" class="form-control" name="templates_harga_diskon" placeholder="Kosongkan bila tidak diskon">
+                        <div class="input-group-append">
+                          <span class="input-group-text">%</span>
+                        </div>
+                      </div>
                     </div>
                   </div>
                 </div>
                 <div class="row">
                   <div class="col-sm-12">
-                    <div class="form-group">
-                      <label>Template URL</label>
-                      <input type="text" class="form-control" name="templates_url" placeholder="URL preview templates">
+                      <label>URL Marketplace</label>
+                    </div>
+                </div>
+                <div class="row">
+                  <div class="col-sm-6">
+                    <div class="input-group mb-3">
+                      <div class="input-group-prepend">
+                        <span class="input-group-text">Shopee</span>
+                      </div>
+                      <input type="text" class="form-control" name="templates_url" >
+                    </div>
+                  </div>
+                  <div class="col-sm-6">
+                    <div class="input-group mb-6">
+                      <div class="input-group-prepend">
+                        <span class="input-group-text">Tokopedia</span>
+                      </div>
+                      <input type="text" class="form-control" name="templates_url_tokped">
                     </div>
                   </div>
                 </div>
@@ -94,7 +125,7 @@
                     <div class="col-sm-12">
                       <div class="form-group">
                         <label>Meta Deskripsi</label>
-                        <input type="text" class="form-control" name="templates_meta_desk" placeholder="Meta description">
+                        <input type="text" class="form-control" name="templates_meta_desk">
                       </div>
                     </div>
                     <div class="col-sm-12">
@@ -111,6 +142,7 @@
                         <div class="custom-file">
                           <input type="file" class="custom-file-input" name="gambar" id="exampleInputFile">
                           <label class="custom-file-label" for="exampleInputFile">Add Image</label>
+                          <p> Dimensi foto Landscape 1080px x 1080px & maksimal ukuran file 2 Mb </p>
                         </div>
                       </div>
                     </div>
