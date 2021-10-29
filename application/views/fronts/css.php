@@ -13,4 +13,5 @@
 <link rel="stylesheet" href="<?php echo base_url()?>assets/css/magnific-popup.css">
 <link rel="stylesheet" href="<?php echo base_url()?>assets/css/style.css">
 <link rel="stylesheet" href="<?php echo base_url()?>assets/css/responsive.css">
+<link rel="stylesheet" href="<?php echo base_url()?>assets/css/demo-shop.css">
 <link rel="stylesheet" id="layoutstyle" href="<?php echo base_url()?>assets/color/theme.css">

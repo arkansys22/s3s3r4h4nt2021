@@ -26,71 +26,24 @@
                   <li class="dropdown">
                       <a class="nav-link" href="<?php echo base_url()?>">Home</a>
                   </li>
+									<?php foreach ($posts_templates_category as $post_new){  ?>
                   <li class="dropdown">
-                    <a class="dropdown-toggle nav-link" href="#" data-toggle="dropdown">PAKET SESERAHAN</a>
+                    <a class="dropdown-toggle nav-link" href="#" data-toggle="dropdown"><?php echo $post_new->templates_cat_judul ?></a>
                         <div class="dropdown-menu">
                             <ul>
+															<?php $posts_templates = $this->Crud_m->view_where_order('templates',array('templates_status'=>'publish', 'templates_cat_id'=>$post_new->templates_cat_id),'templates_id','desc'); ?>
+															<?php foreach ($posts_templates as $post_new2){  ?>
                             	<li>
-																<a class="dropdown-item menu-link" href="#">Produk 1</a>
+																<a class="dropdown-item menu-link" href="#"><?php echo $post_new2->templates_judul; ?></a>
                               </li>
-															<li>
-																<a class="dropdown-item menu-link" href="#">Produk 2</a>
-                              </li>
+														<?php } ?>
                             </ul>
                         </div>
                 	</li>
+									<?php } ?>
 									<li class="dropdown">
-                    <a class="dropdown-toggle nav-link" href="#" data-toggle="dropdown">Mahar</a>
-                        <div class="dropdown-menu">
-                            <ul>
-                            	<li>
-																<a class="dropdown-item menu-link" href="#">Produk 1</a>
-                              </li>
-															<li>
-																<a class="dropdown-item menu-link" href="#">Produk 2</a>
-                              </li>
-                            </ul>
-                        </div>
-                	</li>
-									<li class="dropdown">
-                    <a class="dropdown-toggle nav-link" href="#" data-toggle="dropdown">Ring box</a>
-                        <div class="dropdown-menu">
-                            <ul>
-                            	<li>
-																<a class="dropdown-item menu-link" href="#">Produk 1</a>
-                              </li>
-															<li>
-																<a class="dropdown-item menu-link" href="#">Produk 2</a>
-                              </li>
-                            </ul>
-                        </div>
-                	</li>
-									<li class="dropdown">
-                    <a class="dropdown-toggle nav-link" href="#" data-toggle="dropdown">Aksesoris</a>
-                        <div class="dropdown-menu">
-                            <ul>
-                            	<li>
-																<a class="dropdown-item menu-link" href="#">Produk 1</a>
-                              </li>
-															<li>
-																<a class="dropdown-item menu-link" href="#">Produk 2</a>
-                              </li>
-                            </ul>
-                        </div>
-                	</li>
-									<li class="dropdown">
-                    <a class="dropdown-toggle nav-link" href="#" data-toggle="dropdown">PAKET Pernikahan</a>
-                        <div class="dropdown-menu">
-                            <ul>
-                            	<li>
-																<a class="dropdown-item menu-link" href="#">Produk 1</a>
-                              </li>
-															<li>
-																<a class="dropdown-item menu-link" href="#">Produk 2</a>
-                              </li>
-                            </ul>
-                        </div>
-                	</li>
+                      <a class="nav-link" href="<?php echo base_url()?>">Open BO</a>
+                  </li>
               </ul>
             </div>
 

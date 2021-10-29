@@ -6791,9 +6791,18 @@ select[multiple] option {
 	display: inline-block;
 	line-height: normal;
 }
-.product-rate i {
+.product-rate li{
     color: #ffc300;
 	font-size: 18px;
+}
+
+.left-align span{
+		font-size: 18px;
+		text-align: left;
+}
+.right-align span{
+		font-size: 18px;
+		text-align: right;
 }
 .flash {
     position: absolute;

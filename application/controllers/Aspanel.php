@@ -1032,7 +1032,7 @@ class Aspanel extends CI_Controller {
 					$proses = $this->As_m->edit('slider', array('slider_id' => $id, 'slider_post_oleh' => $this->session->username))->row_array();
 			}
 			$data = array('rows' => $proses);
-			$data['home_stat']   = '';			
+			$data['home_stat']   = '';
 			cek_session_akses('slider',$this->session->id_session);
 			$data['tag'] = $this->Crud_m->view_ordering('keyword','keyword_id','DESC');
 			$this->load->view('backend/slider/v_update', $data);
@@ -3575,8 +3575,6 @@ class Aspanel extends CI_Controller {
 					$config['source_image'] = './assets/frontend/blogs/'.$hasil22['file_name'];
 					$config['create_thumb']= FALSE;
 					$config['maintain_ratio']= FALSE;
-					$config['width']= 700;
-					$config['height']= 475;
 					$config['new_image']= './assets/frontend/blogs/'.$hasil22['file_name'];
 					$this->load->library('image_lib', $config);
 					$this->image_lib->resize();
@@ -3678,8 +3676,6 @@ class Aspanel extends CI_Controller {
 			$config['source_image'] = './assets/frontend/blogs/'.$hasil22['file_name'];
 			$config['create_thumb']= FALSE;
 			$config['maintain_ratio']= FALSE;
-			$config['width']= 700;
-			$config['height']= 475;
 			$config['new_image']= './assets/frontend/blogs/'.$hasil22['file_name'];
 			$this->load->library('image_lib', $config);
 			$this->image_lib->resize();

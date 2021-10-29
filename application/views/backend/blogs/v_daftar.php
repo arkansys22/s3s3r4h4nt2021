@@ -31,6 +31,7 @@
                 <thead>
                 <tr>
                   <th>Tanggal</th>
+                  <th>Kunjungan</th>
                   <th>Judul</th>
                   <th>Aksi</th>
                 </tr>
@@ -44,11 +45,14 @@
 
                 <tr>
                   <td><?=$tgl_posting?></td>
-                  <td><a class="btn btn-primary btn-sm" title="Lihat" href="<?php echo base_url()?>blogs/<?=$row['blogs_judul_seo']?>" target="_blank"> <i class="fas fa-eye"> <?=$row['blogs_dibaca']?></i></a><?=$row['blogs_judul']?></td>
+                  <td><?=$row['blogs_dibaca']?></td>
+                  <td><?=$row['blogs_judul']?></td>
                   <td>
                     <?php
-                    echo"<a class='btn btn-primary btn-sm' title='Edit Data' href='".base_url()."aspanel/blogs_update/$row[blogs_id]'><i class='fas fa-edit'></i></a>
-                    <a class='btn btn-danger btn-sm' title='Delete Data' href='".base_url()."aspanel/blogs_delete_temp/$row[blogs_id]' onclick=\"return confirm('Are you sure want to delete this data?')\"><i class='fas fa-trash-alt'></i></a>";
+                    echo"
+                    <a class='btn btn-primary btn-sm' title='Lihat' href='".base_url()."blogs/$row[blogs_judul_seo]' target='_blank'><i class='fas fa-eye'></i></a>
+                    <a class='btn btn-primary btn-sm' title='Perbarui' href='".base_url()."aspanel/blogs_update/$row[blogs_id]'><i class='fas fa-edit'></i></a>
+                    <a class='btn btn-danger btn-sm' title='Hapus' href='".base_url()."aspanel/blogs_delete_temp/$row[blogs_id]' onclick=\"return confirm('Are you sure want to delete this data?')\"><i class='fas fa-trash-alt'></i></a>";
                     ?>
                   </td>
                 </tr>
@@ -58,8 +62,9 @@
                 <tfoot>
                 <tr>
                  <th>Tanggal</th>
-                  <th>Judul</th>
-                  <th>Aksi</th>
+                 <th>Kunjungan</th>
+                 <th>Judul</th>
+                 <th>Aksi</th>
                 </tr>
                 </tfoot>
               </table>

@@ -90,7 +90,7 @@
                         <div class="custom-file">
                           <input type="file" class="custom-file-input" name="gambar">
                           <label class="custom-file-label" for="exampleInputFile">File gambar sebelumnya <?php echo $rows['blogs_gambar'] ?></label>
-                         <p> Dimensi foto Landscape 694px x 420px & maksimal ukuran file 1 Mb </p>
+                         <p> Dimensi foto Landscape 1920px x 1080px & maksimal ukuran file 2 Mb </p>
                         </div>
                       </div>
                     </div>

@@ -27,11 +27,15 @@
 <?php $this->load->view('fronts/css')?>
 </head>
 <body>
-<?php $this->load->view('fronts/loader.php')?>
-<?php $this->load->view('fronts/home/v_popup')?>
+<!-- <?php $this->load->view('fronts/loader.php')?>-->
 <?php $this->load->view('fronts/header.php')?>
 <?php $this->load->view('fronts/home/v_slider')?>
-
+<?php $this->load->view('fronts/home/v_popular')?>
+<?php $this->load->view('fronts/home/v_countdown')?>
+<!--  <?php $this->load->view('fronts/home/v_cupon')?> -->
+<?php $this->load->view('fronts/home/v_produk')?>
+<?php $this->load->view('fronts/home/v_berita')?>
+<?php $this->load->view('fronts/home/v_iconbawah')?>
 
 <?php $this->load->view('fronts/footer')?>
 <!-- END FOOTER SECTION -->
@@ -39,7 +43,7 @@
 <a href="#" class="scrollup" style="display: none;"><i class="ion-ios-arrow-up"></i></a>
 
 
-
+<script src='<?php echo base_url()?>assets/js/demo-shop.js'></script>
 
 <!-- jquery.dd.min js -->
 <script src='<?php echo base_url()?>assets/js/jquery.dd.min.js'></script>

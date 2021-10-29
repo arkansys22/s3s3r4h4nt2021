@@ -209,6 +209,13 @@ class Crud_m extends CI_model{
          $this->db->order_by($order,$ordering);
          return $this->db->get()->result();
   }
+  public function view_where_order($table1,$where,$order,$ordering)
+  {
+         $this->db->from($table1);
+         $this->db->where($where);
+         $this->db->order_by($order,$ordering);
+         return $this->db->get()->result();
+  }
 
   public function viewz($table,$order,$ordering)
   {
