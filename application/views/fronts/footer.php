@@ -3,14 +3,22 @@
 	<div class="top_footer">
         <div class="container">
             <div class="row">
-							<div class="col-sm-12 col-lg-3 col-md-6 mb-lg-0">
+							<div class="col-sm-12 col-lg-4 col-md-6 mb-lg-0">
 								<div class="footer_logo">
 										<a href="<?php echo base_url()?>"><img height="100%" alt="logo" src="<?php echo base_url()?>assets/frontend/campur/<?php echo $identitas->logo?>"></a>
+
 								</div>
+								<br>
+								<p><?php echo $identitas->meta_deskripsi?></p>
+								<ul class="list_none footer_social">
+										<li><a href="<?php echo $identitas->facebook?>"><i class="ion-social-facebook"></i></a></li>
+										<li><a href="<?php echo $identitas->whatsapp?>"><i class="ion-social-whatsapp"></i></a></li>
+										<li><a href="<?php echo $identitas->youtube?>"><i class="ion-social-youtube-outline"></i></a></li>
+										<li><a href="<?php echo $identitas->instagram?>"><i class="ion-social-instagram-outline"></i></a></li>
+								</ul>
 							</div>
-                <div class="col-sm-12 col-lg-3 col-md-6 mb-4 mb-lg-0">
-										<h6 class="widget_title"><?php echo $identitas->nama_website?></h6>
-                    <p><?php echo $identitas->meta_deskripsi?></p>
+                <div class="col-sm-12 col-lg-4 col-md-6 mb-4 mb-lg-0">
+
                     <ul class="contact_info contact_info_light list_none">
                         <li>
                             <span class="ti-location-pin"></span>
@@ -26,21 +34,12 @@
                         </li>
                     </ul>
                 </div>
-                <div class="col-sm-12  col-lg-3 col-md-6 mb-4 mb-lg-0">
+                <div class="col-sm-12  col-lg-4 col-md-6 mb-4 mb-lg-0">
                 	<h6 class="widget_title">Syarat & Ketentuan</h6>
                     <ul class="list_none widget_links">
                     	<li><a href="#">Pendaftaran</a></li>
                       <li><a href="#">Pengantaran</a></li>
                       <li><a href="#">Catatan Penting!</a></li>
-                    </ul>
-                </div>
-                <div class=" col-sm-12 col-lg-3 col-md-6">
-                    <h6 class="widget_title">SOSMED</h6>
-                    <ul class="list_none footer_social">
-                    	  <li><a href="<?php echo $identitas->facebook?>"><i class="ion-social-facebook"></i></a></li>
-                        <li><a href="<?php echo $identitas->whatsapp?>"><i class="ion-social-whatsapp"></i></a></li>
-                        <li><a href="<?php echo $identitas->youtube?>"><i class="ion-social-youtube-outline"></i></a></li>
-                        <li><a href="<?php echo $identitas->instagram?>"><i class="ion-social-instagram-outline"></i></a></li>
                     </ul>
                 </div>
             </div>
