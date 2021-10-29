@@ -4477,7 +4477,8 @@ footer .widget_title {
 	margin-bottom: 20px;
 }
 .footer_logo {
-	height: auto;
+	
+	height: 250px;
 	width: auto;
 }
 .widget_links li,
