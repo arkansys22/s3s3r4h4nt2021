@@ -4,18 +4,7 @@
         	<div class="col-md-12">
             	<div class="light_gray_bg shop_info">
     				<div class="row">
-                        <div class="col-lg-3 col-sm-6">
-                            <div class="icon_box icon_box_style_4">
-                                <div class="box_icon">
-                                    <i class="ti-truck"></i>
-                                </div>
-                                <div class="icon_box_content">
-                                    <h5>Jangkauan</h5>
-                                    <p>JABODEBEK</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-3 col-sm-6">
+                        <div class="col-lg-4 col-xs-4">
                             <div class="icon_box icon_box_style_4">
                                 <div class="box_icon">
                                     <i class="ti-headphone-alt"></i>
@@ -26,7 +15,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-lg-3 col-sm-6">
+                        <div class="col-lg-4 col-xs-4">
                             <div class="icon_box icon_box_style_4">
                                 <div class="box_icon">
                                     <i class="ti-credit-card"></i>
@@ -37,7 +26,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-lg-3 col-sm-6">
+                        <div class="col-lg-4 col-xs-4">
                             <div class="icon_box icon_box_style_4">
                                 <div class="box_icon">
                                     <i class="ti-gift"></i>

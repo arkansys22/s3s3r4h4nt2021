@@ -136,7 +136,7 @@
                           <?php foreach ($tag as $tag){    } ?>
                       </div>
                     </div>
-                    <div class="col-sm-4">
+                    <div class="col-sm-12">
                       <div class="form-group">
                         <label>Gambar</label>
                         <div class="custom-file">
