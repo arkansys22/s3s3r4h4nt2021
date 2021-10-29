@@ -42,7 +42,7 @@
                 	</li>
 									<?php } ?>
 									<li class="dropdown">
-                      <a class="nav-link" href="<?php echo base_url()?>">Open BO</a>
+                      <a class="nav-link" href="<?php echo base_url()?>">Tips</a>
                   </li>
               </ul>
             </div>

@@ -1278,7 +1278,7 @@ select option {
 }
 .logo_light, .logo_dark {
 	display: none;
-	height: 50px;
+	height: auto;
 	width: : auto;
 }
 .light_skin .logo_default, .light_skin .logo_dark {
