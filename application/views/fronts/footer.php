@@ -16,6 +16,7 @@
 										<li><a href="<?php echo $identitas->youtube?>"><i class="ion-social-youtube-outline"></i></a></li>
 										<li><a href="<?php echo $identitas->instagram?>"><i class="ion-social-instagram-outline"></i></a></li>
 								</ul>
+								<br>
 							</div>
                 <div class="col-sm-12 col-lg-4 col-md-6 mb-4 mb-lg-0">
 										<h6 class="widget_title">Kontak Kami</h6>
