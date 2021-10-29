@@ -10,7 +10,7 @@
                                     <i class="ti-truck"></i>
                                 </div>
                                 <div class="icon_box_content">
-                                    <h5>Gratis Ongkir</h5>
+                                    <h5>Jangkauan</h5>
                                     <p>JABODEBEK</p>
                                 </div>
                             </div>

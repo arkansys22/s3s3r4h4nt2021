@@ -31,8 +31,12 @@
                                         <h5><?php echo $post_new->templates_judul; ?></h5>
                                     </div>
                                     <div class="product_price">
-                                      <del>Rp1.550.000</del>
-                                      <ins>Rp1.050.000</ins>
+                                      <?php
+                                      if(empty($post_new->templates_harga_diskon)) {
+                                        echo "<ins>Rp$post_new->templates_harga</ins>";
+                                      }else if($a = $post_new->templates_harga - ($post_new->templates_harga * ($post_new->templates_harga_diskon/100))){
+                                        echo "<del>Rp$post_new->templates_harga</del><ins>Rp$a</ins>";}
+                                      ?>
                                     </div>
                                     <div align="left">
                                         <span>99 Terjual</span>
