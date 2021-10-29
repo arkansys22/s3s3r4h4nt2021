@@ -18,7 +18,7 @@
 								</ul>
 							</div>
                 <div class="col-sm-12 col-lg-4 col-md-6 mb-4 mb-lg-0">
-
+										<h6 class="widget_title">Kontak Kami</h6>
                     <ul class="contact_info contact_info_light list_none">
                         <li>
                             <span class="ti-location-pin"></span>
