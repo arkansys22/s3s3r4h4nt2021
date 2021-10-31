@@ -842,27 +842,32 @@ class Aspanel extends CI_Controller {
 	public function slider()
 	{
 		$data['home_stat']   = '';
-				if ($this->session->level=='1'){
-						$data['record'] = $this->Crud_m->view_where_ordering('slider',array('slider_status'=>'publish'),'slider_id','DESC');
-				}elseif ($this->session->level=='2'){
-						$data['record'] = $this->Crud_m->view_where_ordering('slider',array('slider_status'=>'publish'),'slider_id','DESC');
-				}else{
-						$data['record'] = $this->Crud_m->view_where_ordering('slider',array('slider_post_oleh'=>$this->session->username,'slider_status'=>'publish'),'slider_id','DESC');
-				}
-				cek_session_akses('slider',$this->session->id_session);
-				$this->load->view('backend/slider/v_daftar', $data);
+		if ($this->session->level=='1'){
+			cek_session_akses('slider',$this->session->id_session);
+			$data['record'] = $this->Crud_m->view_where_ordering('slider',array('slider_status'=>'publish'),'slider_id','DESC');
+			}elseif ($this->session->level=='2'){
+				cek_session_akses_admin('slider',$this->session->id_session);
+				$data['record'] = $this->Crud_m->view_where_ordering('slider',array('slider_status'=>'publish'),'slider_id','DESC');
+			}else{
+				cek_session_akses_staff('slider',$this->session->id_session);
+				$data['record'] = $this->Crud_m->view_where_ordering('slider',array('slider_post_oleh'=>$this->session->username,'slider_status'=>'publish'),'slider_id','DESC');
+
+			}
+			$this->load->view('backend/slider/v_daftar', $data);
 	}
 	public function slider_storage_bin()
 	{
-				if ($this->session->level=='1'){
-						$data['record'] = $this->Crud_m->view_where_ordering('slider',array('slider_status'=>'delete'),'slider_id','DESC');
-				}elseif ($this->session->level=='2'){
-						$data['record'] = $this->Crud_m->view_where_ordering('slider',array('slider_status'=>'delete'),'slider_id','DESC');
-				}else{
-						$data['record'] = $this->Crud_m->view_where_ordering('slider',array('slider_post_oleh'=>$this->session->username,'slider_status'=>'delete'),'slider_id','DESC');
-				}
-				$data['home_stat']   = '';
-				cek_session_akses('slider',$this->session->id_session);
+		if ($this->session->level=='1'){
+			cek_session_akses('slider',$this->session->id_session);
+			$data['record'] = $this->Crud_m->view_where_ordering('slider',array('slider_status'=>'delete'),'slider_id','DESC');
+			}elseif ($this->session->level=='2'){
+				cek_session_akses_admin('slider',$this->session->id_session);
+				$data['record'] = $this->Crud_m->view_where_ordering('slider',array('slider_status'=>'delete'),'slider_id','DESC');
+			}else{
+				cek_session_akses_staff('slider',$this->session->id_session);
+				$data['record'] = $this->Crud_m->view_where_ordering('slider',array('slider_post_oleh'=>$this->session->username,'slider_status'=>'delete'),'slider_id','DESC');
+
+			}
 				$this->load->view('backend/slider/v_daftar_hapus', $data);
 	}
 	public function slider_tambahkan()
@@ -911,37 +916,41 @@ class Aspanel extends CI_Controller {
 										'slider_post_oleh'=>$this->session->username,
 										'slider_judul'=>$this->db->escape_str($this->input->post('slider_judul')),
 										'slider_judul_seo'=>$this->mylibrary->seo_title($this->input->post('slider_judul')),
-										'slider_desk'=>$this->input->post('slider_desk'),
-										'slider_meta_desk'=>$this->input->post('slider_meta_desk'),
-										'slider_keyword'=>$this->input->post('slider_keyword'),
+
 										'slider_post_hari'=>hari_ini(date('w')),
 										'slider_post_tanggal'=>date('Y-m-d'),
 										'slider_post_jam'=>date('H:i:s'),
 										'slider_dibaca'=>'0',
-										'slider_status'=>'publish',
-										'slider_meta_aktiv'=>'non');
+										'slider_status'=>'publish');
 											}else{
 												$data = array(
 													'slider_post_oleh'=>$this->session->username,
 													'slider_judul'=>$this->db->escape_str($this->input->post('slider_judul')),
 													'slider_judul_seo'=>$this->mylibrary->seo_title($this->input->post('slider_judul')),
-													'slider_desk'=>$this->input->post('slider_desk'),
-													'slider_meta_desk'=>$this->input->post('slider_meta_desk'),
-													'slider_keyword'=>$this->input->post('slider_keyword'),
+
 													'slider_post_hari'=>hari_ini(date('w')),
 													'slider_post_tanggal'=>date('Y-m-d'),
 													'slider_post_jam'=>date('H:i:s'),
 													'slider_dibaca'=>'0',
 													'slider_status'=>'publish',
-													'slider_gambar'=>$hasil22['file_name'],
-													'slider_meta_aktiv'=>'non');
+													'slider_gambar'=>$hasil22['file_name']);
 												}
 								$this->As_m->insert('slider',$data);
 								redirect('aspanel/slider');
 				}else{
-					$data['home_stat']   = '';
-					cek_session_akses('slider',$this->session->id_session);
-					$data['tag'] = $this->Crud_m->view_ordering('keyword','keyword_id','DESC');
+					if ($this->session->level=='1'){
+							cek_session_akses('slider',$this->session->id_session);
+							$data['home_stat']   = '';
+							$data['tag'] = $this->Crud_m->view_ordering('keyword','keyword_id','DESC');
+						}elseif ($this->session->level=='2'){
+							cek_session_akses_admin('slider',$this->session->id_session);
+							$data['home_stat']   = '';
+							$data['tag'] = $this->Crud_m->view_ordering('keyword','keyword_id','DESC');
+						}else{
+							cek_session_akses_staff('slider',$this->session->id_session);
+							$data['home_stat']   = '';
+							$data['tag'] = $this->Crud_m->view_ordering('keyword','keyword_id','DESC');
+						}
 					$this->load->view('backend/slider/v_tambahkan', $data);
 				}
 	}
@@ -992,14 +1001,10 @@ class Aspanel extends CI_Controller {
 											'slider_post_oleh'=>$this->session->username,
 											'slider_judul'=>$this->db->escape_str($this->input->post('slider_judul')),
 											'slider_judul_seo'=>$this->mylibrary->seo_title($this->input->post('slider_judul')),
-											'slider_desk'=>$this->input->post('slider_desk'),
-											'slider_meta_desk'=>$this->input->post('slider_meta_desk'),
-											'slider_keyword'=>$this->input->post('slider_keyword'),
+
 											'slider_post_hari'=>hari_ini(date('w')),
 											'slider_post_tanggal'=>date('Y-m-d'),
-											'slider_post_jam'=>date('H:i:s'),
-											'slider_meta_aktiv'=>$this->input->post('slider_meta_aktiv'),
-											'slider_keyword'=>$tag);
+											'slider_post_jam'=>date('H:i:s'));
 											$where = array('slider_id' => $this->input->post('slider_id'));
 											$this->db->update('slider', $data, $where);
 						}else{
@@ -1007,15 +1012,11 @@ class Aspanel extends CI_Controller {
 											'slider_post_oleh'=>$this->session->username,
 											'slider_judul'=>$this->db->escape_str($this->input->post('slider_judul')),
 											'slider_judul_seo'=>$this->mylibrary->seo_title($this->input->post('slider_judul')),
-											'slider_desk'=>$this->input->post('slider_desk'),
-											'slider_meta_desk'=>$this->input->post('slider_meta_desk'),
-											'slider_keyword'=>$this->input->post('slider_keyword'),
+
 											'slider_post_hari'=>hari_ini(date('w')),
 											'slider_post_tanggal'=>date('Y-m-d'),
 											'slider_post_jam'=>date('H:i:s'),
-											'slider_gambar'=>$hasil22['file_name'],
-											'slider_meta_aktiv'=>$this->input->post('slider_meta_aktiv'),
-											'slider_keyword'=>$tag);
+											'slider_gambar'=>$hasil22['file_name']);
 											$where = array('slider_id' => $this->input->post('slider_id'));
 											$_image = $this->db->get_where('slider',$where)->row();
 											$query = $this->db->update('slider',$data,$where);
@@ -1032,36 +1033,82 @@ class Aspanel extends CI_Controller {
 					$proses = $this->As_m->edit('slider', array('slider_id' => $id, 'slider_post_oleh' => $this->session->username))->row_array();
 			}
 			$data = array('rows' => $proses);
-			$data['home_stat']   = '';
-			cek_session_akses('slider',$this->session->id_session);
-			$data['tag'] = $this->Crud_m->view_ordering('keyword','keyword_id','DESC');
+			if ($this->session->level=='1'){
+					cek_session_akses('slider',$this->session->id_session);
+					$data['home_stat']   = '';
+					$data['tag'] = $this->Crud_m->view_ordering('keyword','keyword_id','DESC');
+				}elseif ($this->session->level=='2'){
+					cek_session_akses_admin('slider',$this->session->id_session);
+					$data['home_stat']   = '';
+					$data['tag'] = $this->Crud_m->view_ordering('keyword','keyword_id','DESC');
+				}else{
+					cek_session_akses_staff('slider',$this->session->id_session);
+					$data['home_stat']   = '';
+					$data['tag'] = $this->Crud_m->view_ordering('keyword','keyword_id','DESC');
+				}
 			$this->load->view('backend/slider/v_update', $data);
 		}
 	}
 	function slider_delete_temp()
 	{
-			cek_session_akses('slider',$this->session->id_session);
-			$data = array('slider_status'=>'delete');
-			$where = array('slider_id' => $this->uri->segment(3));
-			$this->db->update('slider', $data, $where);
+		if ($this->session->level=='1'){
+				cek_session_akses('slider',$this->session->id_session);
+				$data = array('slider_status'=>'delete');
+				$where = array('slider_id' => $this->uri->segment(3));
+				$this->db->update('slider', $data, $where);
+			}elseif ($this->session->level=='2'){
+				cek_session_akses_admin('slider',$this->session->id_session);
+				$data = array('slider_status'=>'delete');
+				$where = array('slider_id' => $this->uri->segment(3));
+				$this->db->update('slider', $data, $where);
+			}else{
+				cek_session_akses_staff('slider',$this->session->id_session);
+				$data = array('slider_status'=>'delete');
+				$where = array('slider_id' => $this->uri->segment(3));
+				$this->db->update('slider', $data, $where);
+			}
 			redirect('aspanel/slider');
 	}
 	function slider_restore()
 	{
-			cek_session_akses('slider',$this->session->id_session);
-			$data = array('slider_status'=>'Publish');
-			$where = array('slider_id' => $this->uri->segment(3));
-			$this->db->update('slider', $data, $where);
+		if ($this->session->level=='1'){
+				cek_session_akses('slider',$this->session->id_session);
+				$data = array('slider_status'=>'Publish');
+				$where = array('slider_id' => $this->uri->segment(3));
+				$this->db->update('slider', $data, $where);
+			}elseif ($this->session->level=='2'){
+				cek_session_akses_admin('slider',$this->session->id_session);
+				$data = array('slider_status'=>'Publish');
+				$where = array('slider_id' => $this->uri->segment(3));
+				$this->db->update('slider', $data, $where);
+			}else{
+				cek_session_akses_staff('slider',$this->session->id_session);
+				$data = array('slider_status'=>'Publish');
+				$where = array('slider_id' => $this->uri->segment(3));
+				$this->db->update('slider', $data, $where);
+			}
 			redirect('aspanel/slider_storage_bin');
 	}
 	public function slider_delete()
 	{
-			cek_session_akses('slider',$this->session->id_session);
-			$id = $this->uri->segment(3);
-			$_id = $this->db->get_where('slider',['slider_id' => $id])->row();
-			 $query = $this->db->delete('slider',['slider_id'=>$id]);
-			if($query){
-							 unlink("./bahan/foto_slider/".$_id->sliders_gambar);
+		if ($this->session->level=='1'){
+			 cek_session_akses('slider',$this->session->id_session);
+			 $id = $this->uri->segment(3);
+			 $_id = $this->db->get_where('slider',['slider_id' => $id])->row();
+				$query = $this->db->delete('slider',['slider_id'=>$id]);
+			 if($query){
+								unlink("./assets/frontend/foto_slider/".$_id->sliders_gambar);
+						}
+		 }elseif ($this->session->level=='2'){
+			 cek_session_akses_admin('slider',$this->session->id_session);
+ 			$id = $this->uri->segment(3);
+ 			$_id = $this->db->get_where('slider',['slider_id' => $id])->row();
+ 			 $query = $this->db->delete('slider',['slider_id'=>$id]);
+ 			if($query){
+ 							 unlink("./assets/frontend/foto_slider/".$_id->sliders_gambar);
+						}
+		 }else{
+			 cek_session_akses_staff('slider',$this->session->id_session);
 		 }
 		redirect('aspanel/slider_storage_bin');
 	}
@@ -1091,7 +1138,7 @@ class Aspanel extends CI_Controller {
 	}
 	/*	Bagian untuk Message - Penutup	*/
 
-	/*	Bagian untuk Bisnis - Pembuka	*/
+	/*	Bagian untuk klien - Pembuka	*/
 	public function paketharga()
 	{
 		$data['karyawan_menu_open']   = '';
@@ -1411,36 +1458,307 @@ class Aspanel extends CI_Controller {
 		 }
 		redirect('aspanel/paketharga_storage_bin');
 	}
-	/*	Bagian untuk Bisnis - Penutup	*/
+	/*	Bagian untuk klien - Penutup	*/
 
 
-		/*	Bagian untuk Bisnis - Pembuka	*/
+		/*	Bagian untuk promo - Pembuka	*/
+		public function promo()
+		{
+			if ($this->session->level=='1'){
+				cek_session_akses('promo',$this->session->id_session);
+				$data['record'] = $this->Crud_m->view_where_ordering('promo',array('promo_status'=>'publish'),'promo_id','DESC');
+				}elseif ($this->session->level=='2'){
+					cek_session_akses_admin('promo',$this->session->id_session);
+					$data['record'] = $this->Crud_m->view_where_ordering('promo',array('promo_status'=>'publish'),'promo_id','DESC');
+				}else{
+					cek_session_akses_staff('promo',$this->session->id_session);
+					$data['record'] = $this->Crud_m->view_where_ordering('promo',array('promo_post_oleh'=>$this->session->username,'promo_status'=>'publish'),'promo_id','DESC');
+
+				}
+					$this->load->view('backend/promo/v_daftar', $data);
+		}
+		public function promo_storage_bin()
+		{
+			if ($this->session->level=='1'){
+				cek_session_akses('promo',$this->session->id_session);
+				$data['record'] = $this->Crud_m->view_where_ordering('promo',array('promo_status'=>'delete'),'promo_id','DESC');
+				}elseif ($this->session->level=='2'){
+					cek_session_akses_admin('promo',$this->session->id_session);
+					$data['record'] = $this->Crud_m->view_where_ordering('promo',array('promo_status'=>'delete'),'promo_id','DESC');
+				}else{
+					cek_session_akses_staff('promo',$this->session->id_session);
+					$data['record'] = $this->Crud_m->view_where_ordering('promo',array('promo_post_oleh'=>$this->session->username,'promo_status'=>'delete'),'promo_id','DESC');
+				}
+				$this->load->view('backend/promo/v_daftar_hapus', $data);
+		}
+		public function promo_tambahkan()
+		{
+			if (isset($_POST['submit'])){
+
+						$config['upload_path'] = 'assets/frontend/promo/';
+						$config['allowed_types'] = 'gif|jpg|png|JPG|JPEG';
+						$this->upload->initialize($config);
+						$this->upload->do_upload('gambar');
+						$hasil22=$this->upload->data();
+						$config['image_library']='gd2';
+						$config['source_image'] = './assets/frontend/promo/'.$hasil22['file_name'];
+						$config['create_thumb']= FALSE;
+						$config['maintain_ratio']= FALSE;
+						$config['quality']= '95%';
+						$config['new_image']= './assets/frontend/promo/'.$hasil22['file_name'];
+						$this->load->library('image_lib', $config);
+						$this->image_lib->resize();
+
+						if ($this->input->post('promo_keyword')!=''){
+									$tag_seo = $this->input->post('promo_keyword');
+									$tag=implode(',',$tag_seo);
+							}else{
+									$tag = '';
+							}
+						$tag = $this->input->post('promo_keyword');
+						$tags = explode(",", $tag);
+						$tags2 = array();
+						foreach($tags as $t)
+						{
+							$sql = "select * from keyword where keyword_nama_seo = '" . $this->mylibrary->seo_title($t) . "'";
+							$a = $this->db->query($sql)->result_array();
+							if(count($a) == 0){
+								$data = array('keyword_nama'=>$this->db->escape_str($t),
+										'keyword_username'=>$this->session->username,
+										'keyword_nama_seo'=>$this->mylibrary->seo_title($t),
+										'count'=>'0');
+								$this->As_m->insert('keyword',$data);
+							}
+							$tags2[] = $this->mylibrary->seo_title($t);
+						}
+						$tags = implode(",", $tags2);
+						if ($hasil22['file_name']==''){
+										$data = array(
+														'promo_post_oleh'=>$this->session->username,
+														'templates_id'=>$this->input->post('templates_id'),
+														'promo_selesai_tanggal'=>$this->input->post('promo_selesai_tanggal'),
+														'promo_selesai_jam'=>$this->input->post('promo_selesai_jam'),
+														'promo_judul'=>$this->db->escape_str($this->input->post('promo_judul')),
+														'promo_judul_seo'=>$this->mylibrary->seo_title($this->input->post('promo_judul')),
+														'promo_harga'=>$this->input->post('promo_harga'),
+														'promo_limit'=>$this->input->post('promo_limit'),
+														'promo_post_hari'=>hari_ini(date('w')),
+														'promo_post_tanggal'=>date('Y-m-d'),
+														'promo_post_jam'=>date('H:i:s'),
+														'promo_status'=>'publish');
+												}else{
+													$data = array(
+														'promo_post_oleh'=>$this->session->username,
+														'templates_id'=>$this->input->post('templates_id'),
+														'promo_selesai_tanggal'=>$this->input->post('promo_selesai_tanggal'),
+														'promo_selesai_jam'=>$this->input->post('promo_selesai_jam'),
+														'promo_judul'=>$this->db->escape_str($this->input->post('promo_judul')),
+														'promo_judul_seo'=>$this->mylibrary->seo_title($this->input->post('promo_judul')),
+														'promo_harga'=>$this->input->post('promo_harga'),
+														'promo_limit'=>$this->input->post('promo_limit'),
+														'promo_post_hari'=>hari_ini(date('w')),
+														'promo_post_tanggal'=>date('Y-m-d'),
+														'promo_post_jam'=>date('H:i:s'),
+														'promo_status'=>'publish',
+														'promo_gambar'=>$hasil22['file_name']);
+													}
+									$this->As_m->insert('promo',$data);
+									redirect('aspanel/promo');
+					}else{
+						if ($this->session->level=='1'){
+								cek_session_akses('promo',$this->session->id_session);
+								$data['home_stat']   = '';
+								$data['records'] = $this->Crud_m->view_where_ordering('templates',array('templates_status'=>'Publish'),'templates_id','DESC');
+								$data['tag'] = $this->Crud_m->view_ordering('keyword','keyword_id','DESC');
+							}elseif ($this->session->level=='2'){
+								cek_session_akses_admin('promo',$this->session->id_session);
+								$data['home_stat']   = '';
+								$data['records'] = $this->Crud_m->view_where_ordering('templates',array('templates_status'=>'Publish'),'templates_id','DESC');
+								$data['tag'] = $this->Crud_m->view_ordering('keyword','keyword_id','DESC');
+							}else{
+								cek_session_akses_staff('promo',$this->session->id_session);
+								$data['home_stat']   = '';
+								$data['records'] = $this->Crud_m->view_where_ordering('templates',array('templates_status'=>'Publish'),'templates_id','DESC');
+								$data['tag'] = $this->Crud_m->view_ordering('keyword','keyword_id','DESC');
+							}
+						$this->load->view('backend/promo/v_tambahkan', $data);
+					}
+		}
+		public function promo_update()
+		{
+
+			$id = $this->uri->segment(3);
+			if (isset($_POST['submit'])){
+
+				$config['upload_path'] = 'assets/frontend/promo/';
+				$config['allowed_types'] = 'gif|jpg|png|JPG|JPEG';
+				$this->upload->initialize($config);
+				$this->upload->do_upload('gambar');
+				$hasil22=$this->upload->data();
+				$config['image_library']='gd2';
+				$config['source_image'] = './assets/frontend/promo/'.$hasil22['file_name'];
+				$config['create_thumb']= FALSE;
+				$config['maintain_ratio']= FALSE;
+				$config['quality']= '95%';
+				$config['new_image']= './assets/frontend/promo/'.$hasil22['file_name'];
+				$this->load->library('image_lib', $config);
+				$this->image_lib->resize();
+
+				if ($this->input->post('promo_keyword')!=''){
+							$tag_seo = $this->input->post('promo_keyword');
+							$tag=implode(',',$tag_seo);
+					}else{
+							$tag = '';
+					}
+				$tag = $this->input->post('promo_keyword');
+				$tags = explode(",", $tag);
+				$tags2 = array();
+				foreach($tags as $t)
+				{
+					$sql = "select * from keyword where keyword_nama_seo = '" . $this->mylibrary->seo_title($t) . "'";
+					$a = $this->db->query($sql)->result_array();
+					if(count($a) == 0){
+						$data = array('keyword_nama'=>$this->db->escape_str($t),
+								'keyword_username'=>$this->session->username,
+								'keyword_nama_seo'=>$this->mylibrary->seo_title($t),
+								'count'=>'0');
+						$this->As_m->insert('keyword',$data);
+					}
+					$tags2[] = $this->mylibrary->seo_title($t);
+				}
+				$tags = implode(",", $tags2);
+							if ($hasil22['file_name']==''){
+											$data = array(
+												'promo_update_oleh'=>$this->session->username,
+												'templates_id'=>$this->input->post('templates_id'),
+												'promo_selesai_tanggal'=>$this->input->post('promo_selesai_tanggal'),
+												'promo_selesai_jam'=>$this->input->post('promo_selesai_jam'),
+												'promo_harga'=>$this->input->post('promo_harga'),
+												'promo_limit'=>$this->input->post('promo_limit'),
+												'promo_judul'=>$this->db->escape_str($this->input->post('promo_judul')),
+												'promo_judul_seo'=>$this->mylibrary->seo_title($this->input->post('promo_judul')),
+												'promo_update_hari'=>hari_ini(date('w')),
+												'promo_update_tanggal'=>date('Y-m-d'),
+												'promo_update_jam'=>date('H:i:s'));
+												$where = array('promo_id' => $this->input->post('promo_id'));
+												$this->db->update('promo', $data, $where);
+							}else{
+											$data = array(
+												'promo_update_oleh'=>$this->session->username,
+												'templates_id'=>$this->input->post('templates_id'),
+												'promo_selesai_tanggal'=>$this->input->post('promo_selesai_tanggal'),
+												'promo_selesai_jam'=>$this->input->post('promo_selesai_jam'),
+												'promo_harga'=>$this->input->post('promo_harga'),
+												'promo_limit'=>$this->input->post('promo_limit'),
+												'promo_judul'=>$this->db->escape_str($this->input->post('promo_judul')),
+												'promo_judul_seo'=>$this->mylibrary->seo_title($this->input->post('promo_judul')),
+												'promo_update_hari'=>hari_ini(date('w')),
+												'promo_update_tanggal'=>date('Y-m-d'),
+												'promo_update_jam'=>date('H:i:s'),
+												'promo_gambar'=>$hasil22['file_name']);
+												$where = array('promo_id' => $this->input->post('promo_id'));
+												$_image = $this->db->get_where('promo',$where)->row();
+												$query = $this->db->update('promo',$data,$where);
+												if($query){
+													unlink("assets/frontend/promo/".$_image->promo_gambar);
+												}
+
+							}
+							redirect('aspanel/promo');
+			}else{
+				if ($this->session->level=='1'){
+						 $proses = $this->As_m->edit('promo', array('promo_id' => $id))->row_array();
+				}else{
+						$proses = $this->As_m->edit('promo', array('promo_id' => $id, 'promo_post_oleh' => $this->session->username))->row_array();
+				}
+				$data = array('rows' => $proses);
+				if ($this->session->level=='1'){
+						cek_session_akses('promo',$this->session->id_session);
+						$data['home_stat']   = '';
+						$data['records'] = $this->Crud_m->view_where_ordering('templates',array('templates_status'=>'Publish'),'templates_id','DESC');
+						$data['tag'] = $this->Crud_m->view_ordering('keyword','keyword_id','DESC');
+					}elseif ($this->session->level=='2'){
+						cek_session_akses_admin('promo',$this->session->id_session);
+						$data['home_stat']   = '';
+						$data['records'] = $this->Crud_m->view_where_ordering('templates',array('templates_status'=>'Publish'),'templates_id','DESC');
+						$data['tag'] = $this->Crud_m->view_ordering('keyword','keyword_id','DESC');
+					}else{
+						cek_session_akses_staff('promo',$this->session->id_session);
+						$data['home_stat']   = '';
+						$data['records'] = $this->Crud_m->view_where_ordering('templates',array('templates_status'=>'Publish'),'templates_id','DESC');
+						$data['tag'] = $this->Crud_m->view_ordering('keyword','keyword_id','DESC');
+					}
+				$this->load->view('backend/promo/v_update', $data);
+			}
+		}
+		function promo_delete_temp()
+		{
+			if ($this->session->level=='1'){
+					cek_session_akses('promo',$this->session->id_session);
+					$data = array('promo_status'=>'delete');
+		      $where = array('promo_id' => $this->uri->segment(3));
+					$this->db->update('promo', $data, $where);
+				}elseif ($this->session->level=='2'){
+					cek_session_akses_admin('promo',$this->session->id_session);
+					$data = array('promo_status'=>'delete');
+		      $where = array('promo_id' => $this->uri->segment(3));
+					$this->db->update('promo', $data, $where);
+				}else{
+					cek_session_akses_staff('promo',$this->session->id_session);
+					$data = array('promo_status'=>'delete');
+		      $where = array('promo_id' => $this->uri->segment(3));
+					$this->db->update('promo', $data, $where);
+				}
+				redirect('aspanel/promo');
+		}
+		function promo_restore()
+		{
+			if ($this->session->level=='1'){
+					cek_session_akses('promo',$this->session->id_session);
+					$data = array('promo_status'=>'Publish');
+					$where = array('promo_id' => $this->uri->segment(3));
+					$this->db->update('promo', $data, $where);
+				}elseif ($this->session->level=='2'){
+					cek_session_akses_admin('promo',$this->session->id_session);
+					$data = array('promo_status'=>'Publish');
+					$where = array('promo_id' => $this->uri->segment(3));
+					$this->db->update('promo', $data, $where);
+				}else{
+					cek_session_akses_staff('promo',$this->session->id_session);
+					$data = array('promo_status'=>'Publish');
+					$where = array('promo_id' => $this->uri->segment(3));
+					$this->db->update('promo', $data, $where);
+				}
+				redirect('aspanel/promo_storage_bin');
+		}
+		public function promo_delete()
+		{
+			 if ($this->session->level=='1'){
+ 					cek_session_akses('promo',$this->session->id_session);
+ 					$id = $this->uri->segment(3);
+ 					$_id = $this->db->get_where('promo',['promo_id' => $id])->row();
+ 					 $query = $this->db->delete('promo',['promo_id'=>$id]);
+ 				 	if($query){
+ 									 unlink("./assets/frontend/promo/".$_id->promo_gambar);
+ 				 			 }
+ 				}elseif ($this->session->level=='2'){
+ 					cek_session_akses_admin('promo',$this->session->id_session);
+ 					$id = $this->uri->segment(3);
+ 					$_id = $this->db->get_where('promo',['promo_id' => $id])->row();
+ 					 $query = $this->db->delete('promo',['promo_id'=>$id]);
+ 				 	if($query){
+ 									 unlink("./assets/frontend/promo/".$_id->promo_gambar);
+ 				 			 }
+ 				}else{
+ 					cek_session_akses_staff('promo',$this->session->id_session);
+ 				}
+			redirect('aspanel/promo_storage_bin');
+		}
+		/*	Bagian untuk promo - Penutup	*/
+
+		/*	Bagian untuk testimoni - Pembuka	*/
 		public function testimoni()
 		{
-			$data['karyawan_menu_open']   = '';
-			$data['home_stat']   = '';
-			$data['identitas_stat']   = '';
-			$data['profil_stat']   = '';
-			$data['sliders_stat']   = '';
-			$data['templates_stat']   = '';
-			$data['cat_templates_stat']   = '';
-			$data['slider_stat']   = '';
-			$data['blogs_stat']   = '';
-			$data['message_stat']   = '';
-			$data['gallery_stat']   = '';
-			$data['kehadiran_menu_open']   = '';
-				$data['jamkerja_stat']   = '';
-				$data['absen_stat']   = '';
-				$data['dataabsen_stat']   = '';
-				$data['cuti_stat']   = '';
-				$data['gaji_stat']   = '';
-				$data['pengumuman_stat']   = '';
-				$data['konfig_stat']   = '';
-				$data['produk_menu_open']   = 'menu-open';
-				$data['testimoni']   = 'active';
-				$data['produk']   = '';
-				$data['services']   = '';
-
 					if ($this->session->level=='1'){
 							$data['record'] = $this->Crud_m->view_where_ordering('testimoni',array('testimoni_status'=>'publish'),'testimoni_id','DESC');
 					}else{
@@ -1451,30 +1769,6 @@ class Aspanel extends CI_Controller {
 		}
 		public function testimoni_storage_bin()
 		{
-			$data['karyawan_menu_open']   = '';
-			$data['home_stat']   = '';
-			$data['identitas_stat']   = '';
-			$data['profil_stat']   = '';
-			$data['sliders_stat']   = '';
-			$data['templates_stat']   = '';
-			$data['cat_templates_stat']   = '';
-			$data['slider_stat']   = '';
-			$data['blogs_stat']   = '';
-			$data['message_stat']   = '';
-			$data['gallery_stat']   = '';
-			$data['kehadiran_menu_open']   = '';
-				$data['jamkerja_stat']   = '';
-				$data['absen_stat']   = '';
-				$data['dataabsen_stat']   = '';
-				$data['cuti_stat']   = '';
-				$data['gaji_stat']   = '';
-				$data['pengumuman_stat']   = '';
-				$data['konfig_stat']   = '';
-				$data['produk_menu_open']   = 'menu-open';
-				$data['testimoni']   = 'active';
-				$data['produk']   = '';
-				$data['services']   = '';
-
 					if ($this->session->level=='1'){
 							$data['record'] = $this->Crud_m->view_where_ordering('testimoni',array('testimoni_status'=>'delete'),'testimoni_id','DESC');
 					}else{
@@ -1559,29 +1853,7 @@ class Aspanel extends CI_Controller {
 									$this->As_m->insert('testimoni',$data);
 									redirect('aspanel/testimoni');
 					}else{
-						$data['karyawan_menu_open']   = '';
-						$data['home_stat']   = '';
-						$data['identitas_stat']   = '';
-						$data['profil_stat']   = '';
-						$data['sliders_stat']   = '';
-						$data['templates_stat']   = '';
-						$data['cat_templates_stat']   = '';
-						$data['slider_stat']   = '';
-						$data['blogs_stat']   = '';
-						$data['message_stat']   = '';
-						$data['gallery_stat']   = '';
-						$data['kehadiran_menu_open']   = '';
-						$data['jamkerja_stat']   = '';
-						$data['absen_stat']   = '';
-						$data['dataabsen_stat']   = '';
-						$data['cuti_stat']   = '';
-						$data['gaji_stat']   = '';
-						$data['pengumuman_stat']   = '';
-						$data['konfig_stat']   = '';
-						$data['produk_menu_open']   = 'menu-open';
-						$data['testimoni']   = 'active';
-						$data['produk']   = '';
-						$data['services']   = '';
+
 						cek_session_akses('testimoni',$this->session->id_session);
 						$data['tag'] = $this->Crud_m->view_ordering('keyword','keyword_id','DESC');
 						$this->load->view('backend/testimoni/v_tambahkan', $data);
@@ -1675,29 +1947,7 @@ class Aspanel extends CI_Controller {
 						$proses = $this->As_m->edit('testimoni', array('testimoni_id' => $id, 'testimoni_post_oleh' => $this->session->username))->row_array();
 				}
 				$data = array('rows' => $proses);
-				$data['karyawan_menu_open']   = '';
-				$data['home_stat']   = '';
-				$data['identitas_stat']   = '';
-				$data['profil_stat']   = '';
-				$data['sliders_stat']   = '';
-				$data['templates_stat']   = '';
-				$data['cat_templates_stat']   = 'active';
-				$data['slider_stat']   = '';
-				$data['blogs_stat']   = '';
-				$data['message_stat']   = '';
-				$data['gallery_stat']   = '';
-				$data['kehadiran_menu_open']   = 'menu-open';
-					$data['jamkerja_stat']   = '';
-					$data['absen_stat']   = '';
-					$data['dataabsen_stat']   = 'active';
-					$data['cuti_stat']   = '';
-					$data['gaji_stat']   = '';
-					$data['pengumuman_stat']   = '';
-					$data['konfig_stat']   = '';
-					$data['produk_menu_open']   = 'menu-open';
-					$data['testimoni']   = 'active';
-					$data['produk']   = '';
-					$data['services']   = '';
+
 					cek_session_akses('testimoni',$this->session->id_session);
 				$data['tag'] = $this->Crud_m->view_ordering('keyword','keyword_id','DESC');
 				$this->load->view('backend/testimoni/v_update', $data);
@@ -1730,102 +1980,56 @@ class Aspanel extends CI_Controller {
 			 }
 			redirect('aspanel/testimoni_storage_bin');
 		}
-		/*	Bagian untuk Bisnis - Penutup	*/
+		/*	Bagian untuk testimoni - Penutup	*/
 
-		/*	Bagian untuk Bisnis - Pembuka	*/
-		public function bisnis()
+		/*	Bagian untuk klien - Pembuka	*/
+		public function klien()
 		{
-			$data['karyawan_menu_open']   = '';
-			$data['home_stat']   = '';
-			$data['identitas_stat']   = '';
-			$data['profil_stat']   = '';
-			$data['sliders_stat']   = '';
-			$data['templates_stat']   = '';
-			$data['cat_templates_stat']   = '';
-			$data['slider_stat']   = '';
-			$data['blogs_stat']   = '';
-			$data['message_stat']   = '';
-			$data['gallery_stat']   = '';
-			$data['kehadiran_menu_open']   = '';
-				$data['jamkerja_stat']   = '';
-				$data['absen_stat']   = '';
-				$data['dataabsen_stat']   = '';
-				$data['cuti_stat']   = '';
-				$data['gaji_stat']   = '';
-				$data['pengumuman_stat']   = '';
-				$data['konfig_stat']   = '';
-				$data['produk_menu_open']   = 'menu-open';
-				$data['bisnis']   = 'active';
-				$data['produk']   = '';
-				$data['services']   = '';
 
 					if ($this->session->level=='1'){
-							$data['record'] = $this->Crud_m->view_where_ordering('bisnis',array('bisnis_status'=>'publish'),'bisnis_id','DESC');
+							$data['record'] = $this->Crud_m->view_where_ordering('klien',array('klien_status'=>'publish'),'klien_id','DESC');
 					}else{
-							$data['record'] = $this->Crud_m->view_where_ordering('bisnis',array('bisnis_post_oleh'=>$this->session->username,'bisnis_status'=>'publish'),'bisnis_id','DESC');
+							$data['record'] = $this->Crud_m->view_where_ordering('klien',array('klien_post_oleh'=>$this->session->username,'klien_status'=>'publish'),'klien_id','DESC');
 					}
-					cek_session_akses('bisnis',$this->session->id_session);
+					cek_session_akses('klien',$this->session->id_session);
 					$this->load->view('backend/klien/v_daftar', $data);
 		}
-		public function bisnis_storage_bin()
+		public function klien_storage_bin()
 		{
-			$data['karyawan_menu_open']   = '';
-			$data['home_stat']   = '';
-			$data['identitas_stat']   = '';
-			$data['profil_stat']   = '';
-			$data['sliders_stat']   = '';
-			$data['templates_stat']   = '';
-			$data['cat_templates_stat']   = '';
-			$data['slider_stat']   = '';
-			$data['blogs_stat']   = '';
-			$data['message_stat']   = '';
-			$data['gallery_stat']   = '';
-			$data['kehadiran_menu_open']   = '';
-				$data['jamkerja_stat']   = '';
-				$data['absen_stat']   = '';
-				$data['dataabsen_stat']   = '';
-				$data['cuti_stat']   = '';
-				$data['gaji_stat']   = '';
-				$data['pengumuman_stat']   = '';
-				$data['konfig_stat']   = '';
-				$data['produk_menu_open']   = 'menu-open';
-				$data['bisnis']   = 'active';
-				$data['produk']   = '';
-				$data['services']   = '';
 
 					if ($this->session->level=='1'){
-							$data['record'] = $this->Crud_m->view_where_ordering('bisnis',array('bisnis_status'=>'delete'),'bisnis_id','DESC');
+							$data['record'] = $this->Crud_m->view_where_ordering('klien',array('klien_status'=>'delete'),'klien_id','DESC');
 					}else{
-							$data['record'] = $this->Crud_m->view_where_ordering('bisnis',array('bisnis_post_oleh'=>$this->session->username,'bisnis_status'=>'delete'),'bisnis_id','DESC');
+							$data['record'] = $this->Crud_m->view_where_ordering('klien',array('klien_post_oleh'=>$this->session->username,'klien_status'=>'delete'),'klien_id','DESC');
 					}
-					cek_session_akses('bisnis',$this->session->id_session);
+					cek_session_akses('klien',$this->session->id_session);
 					$this->load->view('backend/klien/v_daftar_hapus', $data);
 		}
-		public function bisnis_tambahkan()
+		public function klien_tambahkan()
 		{
 			if (isset($_POST['submit'])){
 
-						$config['upload_path'] = 'assets/frontend/linibisnis/';
+						$config['upload_path'] = 'assets/frontend/liniklien/';
 						$config['allowed_types'] = 'gif|jpg|png|JPG|JPEG';
 						$this->upload->initialize($config);
 						$this->upload->do_upload('gambar');
 						$hasil22=$this->upload->data();
 						$config['image_library']='gd2';
-						$config['source_image'] = './assets/frontend/linibisnis/'.$hasil22['file_name'];
+						$config['source_image'] = './assets/frontend/liniklien/'.$hasil22['file_name'];
 						$config['create_thumb']= FALSE;
 						$config['maintain_ratio']= FALSE;
 						$config['quality']= '80%';
-						$config['new_image']= './assets/frontend/linibisnis/'.$hasil22['file_name'];
+						$config['new_image']= './assets/frontend/liniklien/'.$hasil22['file_name'];
 						$this->load->library('image_lib', $config);
 						$this->image_lib->resize();
 
-						if ($this->input->post('bisnis_keyword')!=''){
-									$tag_seo = $this->input->post('bisnis_keyword');
+						if ($this->input->post('klien_keyword')!=''){
+									$tag_seo = $this->input->post('klien_keyword');
 									$tag=implode(',',$tag_seo);
 							}else{
 									$tag = '';
 							}
-						$tag = $this->input->post('bisnis_keyword');
+						$tag = $this->input->post('klien_keyword');
 						$tags = explode(",", $tag);
 						$tags2 = array();
 						foreach($tags as $t)
@@ -1844,90 +2048,68 @@ class Aspanel extends CI_Controller {
 						$tags = implode(",", $tags2);
 						if ($hasil22['file_name']==''){
 										$data = array(
-														'bisnis_post_oleh'=>$this->session->username,
-														'bisnis_judul'=>$this->db->escape_str($this->input->post('bisnis_judul')),
-														'bisnis_judul_seo'=>$this->mylibrary->seo_title($this->input->post('bisnis_judul')),
-														'bisnis_desk'=>$this->input->post('bisnis_desk'),
-														'bisnis_post_hari'=>hari_ini(date('w')),
-														'bisnis_post_tanggal'=>date('Y-m-d'),
-														'bisnis_post_jam'=>date('H:i:s'),
-														'bisnis_dibaca'=>'0',
-														'bisnis_status'=>'publish',
-														'bisnis_meta_desk'=>$this->input->post('bisnis_meta_desk'),
-														'bisnis_keyword'=>$tag);
+														'klien_post_oleh'=>$this->session->username,
+														'klien_judul'=>$this->db->escape_str($this->input->post('klien_judul')),
+														'klien_judul_seo'=>$this->mylibrary->seo_title($this->input->post('klien_judul')),
+														'klien_desk'=>$this->input->post('klien_desk'),
+														'klien_post_hari'=>hari_ini(date('w')),
+														'klien_post_tanggal'=>date('Y-m-d'),
+														'klien_post_jam'=>date('H:i:s'),
+														'klien_dibaca'=>'0',
+														'klien_status'=>'publish',
+														'klien_meta_desk'=>$this->input->post('klien_meta_desk'),
+														'klien_keyword'=>$tag);
 												}else{
 													$data = array(
-														'bisnis_post_oleh'=>$this->session->username,
-														'bisnis_judul'=>$this->db->escape_str($this->input->post('bisnis_judul')),
-														'bisnis_judul_seo'=>$this->mylibrary->seo_title($this->input->post('bisnis_judul')),
-														'bisnis_desk'=>$this->input->post('bisnis_desk'),
-														'bisnis_post_hari'=>hari_ini(date('w')),
-														'bisnis_post_tanggal'=>date('Y-m-d'),
-														'bisnis_post_jam'=>date('H:i:s'),
-														'bisnis_dibaca'=>'0',
-														'bisnis_status'=>'publish',
-														'bisnis_gambar'=>$hasil22['file_name'],
-														'bisnis_meta_desk'=>$this->input->post('bisnis_meta_desk'),
-														'bisnis_keyword'=>$tag);
+														'klien_post_oleh'=>$this->session->username,
+														'klien_judul'=>$this->db->escape_str($this->input->post('klien_judul')),
+														'klien_judul_seo'=>$this->mylibrary->seo_title($this->input->post('klien_judul')),
+														'klien_desk'=>$this->input->post('klien_desk'),
+														'klien_post_hari'=>hari_ini(date('w')),
+														'klien_post_tanggal'=>date('Y-m-d'),
+														'klien_post_jam'=>date('H:i:s'),
+														'klien_dibaca'=>'0',
+														'klien_status'=>'publish',
+														'klien_gambar'=>$hasil22['file_name'],
+														'klien_meta_desk'=>$this->input->post('klien_meta_desk'),
+														'klien_keyword'=>$tag);
 													}
-									$this->As_m->insert('bisnis',$data);
-									redirect('aspanel/bisnis');
+									$this->As_m->insert('klien',$data);
+									redirect('aspanel/klien');
 					}else{
-						$data['karyawan_menu_open']   = '';
-						$data['home_stat']   = '';
-						$data['identitas_stat']   = '';
-						$data['profil_stat']   = '';
-						$data['sliders_stat']   = '';
-						$data['templates_stat']   = '';
-						$data['cat_templates_stat']   = '';
-						$data['slider_stat']   = '';
-						$data['blogs_stat']   = '';
-						$data['message_stat']   = '';
-						$data['gallery_stat']   = '';
-						$data['kehadiran_menu_open']   = '';
-						$data['jamkerja_stat']   = '';
-						$data['absen_stat']   = '';
-						$data['dataabsen_stat']   = '';
-						$data['cuti_stat']   = '';
-						$data['gaji_stat']   = '';
-						$data['pengumuman_stat']   = '';
-						$data['konfig_stat']   = '';
-						$data['produk_menu_open']   = 'menu-open';
-						$data['bisnis']   = 'active';
-						$data['produk']   = '';
-						$data['services']   = '';
-						cek_session_akses('bisnis',$this->session->id_session);
+
+						cek_session_akses('klien',$this->session->id_session);
 						$data['tag'] = $this->Crud_m->view_ordering('keyword','keyword_id','DESC');
 						$this->load->view('backend/klien/v_tambahkan', $data);
 					}
 		}
-		public function bisnis_update()
+		public function klien_update()
 		{
 
 			$id = $this->uri->segment(3);
 			if (isset($_POST['submit'])){
 
-				$config['upload_path'] = 'assets/frontend/linibisnis/';
+				$config['upload_path'] = 'assets/frontend/liniklien/';
 				$config['allowed_types'] = 'gif|jpg|png|JPG|JPEG';
 				$this->upload->initialize($config);
 				$this->upload->do_upload('gambar');
 				$hasil22=$this->upload->data();
 				$config['image_library']='gd2';
-				$config['source_image'] = './assets/frontend/linibisnis/'.$hasil22['file_name'];
+				$config['source_image'] = './assets/frontend/liniklien/'.$hasil22['file_name'];
 				$config['create_thumb']= FALSE;
 				$config['maintain_ratio']= FALSE;
 				$config['quality']= '80%';
-				$config['new_image']= './assets/frontend/linibisnis/'.$hasil22['file_name'];
+				$config['new_image']= './assets/frontend/liniklien/'.$hasil22['file_name'];
 				$this->load->library('image_lib', $config);
 				$this->image_lib->resize();
 
-				if ($this->input->post('bisnis_keyword')!=''){
-							$tag_seo = $this->input->post('bisnis_keyword');
+				if ($this->input->post('klien_keyword')!=''){
+							$tag_seo = $this->input->post('klien_keyword');
 							$tag=implode(',',$tag_seo);
 					}else{
 							$tag = '';
 					}
-				$tag = $this->input->post('bisnis_keyword');
+				$tag = $this->input->post('klien_keyword');
 				$tags = explode(",", $tag);
 				$tags2 = array();
 				foreach($tags as $t)
@@ -1946,101 +2128,299 @@ class Aspanel extends CI_Controller {
 				$tags = implode(",", $tags2);
 							if ($hasil22['file_name']==''){
 											$data = array(
-												'bisnis_update_oleh'=>$this->session->username,
-												'bisnis_judul'=>$this->db->escape_str($this->input->post('bisnis_judul')),
-												'bisnis_judul_seo'=>$this->mylibrary->seo_title($this->input->post('bisnis_judul')),
-												'bisnis_desk'=>$this->input->post('bisnis_desk'),
-												'bisnis_update_hari'=>hari_ini(date('w')),
-												'bisnis_update_tanggal'=>date('Y-m-d'),
-												'bisnis_update_jam'=>date('H:i:s'),
-												'bisnis_meta_desk'=>$this->input->post('bisnis_meta_desk'),
-												'bisnis_keyword'=>$tag);
-												$where = array('bisnis_id' => $this->input->post('bisnis_id'));
-												$this->db->update('bisnis', $data, $where);
+												'klien_update_oleh'=>$this->session->username,
+												'klien_judul'=>$this->db->escape_str($this->input->post('klien_judul')),
+												'klien_judul_seo'=>$this->mylibrary->seo_title($this->input->post('klien_judul')),
+												'klien_desk'=>$this->input->post('klien_desk'),
+												'klien_update_hari'=>hari_ini(date('w')),
+												'klien_update_tanggal'=>date('Y-m-d'),
+												'klien_update_jam'=>date('H:i:s'),
+												'klien_meta_desk'=>$this->input->post('klien_meta_desk'),
+												'klien_keyword'=>$tag);
+												$where = array('klien_id' => $this->input->post('klien_id'));
+												$this->db->update('klien', $data, $where);
 							}else{
 											$data = array(
-												'bisnis_update_oleh'=>$this->session->username,
-												'bisnis_judul'=>$this->db->escape_str($this->input->post('bisnis_judul')),
-												'bisnis_judul_seo'=>$this->mylibrary->seo_title($this->input->post('bisnis_judul')),
-												'bisnis_desk'=>$this->input->post('bisnis_desk'),
-												'bisnis_update_hari'=>hari_ini(date('w')),
-												'bisnis_update_tanggal'=>date('Y-m-d'),
-												'bisnis_update_jam'=>date('H:i:s'),
-												'bisnis_gambar'=>$hasil22['file_name'],
-												'bisnis_meta_desk'=>$this->input->post('bisnis_meta_desk'),
-												'bisnis_keyword'=>$tag);
-												$where = array('bisnis_id' => $this->input->post('bisnis_id'));
-												$_image = $this->db->get_where('bisnis',$where)->row();
-												$query = $this->db->update('bisnis',$data,$where);
+												'klien_update_oleh'=>$this->session->username,
+												'klien_judul'=>$this->db->escape_str($this->input->post('klien_judul')),
+												'klien_judul_seo'=>$this->mylibrary->seo_title($this->input->post('klien_judul')),
+												'klien_desk'=>$this->input->post('klien_desk'),
+												'klien_update_hari'=>hari_ini(date('w')),
+												'klien_update_tanggal'=>date('Y-m-d'),
+												'klien_update_jam'=>date('H:i:s'),
+												'klien_gambar'=>$hasil22['file_name'],
+												'klien_meta_desk'=>$this->input->post('klien_meta_desk'),
+												'klien_keyword'=>$tag);
+												$where = array('klien_id' => $this->input->post('klien_id'));
+												$_image = $this->db->get_where('klien',$where)->row();
+												$query = $this->db->update('klien',$data,$where);
 												if($query){
-													unlink("assets/frontend/linibisnis/".$_image->bisnis_gambar);
+													unlink("assets/frontend/liniklien/".$_image->klien_gambar);
 												}
 
 							}
-							redirect('aspanel/bisnis');
+							redirect('aspanel/klien');
 			}else{
 				if ($this->session->level=='1'){
-						 $proses = $this->As_m->edit('bisnis', array('bisnis_id' => $id))->row_array();
+						 $proses = $this->As_m->edit('klien', array('klien_id' => $id))->row_array();
 				}else{
-						$proses = $this->As_m->edit('bisnis', array('bisnis_id' => $id, 'bisnis_post_oleh' => $this->session->username))->row_array();
+						$proses = $this->As_m->edit('klien', array('klien_id' => $id, 'klien_post_oleh' => $this->session->username))->row_array();
 				}
 				$data = array('rows' => $proses);
-				$data['karyawan_menu_open']   = '';
-				$data['home_stat']   = '';
-				$data['identitas_stat']   = '';
-				$data['profil_stat']   = '';
-				$data['sliders_stat']   = '';
-				$data['templates_stat']   = '';
-				$data['cat_templates_stat']   = 'active';
-				$data['slider_stat']   = '';
-				$data['blogs_stat']   = '';
-				$data['message_stat']   = '';
-				$data['gallery_stat']   = '';
-				$data['kehadiran_menu_open']   = 'menu-open';
-					$data['jamkerja_stat']   = '';
-					$data['absen_stat']   = '';
-					$data['dataabsen_stat']   = 'active';
-					$data['cuti_stat']   = '';
-					$data['gaji_stat']   = '';
-					$data['pengumuman_stat']   = '';
-					$data['konfig_stat']   = '';
-					$data['produk_menu_open']   = 'menu-open';
-					$data['bisnis']   = 'active';
-					$data['produk']   = '';
-					$data['services']   = '';
-				cek_session_akses('bisnis',$this->session->id_session);
+				cek_session_akses('klien',$this->session->id_session);
 				$data['tag'] = $this->Crud_m->view_ordering('keyword','keyword_id','DESC');
 				$this->load->view('backend/klien/v_update', $data);
 			}
 		}
-		function bisnis_delete_temp()
+		function klien_delete_temp()
 		{
-			cek_session_akses('bisnis',$this->session->id_session);
-				$data = array('bisnis_status'=>'delete');
-				$where = array('bisnis_id' => $this->uri->segment(3));
-				$this->db->update('bisnis', $data, $where);
-				redirect('aspanel/bisnis');
+			cek_session_akses('klien',$this->session->id_session);
+				$data = array('klien_status'=>'delete');
+				$where = array('klien_id' => $this->uri->segment(3));
+				$this->db->update('klien', $data, $where);
+				redirect('aspanel/klien');
 		}
-		function bisnis_restore()
+		function klien_restore()
 		{
-				cek_session_akses('bisnis',$this->session->id_session);
-				$data = array('bisnis_status'=>'Publish');
-				$where = array('bisnis_id' => $this->uri->segment(3));
-				$this->db->update('bisnis', $data, $where);
-				redirect('aspanel/bisnis_storage_bin');
+				cek_session_akses('klien',$this->session->id_session);
+				$data = array('klien_status'=>'Publish');
+				$where = array('klien_id' => $this->uri->segment(3));
+				$this->db->update('klien', $data, $where);
+				redirect('aspanel/klien_storage_bin');
 		}
-		public function bisnis_delete()
+		public function klien_delete()
 		{
-				cek_session_akses('bisnis',$this->session->id_session);
+				cek_session_akses('klien',$this->session->id_session);
 				$id = $this->uri->segment(3);
-				$_id = $this->db->get_where('bisnis',['bisnis_id' => $id])->row();
-				 $query = $this->db->delete('bisnis',['bisnis_id'=>$id]);
+				$_id = $this->db->get_where('klien',['klien_id' => $id])->row();
+				 $query = $this->db->delete('klien',['klien_id'=>$id]);
 				if($query){
-								 unlink("./assets/frontend/linibisnis/".$_id->bisnis_gambar);
+								 unlink("./assets/frontend/liniklien/".$_id->klien_gambar);
 			 }
-			redirect('aspanel/bisnis_storage_bin');
+			redirect('aspanel/klien_storage_bin');
 		}
-		/*	Bagian untuk Bisnis - Penutup	*/
+		/*	Bagian untuk klien - Penutup	*/
+
+		/*	Bagian untuk note - Pembuka	*/
+		public function note()
+		{
+
+					if ($this->session->level=='1'){
+							$data['record'] = $this->Crud_m->view_where_ordering('note',array('note_status'=>'publish'),'note_id','DESC');
+					}else{
+							$data['record'] = $this->Crud_m->view_where_ordering('note',array('note_post_oleh'=>$this->session->username,'note_status'=>'publish'),'note_id','DESC');
+					}
+					cek_session_akses('note',$this->session->id_session);
+					$this->load->view('backend/note/v_daftar', $data);
+		}
+		public function note_storage_bin()
+		{
+
+					if ($this->session->level=='1'){
+							$data['record'] = $this->Crud_m->view_where_ordering('note',array('note_status'=>'delete'),'note_id','DESC');
+					}else{
+							$data['record'] = $this->Crud_m->view_where_ordering('note',array('note_post_oleh'=>$this->session->username,'note_status'=>'delete'),'note_id','DESC');
+					}
+					cek_session_akses('note',$this->session->id_session);
+					$this->load->view('backend/note/v_daftar_hapus', $data);
+		}
+		public function note_tambahkan()
+		{
+			if (isset($_POST['submit'])){
+
+						$config['upload_path'] = 'assets/frontend/lininote/';
+						$config['allowed_types'] = 'gif|jpg|png|JPG|JPEG';
+						$this->upload->initialize($config);
+						$this->upload->do_upload('gambar');
+						$hasil22=$this->upload->data();
+						$config['image_library']='gd2';
+						$config['source_image'] = './assets/frontend/lininote/'.$hasil22['file_name'];
+						$config['create_thumb']= FALSE;
+						$config['maintain_ratio']= FALSE;
+						$config['quality']= '80%';
+						$config['new_image']= './assets/frontend/lininote/'.$hasil22['file_name'];
+						$this->load->library('image_lib', $config);
+						$this->image_lib->resize();
+
+						if ($this->input->post('note_keyword')!=''){
+									$tag_seo = $this->input->post('note_keyword');
+									$tag=implode(',',$tag_seo);
+							}else{
+									$tag = '';
+							}
+						$tag = $this->input->post('note_keyword');
+						$tags = explode(",", $tag);
+						$tags2 = array();
+						foreach($tags as $t)
+						{
+							$sql = "select * from keyword where keyword_nama_seo = '" . $this->mylibrary->seo_title($t) . "'";
+							$a = $this->db->query($sql)->result_array();
+							if(count($a) == 0){
+								$data = array('keyword_nama'=>$this->db->escape_str($t),
+										'keyword_username'=>$this->session->username,
+										'keyword_nama_seo'=>$this->mylibrary->seo_title($t),
+										'count'=>'0');
+								$this->As_m->insert('keyword',$data);
+							}
+							$tags2[] = $this->mylibrary->seo_title($t);
+						}
+						$tags = implode(",", $tags2);
+						if ($hasil22['file_name']==''){
+										$data = array(
+														'note_post_oleh'=>$this->session->username,
+														'note_judul'=>$this->db->escape_str($this->input->post('note_judul')),
+														'note_judul_seo'=>$this->mylibrary->seo_title($this->input->post('note_judul')),
+														'note_desk'=>$this->input->post('note_desk'),
+														'note_post_hari'=>hari_ini(date('w')),
+														'note_post_tanggal'=>date('Y-m-d'),
+														'note_post_jam'=>date('H:i:s'),
+														'note_dibaca'=>'0',
+														'note_status'=>'publish',
+														'note_meta_desk'=>$this->input->post('note_meta_desk'),
+														'note_keyword'=>$tag);
+												}else{
+													$data = array(
+														'note_post_oleh'=>$this->session->username,
+														'note_judul'=>$this->db->escape_str($this->input->post('note_judul')),
+														'note_judul_seo'=>$this->mylibrary->seo_title($this->input->post('note_judul')),
+														'note_desk'=>$this->input->post('note_desk'),
+														'note_post_hari'=>hari_ini(date('w')),
+														'note_post_tanggal'=>date('Y-m-d'),
+														'note_post_jam'=>date('H:i:s'),
+														'note_dibaca'=>'0',
+														'note_status'=>'publish',
+														'note_gambar'=>$hasil22['file_name'],
+														'note_meta_desk'=>$this->input->post('note_meta_desk'),
+														'note_keyword'=>$tag);
+													}
+									$this->As_m->insert('note',$data);
+									redirect('aspanel/note');
+					}else{
+
+						cek_session_akses('note',$this->session->id_session);
+						$data['tag'] = $this->Crud_m->view_ordering('keyword','keyword_id','DESC');
+						$this->load->view('backend/note/v_tambahkan', $data);
+					}
+		}
+		public function note_update()
+		{
+
+			$id = $this->uri->segment(3);
+			if (isset($_POST['submit'])){
+
+				$config['upload_path'] = 'assets/frontend/lininote/';
+				$config['allowed_types'] = 'gif|jpg|png|JPG|JPEG';
+				$this->upload->initialize($config);
+				$this->upload->do_upload('gambar');
+				$hasil22=$this->upload->data();
+				$config['image_library']='gd2';
+				$config['source_image'] = './assets/frontend/lininote/'.$hasil22['file_name'];
+				$config['create_thumb']= FALSE;
+				$config['maintain_ratio']= FALSE;
+				$config['quality']= '80%';
+				$config['new_image']= './assets/frontend/lininote/'.$hasil22['file_name'];
+				$this->load->library('image_lib', $config);
+				$this->image_lib->resize();
+
+				if ($this->input->post('note_keyword')!=''){
+							$tag_seo = $this->input->post('note_keyword');
+							$tag=implode(',',$tag_seo);
+					}else{
+							$tag = '';
+					}
+				$tag = $this->input->post('note_keyword');
+				$tags = explode(",", $tag);
+				$tags2 = array();
+				foreach($tags as $t)
+				{
+					$sql = "select * from keyword where keyword_nama_seo = '" . $this->mylibrary->seo_title($t) . "'";
+					$a = $this->db->query($sql)->result_array();
+					if(count($a) == 0){
+						$data = array('keyword_nama'=>$this->db->escape_str($t),
+								'keyword_username'=>$this->session->username,
+								'keyword_nama_seo'=>$this->mylibrary->seo_title($t),
+								'count'=>'0');
+						$this->As_m->insert('keyword',$data);
+					}
+					$tags2[] = $this->mylibrary->seo_title($t);
+				}
+				$tags = implode(",", $tags2);
+							if ($hasil22['file_name']==''){
+											$data = array(
+												'note_update_oleh'=>$this->session->username,
+												'note_judul'=>$this->db->escape_str($this->input->post('note_judul')),
+												'note_judul_seo'=>$this->mylibrary->seo_title($this->input->post('note_judul')),
+												'note_desk'=>$this->input->post('note_desk'),
+												'note_update_hari'=>hari_ini(date('w')),
+												'note_update_tanggal'=>date('Y-m-d'),
+												'note_update_jam'=>date('H:i:s'),
+												'note_meta_desk'=>$this->input->post('note_meta_desk'),
+												'note_keyword'=>$tag);
+												$where = array('note_id' => $this->input->post('note_id'));
+												$this->db->update('note', $data, $where);
+							}else{
+											$data = array(
+												'note_update_oleh'=>$this->session->username,
+												'note_judul'=>$this->db->escape_str($this->input->post('note_judul')),
+												'note_judul_seo'=>$this->mylibrary->seo_title($this->input->post('note_judul')),
+												'note_desk'=>$this->input->post('note_desk'),
+												'note_update_hari'=>hari_ini(date('w')),
+												'note_update_tanggal'=>date('Y-m-d'),
+												'note_update_jam'=>date('H:i:s'),
+												'note_gambar'=>$hasil22['file_name'],
+												'note_meta_desk'=>$this->input->post('note_meta_desk'),
+												'note_keyword'=>$tag);
+												$where = array('note_id' => $this->input->post('note_id'));
+												$_image = $this->db->get_where('note',$where)->row();
+												$query = $this->db->update('note',$data,$where);
+												if($query){
+													unlink("assets/frontend/lininote/".$_image->note_gambar);
+												}
+
+							}
+							redirect('aspanel/note');
+			}else{
+				if ($this->session->level=='1'){
+						 $proses = $this->As_m->edit('note', array('note_id' => $id))->row_array();
+				}else{
+						$proses = $this->As_m->edit('note', array('note_id' => $id, 'note_post_oleh' => $this->session->username))->row_array();
+				}
+				$data = array('rows' => $proses);
+				cek_session_akses('note',$this->session->id_session);
+				$data['tag'] = $this->Crud_m->view_ordering('keyword','keyword_id','DESC');
+				$this->load->view('backend/note/v_update', $data);
+			}
+		}
+		function note_delete_temp()
+		{
+			cek_session_akses('note',$this->session->id_session);
+				$data = array('note_status'=>'delete');
+				$where = array('note_id' => $this->uri->segment(3));
+				$this->db->update('note', $data, $where);
+				redirect('aspanel/note');
+		}
+		function note_restore()
+		{
+				cek_session_akses('note',$this->session->id_session);
+				$data = array('note_status'=>'Publish');
+				$where = array('note_id' => $this->uri->segment(3));
+				$this->db->update('note', $data, $where);
+				redirect('aspanel/note_storage_bin');
+		}
+		public function note_delete()
+		{
+				cek_session_akses('note',$this->session->id_session);
+				$id = $this->uri->segment(3);
+				$_id = $this->db->get_where('note',['note_id' => $id])->row();
+				 $query = $this->db->delete('note',['note_id'=>$id]);
+				if($query){
+								 unlink("./assets/frontend/lininote/".$_id->note_gambar);
+			 }
+			redirect('aspanel/note_storage_bin');
+		}
+		/*	Bagian untuk note - Penutup	*/
+
+
 
 	/*	Bagian untuk Produks cat - Pembuka	*/
 	public function produks_cat()

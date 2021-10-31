@@ -32,7 +32,7 @@
                                 <button class="btn btn-default radius_none" type="button"><i class="ion-android-cart mr-2 ml-0"></i> Pesan Sekarang</button>
                             </div>
                         </div>
-                        <div class="countdown_time  bg-white border py-sm-4 py-3 mt-4" data-time="2019/08/06 00:00:00"></div>
+                        <div class="countdown_time  bg-white border py-sm-4 py-3 mt-4" data-time="2021/10/31 00:00:00"></div>
                     </div>
                 </div>
             </div>

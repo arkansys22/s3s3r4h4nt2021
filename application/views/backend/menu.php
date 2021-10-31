@@ -78,6 +78,14 @@
             </p>
           </a>
         </li>
+        <li class="nav-item">
+          <a href="<?php echo base_url(); ?>aspanel/promo" class="nav-link" >
+            <i class="nav-icon fas fa-boxes"></i>
+            <p>
+              Promo
+            </p>
+          </a>
+        </li>
         <!--<li class="nav-item">
           <a href="<?php echo base_url(); ?>aspanel/paketharga" class="nav-link" >
             <i class="nav-icon fas fa-cogs"></i>
@@ -104,10 +112,18 @@
           </a>
         </li>
         <li class="nav-item">
-          <a href="<?php echo base_url(); ?>aspanel/bisnis" class="nav-link " >
+          <a href="<?php echo base_url(); ?>aspanel/klien" class="nav-link " >
             <i class="nav-icon fas fa-id-badge"></i>
             <p>
               Klien
+            </p>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="<?php echo base_url(); ?>aspanel/note" class="nav-link " >
+            <i class="nav-icon fas fa-id-badge"></i>
+            <p>
+              Note
             </p>
           </a>
         </li>
