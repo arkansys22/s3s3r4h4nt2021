@@ -30,6 +30,7 @@ class Main extends CI_Controller {
       $data['posts_slider'] = $this->Crud_m->view_one_limit('slider','slider_status','slider_id','DESC',$dari,$config['per_page_slider']);
       $data['posts_popular'] = $this->Crud_m->view_where_order('templates',array('templates_status'=>'publish'),'templates_id','desc');
       $data['posts_blogs'] = $this->Crud_m->view_where_order('blogs',array('blogs_status'=>'publish'),'blogs_id','desc');
+      $data['posts_promo'] = $this->Crud_m->view_join_one('promo','templates','templates_id',array('promo_status'=>'publish'),'promo_id','DESC','0','1');
     }else{
 			redirect('main');
 		}

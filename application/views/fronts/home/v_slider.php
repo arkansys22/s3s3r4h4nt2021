@@ -8,20 +8,7 @@
                   }else {
                   echo " <div class='carousel-item ".$post_new->slider_meta_aktiv." background_bg' data-img-src='".base_url()."assets/frontend/slider/".$post_new->slider_gambar."'> ";}
                   ?>
-                           <div class="banner_slide_content">
-                               <div class="container"><!-- STRART CONTAINER -->
-                               <div class="row">
-                                   <div class="col-lg-8 col-9">
-                                       <div class="banner_content shop_banner animation" data-animation="fadeInRight" data-animation-delay="0.8s">
-                                         <h4 class="animation text_default" data-animation="fadeInRight" data-animation-delay="0.9s">Best Selling</h4>
-                                           <h2 class="animation text-uppercase" data-animation="fadeInRight" data-animation-delay="1s">New Collection</h2>
-                                           <p class="animation my-4" data-animation="fadeInRight" data-animation-delay="1.5s">Lorem is simply text of the printing and typesetting industry.</p>
-                                           <a class="btn btn-default radius_none animation" href="#" data-animation="fadeInRight" data-animation-delay="1.8s">Shop Now</a>
-                                       </div>
-                                   </div>
-                               </div>
-                           </div><!-- END CONTAINER-->
-                           </div>
+
                           </div>
 
             <?php } ?>

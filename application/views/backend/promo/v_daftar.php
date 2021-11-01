@@ -30,9 +30,9 @@
               <table id="example1" class="table table-bordered table-striped">
                 <thead>
                 <tr>
-                  <th>Date</th>
-                  <th>promo</th>
-                  <th>Action</th>
+                  <th>Berakhir Pada</th>
+                  <th>Judul</th>
+                  <th>Aksi</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -43,7 +43,7 @@
                   ?>
 
                 <tr>
-                  <td><?=$tgl_posting?></td>
+                  <td><?=$row['promo_selesai_tanggal']?> <?=$row['promo_selesai_jam']?></td>
                   <td><?=$row['promo_judul']?></td>
                   <td>
                     <?php
@@ -57,9 +57,9 @@
                 </tbody>
                 <tfoot>
                 <tr>
-                  <th>Date</th>
-                  <th>Title</th>
-                  <th>Action</th>
+                  <th>Berakhir Pada</th>
+                  <th>Judul</th>
+                  <th>Aksi</th>
                 </tr>
                 </tfoot>
               </table>

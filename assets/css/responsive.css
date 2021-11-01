@@ -609,7 +609,7 @@ section.small_pb,
 	padding: 8% 15px;
 }
 .sm-height-300 {
-	height: 300px !important;
+	height: 100% !important;
 }
 .heading_s7 h2 {
 	font-size: 28px;
@@ -765,7 +765,7 @@ section.small_pb,
 	height: 300px;
 }
 .sm-height-300 {
-	height: 300px !important;
+	height: 400px;
 }
 .header_wrap.fixed-top + .breadcrumb_section {
 	padding-top: 100px;

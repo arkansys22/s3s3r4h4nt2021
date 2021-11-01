@@ -1,41 +1,44 @@
 <section class="gray_bg p-0">
 	<div class="container-fluid">
     	<div class="row">
-        	<div class="col-md-5 col-sm-12 p-0">
-                <div class="h-100 background_bg sm-height-300 position_top_center" data-img-src="demo-shop/images/deal_img.jpg"></div>
+				<?php foreach ($posts_promo as $post_new){  ?>
+        		<div class="col-md-5 col-sm-12 p-0">
+							<img height="100%" src="<?php echo base_url()?>assets/frontend/promo/<?php echo $post_new->promo_gambar; ?>" alt="image">
             </div>
             <div class="col-md-7 col-sm-12">
             	<div class="h-100 d-flex align-items-center padding_eight_all">
                 	<div>
                         <div class="heading_s1">
-                            <h2>Siapa Cepat Dia Dapat</h2>
+                            <h2><?php echo $post_new->promo_judul; ?></h2>
                         </div>
 
                         <div class="pr_detail">
                           <div class="product-description">
                             <div class="product-title">
-                              <h4><a href="#">Women Round Neck Yellow T-Shirt</a></h4>
+                              <h4><a href="#"><?php echo $post_new->templates_judul; ?></a></h4>
                             </div>
                             <div class="product_price float-left">
-                                <del>Rp1.500.000</del>
-                                <ins>Rp1.000.000</ins>
+                                <del>Rp<?php echo $post_new->templates_harga; ?></del>
+																<?php ($a = $post_new->templates_harga - ($post_new->templates_harga * ($post_new->promo_harga/100))); ?>
+                                <ins>Rp<?php echo $a ?></ins>
                             </div>
                             <div class="product-rate float-right">
-                                <span>7 Kuota Tersisa </span>
+                                <span><?php echo $post_new->promo_limit; ?> Kuota Tersisa </span>
                             </div>
                             <div class="clearfix"></div>
                             <hr>
-                            <p>Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Vivamus bibendum magna Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                            <p><?php echo $post_new->templates_desk; ?></p>
                           </div>
                           <hr>
                             <div class="cart_btn">
-                                <button class="btn btn-default radius_none" type="button"><i class="ion-android-cart mr-2 ml-0"></i> Pesan Sekarang</button>
+															<a href="https://api.whatsapp.com/send?phone=<?php echo $identitas->whatsapp?>&text= Halo Seserahant ! Aku mau ambil promo <?php echo $post_new->promo_judul; ?> <?php echo $post_new->templates_judul; ?> untuk pernikahan." class="btn btn-primary"><i class="ion-android-cart mr-2 ml-0"></i>Pesan Sekarang</a>
                             </div>
                         </div>
-                        <div class="countdown_time  bg-white border py-sm-4 py-3 mt-4" data-time="2021/10/31 00:00:00"></div>
+                        <div class="countdown_time  bg-white border py-sm-4 py-3 mt-4" data-time="<?php echo $post_new->promo_selesai_tanggal; ?> <?php echo $post_new->promo_selesai_jam; ?>"></div>
                     </div>
                 </div>
             </div>
+					<?php } ?>
         </div>
     </div>
 </section>
