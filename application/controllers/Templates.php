@@ -22,17 +22,16 @@ class Templates extends CI_Controller {
 			}
 			if ($row)
 				{
-          $data['posts_paketharga']= $this->Crud_m->view_one_limit('paketharga','paketharga_status','paketharga_id','ASC',$dari,$config['per_page_templates']);
           $data['posts_templates'] = $this->Crud_m->view_join_one('templates','templates_category','templates_cat_id',array('templates_status'=>'publish'),'templates_id','DESC',$dari,$config['per_page_templates']);
 					$data['posts']            = $this->Crud_m->get_by_id_post($id,'templates_id','templates','templates_judul_seo');
-					$this->add_count_templates($id);
+
 					$data['identitas']= $this->Crud_m->get_by_id_identitas($id='1');
-          $this->load->view('fronts/templates/v_detail', $data);
+          $this->load->view('fronts/produk/v_live_preview', $data);
 				}
 				else
 						{
 							$this->session->set_flashdata('message', '<div class="alert alert-dismissible alert-danger">
-								<button type="button" class="close" data-dismiss="alert">&times;</button>templates tidak ditemukan</b></div>');
+								<button type="button" class="close" data-dismiss="alert">&times;</button>Halaman tidak ditemukan</b></div>');
 							redirect(base_url());
 						}
 	}
@@ -43,7 +42,7 @@ class Templates extends CI_Controller {
 			if ($check_visitor == false) {
 					$cookie = array("name" => urldecode($id), "value" => "$ip", "expire" => time() + 10, "secure" => false);
 					$this->input->set_cookie($cookie);
-					$this->Crud_m->update_counter_templates(urldecode($id));
+					$this->Crud_m->update_counter(urldecode($id),'templates','templates_judul_seo','templates_dibaca');
 			}
 	}
 }

@@ -33,6 +33,15 @@
                             <div class="cart_btn">
 															<a href="https://api.whatsapp.com/send?phone=<?php echo $identitas->whatsapp?>&text= Halo Seserahant ! Aku mau ambil promo <?php echo $post_new->promo_judul; ?> <?php echo $post_new->templates_judul; ?> untuk pernikahan." class="btn btn-primary"><i class="ion-android-cart mr-2 ml-0"></i>Pesan Sekarang</a>
                             </div>
+														<div class="clearfix"></div>
+				                    <hr />
+				                    <div class="product_share d-block d-sm-flex align-items-center">
+				                      <span>Bagikan ke:</span>
+				                        <ul class="list_none social_icons">
+				                              <li><a href="http://www.facebook.com/sharer.php?u=<?php echo base_url("produk/$post_new->templates_judul_seo ") ?>" onclick="window.open('https://www.facebook.com/sharer.php?u=<?php echo base_url("produk/$post_new->templates_judul_seo ") ?>','newwindow','width=400,height=350');  return false;" title="Facebook" target="_blank"><i class="ion-social-facebook"></i></a></li>
+				                              <li><a href="whatsapp://send?text=<?php echo $post_new->templates_judul ?> | <?php echo base_url("$post_new->templates_judul_seo ") ?>"><i class="ion-social-whatsapp"></i></a></li>
+				                        </ul>
+				                    </div>
                         </div>
                         <div class="countdown_time  bg-white border py-sm-4 py-3 mt-4" data-time="<?php echo $post_new->promo_selesai_tanggal; ?> <?php echo $post_new->promo_selesai_jam; ?>"></div>
                     </div>

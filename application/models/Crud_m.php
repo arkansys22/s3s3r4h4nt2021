@@ -277,6 +277,18 @@ class Crud_m extends CI_model{
             $this->db->set('templates_dibaca', ($count->templates_dibaca + 1));
             $this->db->update('templates');
       }
+
+      function update_counter($id,$table,$judul_seo,$dibaca)
+        {
+              //return current article views
+              $this->db->where($judul_seo, urldecode($id));
+              $this->db->select($dibaca);
+              $count = $this->db->get($table)->row();
+              // then increase by one
+              $this->db->where($judul_seo, urldecode($id));
+              $this->db->set($dibaca, ($count->$dibaca + 1));
+              $this->db->update($table);
+        }
       function update_counter_paketharga($id)
       {
             //return current article views

@@ -20,9 +20,9 @@
                                     </a>
                                     <div class="product_action_box">
                                         <ul class="list_none pr_action_btn">
-                                            <li><a href="https://bestwebcreator.com/anger/demo/shop-quick-view.html" class="popup-ajax"><i class="ion-eye"></i></a></li>
-                                            <li class="add-to-cart"><a href="#"><i class="ion-android-cart"></i></a></li>
-                                            <li><a href="#"><i class="ion-ios-heart-outline"></i></a></li>
+                                            <li><a href="<?php echo base_url("produk/$post_new->templates_judul_seo ") ?>" class="popup-ajax"><i class="ion-eye"></i></a></li>
+                                            <li class="add-to-cart"><a href="https://api.whatsapp.com/send?phone=<?php echo $identitas->whatsapp?>&text= Halo Seserahant ! Aku mau <?php echo $post_new->templates_judul; ?> | <?php echo base_url(); ?>produk/<?php echo $post_new->templates_judul_seo ?>"><i class="ion-android-cart"></i></a></li>
+
                                         </ul>
                                     </div>
                                 </div>

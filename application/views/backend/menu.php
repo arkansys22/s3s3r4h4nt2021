@@ -112,7 +112,7 @@
           </a>
         </li>
         <li class="nav-item">
-          <a href="<?php echo base_url(); ?>aspanel/klien" class="nav-link " >
+          <a href="<?php echo base_url(); ?>aspanel/home" class="nav-link " >
             <i class="nav-icon fas fa-id-badge"></i>
             <p>
               Klien

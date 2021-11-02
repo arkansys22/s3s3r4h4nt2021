@@ -11,7 +11,7 @@ $route['berita'] = "Berita/index";
 $route['daftar'] = "Aspanel/register";
 $route['klien/(:any)'] = "Klien/detail/$1";
 $route['harga/(:any)'] = "Harga/detail/$1";
-$route['templates/(:any)'] = "templates/detail/$1";
+$route['produk/(:any)'] = "templates/detail/$1";
 
 /* Controller Default - Pembuka*/
 $route['404_override'] = 'Notfound';
