@@ -10,15 +10,15 @@
 <title><?php echo $posts->templates_judul ?> - <?php echo $posts->templates_keyword ?> - <?php echo $identitas->slogan?></title>
 <meta name="title" content="<?php echo $posts->templates_judul ?> - <?php echo $posts->templates_keyword ?> | <?php echo $identitas->nama_website?>">
 <meta property="og:title" content="<?php echo $posts->templates_judul ?> - <?php echo $posts->templates_keyword ?> | <?php echo $identitas->nama_website?>">
-<meta name="site_url" content="<?php echo base_url()?>templates/<?php echo $posts->templates_judul_seo ?>">
+<meta name="site_url" content="<?php echo base_url()?><?=$menu?>/<?php echo $posts->templates_judul_seo ?>">
 <meta name="description" content="<?php echo $posts->templates_meta_desk ?>">
 <meta name="keywords" content="<?php echo $posts->templates_keyword ?>">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
-<link rel="alternate" href="<?php echo base_url()?>templates/<?php echo $posts->templates_judul_seo ?>" hreflang="id" />
+<link rel="alternate" href="<?php echo base_url()?><?=$menu?>/<?php echo $posts->templates_judul_seo ?>" hreflang="id" />
 <link href='<?php echo base_url()?>templates/<?php echo $posts->templates_judul_seo ?>' rel='canonical'/>
 <meta property="og:site_name" content="<?php echo $identitas->nama_website?>">
 <meta property="og:description" content="<?php echo $posts->templates_meta_desk ?>">
-<meta property="og:url" content="<?php echo base_url()?>templates/<?php echo $posts->templates_judul_seo ?>">
+<meta property="og:url" content="<?php echo base_url()?><?=$menu?>/<?php echo $posts->templates_judul_seo ?>">
 <meta property="og:image" content="<?php echo base_url()?>assets/frontend/produk/<?php echo $posts->templates_gambar ?>">
 <meta property="og:image:url" content="<?php echo base_url()?>assets/frontend/produk/<?php echo $posts->templates_gambar ?>">
 <meta property="og:type" content="article">
@@ -28,111 +28,149 @@
 </head>
 
 <body>
+  <?php $this->load->view('fronts/header.php')?>
+<br><br>
+  <!-- START SECTION SHOP DETAIL -->
+  <section class="small_pb">
+      <div class="container">
+          <div class="row">
+              <div class="col-lg-5 col-md-6 mb-4 mb-md-0">
+                <div class="product-image">
+                  <?php
+                  if(empty($posts->templates_gambar)) {
+                    echo "";
+                  }else{
+                    echo "<img id='product_img' src='".base_url()."assets/frontend/produk/".$posts->templates_gambar."' data-zoom-image='".base_url()."assets/frontend/produk/".$posts->templates_gambar."'> ";}
+                  ?>
+                  <div id="pr_item_gallery" class="product_gallery_item owl-thumbs-slider owl-carousel owl-theme">
+                    <?php
+                    if(empty($posts->templates_gambar)) {
+                      echo "";
+                    }else{
+                      echo "
+                      <div class='item' height='100px' width='100px'>
+                       <a href='#' class='active' data-image='".base_url()."assets/frontend/produk/".$posts->templates_gambar."' data-zoom-image='".base_url()."assets/frontend/produk/".$posts->templates_gambar."'>
+                       <img  src='".base_url()."assets/frontend/produk/".$posts->templates_gambar."' />
+                      </div>
+                      ";
+                    }
+                    ?>
 
-
-
-<!-- START HEADER -->
-<?php $this->load->view('fronts/header.php')?>
-<!-- END HEADER -->
-<section class="small_pb">
-	<div class="container">
-    	<div class="row">
-        	<div class="col-md-12 animation" data-animation="fadeInUp" data-animation-delay="0.2s">
-            <img <?php
-                if(empty($posts->templates_gambar)) {
-                  echo "";
-                }else {
-                  echo " <img src='".base_url()."assets/frontend/produk/".$posts->templates_gambar."'> ";}
-                ?>
-            </div>
-        </div>
-        <div class="row">
-        	<div class="col-md-12">
-            	<div class="clearfix medium_divider"></div>
-            </div>
-        </div>
-    	<div class="row">
-        	<div class="col-lg-8 col-md-7 mb-4 mb-md-0 animation" data-animation="fadeInUp" data-animation-delay="0.4s">
-            	<h5><?php echo $posts->templates_judul ?></h5>
-                <?php echo $posts->templates_desk ?>
-								<p>Tekan tombol “Lihat Demo” dan nikmati secara langsung pengalaman menggunakan websitenya.
-                <a href="<?php echo $posts->templates_url ?>" target="_blank"class="btn btn-outline-primary btn-sm">Lihat Demo</a>
-            </div>
-            <div class="col-lg-4 col-md-5 animation" data-animation="fadeInUp" data-animation-delay="0.6s">
-            	<div class="gray_bg p-3 p-md-4">
-                    <ul class="list_none portfolio_info_box">
-												<?php $category = $this->Crud_m->view_join_where_array('templates_category','templates','templates_cat_id',array ('templates.templates_cat_id' => $posts->templates_cat_id))->row_array(); ?>
-                        <li><span class="text-uppercase">Untuk Bisnis</span><?php echo $category['templates_cat_judul']?></li>
-                        <li><span class="text-uppercase">Fitur Unggulan</span><?php echo $posts->templates_fitur ?></li>
-												<li><span class="text-uppercase">Sudah Sesuai</span><a href="https://api.whatsapp.com/send?phone=<?php echo $identitas->whatsapp?>&text=Hai,%20Crudbiz.%20Saya%20mau%20bikin%20website%20dengan%20memilih%20<?php echo $posts->templates_judul ?>.%20Bagaimana%20cara%20memesannya%20?" class="btn btn-success btn-sm">Pilih Website Ini</a></li>
-												<li><span class="text-uppercase">Bagikan </span>
-                        	<ul class="list_none social_icons border_social rounded_social">
-                            	<li><a href="http://www.facebook.com/sharer.php?u=<?php echo base_url("templates/$posts->templates_judul_seo ") ?>" onclick="window.open('https://www.facebook.com/sharer.php?u=<?php echo base_url("templates/$posts->templates_judul_seo ") ?>','newwindow','width=400,height=350');  return false;" title="Facebook" target="_blank" title="Facebook"><i class="ion-social-facebook"></i></a></li>
-                            	<li><a href="whatsapp://send?text=<?php echo $posts->templates_judul ?> | <?php echo base_url("$posts->templates_judul_seo ") ?>" title="Whatsapp" target="_blank"><i class="ion-social-whatsapp"></i></a></li>
-                        	</ul>
-                        </li>
-                    </ul>
+                  </div>
                 </div>
-            </div>
-        </div>
-    </div>
-</section>
-<!-- END SECTION ABOUT US -->
-<section>
-	   <div class="container-fluid">
-    	<div class="row">
-        	<div class="col-md-12">
-                <div class="heading_s4 text-center">
-                    <h3>Ingin Lihat Tampilan Website Yang Lainnya ?</h3>
-                    <p><center>Kami memiliki beragam tampilan website yang tepat untuk meningkatkan pemasaran produk Anda</center></p>
+              </div>
+              <div class="col-lg-7 col-md-6">
+                  <div class="pr_detail">
+                    <div class="product-description">
+                      <div class="product-title">
+                        <h4><?php echo $posts->templates_judul; ?></h4>
+                      </div>
+                      <div class="product_price float-left">
+                        <?php
+                        if(empty($posts->templates_harga_diskon)) {
+                          echo "<ins>Rp$posts->templates_harga</ins>";
+                        }else if($a = $posts->templates_harga - ($posts->templates_harga * ($posts->templates_harga_diskon/100))){
+                          echo "<del>Rp$posts->templates_harga</del><ins>Rp$a</ins>";}
+                        ?>
+                      </div>
+                      <div class="clearfix"></div>
+                      <hr />
+                      <p><?php echo $posts->templates_desk; ?></p>
+                    </div>
+                    <hr />
+                    <div>
+                      <div class="cart_btn">
+                          <a href="https://api.whatsapp.com/send?phone=<?php echo $identitas->whatsapp?>&text= Halo Seserahant ! Aku mau <?php echo $posts->templates_judul; ?> | <?php echo base_url(); ?>produk/<?php echo $posts->templates_judul_seo ?>" class="btn btn-primary"><i class="ion-android-cart mr-2 ml-0"></i>Pesan Sekarang</a>
+                      </div>
+                    </div>
+                    <div class="clearfix"></div>
+                    <hr />
+                    <div class="product_share d-block d-sm-flex align-items-center">
+                      <span>Bagikan ke:</span>
+                        <ul class="list_none social_icons">
+                              <li><a href="http://www.facebook.com/sharer.php?u=<?php echo base_url("produk/$posts->templates_judul_seo ") ?>" onclick="window.open('https://www.facebook.com/sharer.php?u=<?php echo base_url("produk/$posts->templates_judul_seo ") ?>','newwindow','width=400,height=350');  return false;" title="Facebook" target="_blank"><i class="ion-social-facebook"></i></a></li>
+                              <li><a href="whatsapp://send?text=<?php echo $posts->templates_judul ?> | <?php echo base_url("produk/$posts->templates_judul_seo ") ?>"><i class="ion-social-whatsapp"></i></a></li>
 
-                </div>
-					</div>
+                        </ul>
+                    </div>
+                  </div>
+              </div>
+          </div>
+          <div class="row">
+          	<div class="col-12">
+              	<div class="medium_divider clearfix"></div>
+              </div>
+          </div>
       </div>
-			<div class="row">
-					<div class="col-12">
-							<div class="cleafix small_divider"></div>
-					</div>
-			</div>
-			<div class="row">
-					<div class="col-md-12">
-							<ul class="list_none carousel_slide4 owl-carousel owl-theme" data-margin="15" data-dots="false" data-autoplay="false" data-nav="true" data-loop="true">
-								<?php  foreach ($posts_templates as $post_new){
-									?>
-									<a href="<?php echo base_url("templates/$post_new->templates_judul_seo")?>">
-									<li>
-										<?php
-																							if(empty($post_new->templates_gambar)) {
-																								echo "<img style='height:210px' src='".base_url()."assets/frontend/campur/template_blank.jpg'>";
-																							}else {
-																								echo " <img style='height:210px' src='".base_url()."assets/frontend/produk/".$post_new->templates_gambar."'> ";}
-																							?>
-
-									</li>
-									</a>
-								<?php } ?>
-							</ul>
-					</div>
-			</div>
-
-    </div>
-</section>
+  </section>
+  <!-- END SECTION SHOP DETAIL -->
+  <!-- START SECTION RELATED PRODUCTS-->
+  <section class="small_pt">
+  	<div class="container">
+      	<div class="row">
+          	<div class="col-12">
+              	<div class="heading_s3">
+                  	<h4>Produk Terkait</h4>
+                  </div>
+              </div>
+          </div>
+          <div class="row">
+          	<div class="col-12">
+              	   <div class="carousel_slide4 owl-carousel owl-theme nav_top" data-margin="30" data-nav="true" data-dots="false">
+                      <?php foreach ($posts_produk as $post_new){  ?>
 
 
-<!-- START FOOTER SECTION -->
-<?php $this->load->view('fronts/footer')?>
-<!-- END FOOTER SECTION -->
+                        <div class="item">
+                      	<div class="shop-item">
+                              <div class="product text-center">
+                                  <div class="product_img">
+                                      <img src="<?php echo base_url()?>assets/frontend/produk/<?php echo $post_new->templates_gambar; ?>" alt="image">
+                                      <?php
+                                      if(empty($post_new->templates_harga_diskon)) {
+                                        echo "";
+                                      }else{
+                                        echo "<span class='flash'>$post_new->templates_harga_diskon%</span>";}
+                                      ?>
+                                      <div class="product_action_box">
+                                          <ul class="list_none pr_action_btn">
+                                              <li><a href="<?php echo base_url("quick/$post_new->templates_judul_seo ") ?>" class="popup-ajax"><i class="ion-eye"></i></a></li>
+                                              <li class="add-to-cart"><a href="https://api.whatsapp.com/send?phone=<?php echo $identitas->whatsapp?>&text= Halo Seserahant ! Aku mau <?php echo $post_new->templates_judul; ?> | <?php echo base_url(); ?>produk/<?php echo $post_new->templates_judul_seo ?>"><i class="ion-android-cart"></i></a></li>
+                                          </ul>
+                                      </div>
+                                  </div>
+                                  <div class="product_info">
+                                      <div class="product_title">
+                                          <h5><a href="#"><?php echo $post_new->templates_judul; ?></a></h5>
+                                      </div>
+                                      <div class="product_price">
+                                        <?php
+                                        if(empty($post_new->templates_harga_diskon)) {
+                                          echo "<ins>Rp$post_new->templates_harga</ins>";
+                                        }else if($a = $post_new->templates_harga - ($post_new->templates_harga * ($post_new->templates_harga_diskon/100))){
+                                          echo "<del>Rp$post_new->templates_harga</del><ins>Rp$a</ins>";}
+                                        ?>
+                                      </div>
+                                      <div align="left">
+                                          <span>99 Terjual</span>
+                                      </div>
+                                  </div>
+                              </div>
+                      	</div>
+                      </div>
 
-<a href="#" class="scrollup" style="display: none;"><i class="ion-ios-arrow-up"></i></a>
+                      <?php } ?>
+                    </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </section>
+  <!-- END SECTION RELATED PRODUCTS-->
+  <?php $this->load->view('fronts/footer')?>
+  <!-- END FOOTER SECTION -->
 
-<div id="fb-root"></div>
-           <script>(function(d, s, id) {
-             var js, fjs = d.getElementsByTagName(s)[0];
-             if (d.getElementById(id)) return;
-             js = d.createElement(s); js.id = id;
-             js.src = 'https://connect.facebook.net/id_ID/sdk.js#xfbml=1&version=v2.10&appId=129429343801925';
-             fjs.parentNode.insertBefore(js, fjs);
-           }(document, 'script', 'facebook-jssdk'));</script>
+  <a href="#" class="scrollup" style="display: none;"><i class="ion-ios-arrow-up"></i></a>
+
 <!-- Latest jQuery -->
 <script src="<?php echo base_url()?>assets/js/jquery-1.12.4.min.js"></script>
 <!-- jquery-ui -->

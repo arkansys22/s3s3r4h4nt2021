@@ -10,15 +10,15 @@
 <title><?php echo $posts->templates_judul ?> - <?php echo $posts->templates_keyword ?> - <?php echo $identitas->slogan?></title>
 <meta name="title" content="<?php echo $posts->templates_judul ?> - <?php echo $posts->templates_keyword ?> | <?php echo $identitas->nama_website?>">
 <meta property="og:title" content="<?php echo $posts->templates_judul ?> - <?php echo $posts->templates_keyword ?> | <?php echo $identitas->nama_website?>">
-<meta name="site_url" content="<?php echo base_url()?>templates/<?php echo $posts->templates_judul_seo ?>">
+<meta name="site_url" content="<?php echo base_url()?><?=$menu?>/<?php echo $posts->templates_judul_seo ?>">
 <meta name="description" content="<?php echo $posts->templates_meta_desk ?>">
 <meta name="keywords" content="<?php echo $posts->templates_keyword ?>">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
-<link rel="alternate" href="<?php echo base_url()?>templates/<?php echo $posts->templates_judul_seo ?>" hreflang="id" />
-<link href='<?php echo base_url()?>templates/<?php echo $posts->templates_judul_seo ?>' rel='canonical'/>
+<link rel="alternate" href="<?php echo base_url()?><?=$menu?>/<?php echo $posts->templates_judul_seo ?>" hreflang="id" />
+<link href='<?php echo base_url()?><?=$menu?>/<?php echo $posts->templates_judul_seo ?>' rel='canonical'/>
 <meta property="og:site_name" content="<?php echo $identitas->nama_website?>">
 <meta property="og:description" content="<?php echo $posts->templates_meta_desk ?>">
-<meta property="og:url" content="<?php echo base_url()?>templates/<?php echo $posts->templates_judul_seo ?>">
+<meta property="og:url" content="<?php echo base_url()?><?=$menu?>/<?php echo $posts->templates_judul_seo ?>">
 <meta property="og:image" content="<?php echo base_url()?>assets/frontend/produk/<?php echo $posts->templates_gambar ?>">
 <meta property="og:image:url" content="<?php echo base_url()?>assets/frontend/produk/<?php echo $posts->templates_gambar ?>">
 <meta property="og:type" content="article">

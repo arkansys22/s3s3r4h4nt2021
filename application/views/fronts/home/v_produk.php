@@ -24,20 +24,25 @@
                                   <?php $posts_templates = $this->Crud_m->view_where_order('templates',array('templates_status'=>'publish', 'templates_cat_id'=>$post_new->templates_cat_id),'templates_id','desc'); ?>
                                   <?php foreach ($posts_templates as $post_new2){  ?>
 
-                                    <a href="#2"><div class="item">
+                                    <a href="<?php echo base_url("produk/$post_new2->templates_judul_seo ") ?>"><div class="item">
                                         <div class="shop-item">
 
                                             <div class="product">
                                                 <div class="product_img">
                                                         <img src="<?php echo base_url()?>assets/frontend/produk/<?php echo $post_new2->templates_gambar; ?>" alt="image">
-
+                                                        <?php
+                                                        if(empty($post_new2->templates_harga_diskon)) {
+                                                          echo "";
+                                                        }else{
+                                                          echo "<span class='flash'>$post_new2->templates_harga_diskon%</span>";}
+                                                        ?>
                                                 </div>
                                                 <div class="product_info">
                                                     <div class="product_title">
                                                         <h5><?php echo $post_new2->templates_judul; ?></h5>
                                                     </div>
                                                     <div class="product_price">
-                                                      
+
                                                         <?php
                       																	if(empty($post_new2->templates_harga_diskon)) {
                       																		echo "<ins>Rp$post_new2->templates_harga</ins>";

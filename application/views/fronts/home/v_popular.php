@@ -15,12 +15,16 @@
                         <div class="shop-item">
                             <div class="product ">
                                 <div class="product_img">
-                                    <a href="#">
-                                      <img src="<?php echo base_url()?>assets/frontend/produk/<?php echo $post_new->templates_gambar; ?>" alt="image">
-                                    </a>
+                                    <img src="<?php echo base_url()?>assets/frontend/produk/<?php echo $post_new->templates_gambar; ?>" alt="image">
+                                    <?php
+                                    if(empty($post_new->templates_harga_diskon)) {
+                                      echo "";
+                                    }else{
+                                      echo "<span class='flash'>$post_new->templates_harga_diskon%</span>";}
+                                    ?>
                                     <div class="product_action_box">
                                         <ul class="list_none pr_action_btn">
-                                            <li><a href="<?php echo base_url("produk/$post_new->templates_judul_seo ") ?>" class="popup-ajax"><i class="ion-eye"></i></a></li>
+                                            <li><a href="<?php echo base_url("quick/$post_new->templates_judul_seo ") ?>" class="popup-ajax"><i class="ion-eye"></i></a></li>
                                             <li class="add-to-cart"><a href="https://api.whatsapp.com/send?phone=<?php echo $identitas->whatsapp?>&text= Halo Seserahant ! Aku mau <?php echo $post_new->templates_judul; ?> | <?php echo base_url(); ?>produk/<?php echo $post_new->templates_judul_seo ?>"><i class="ion-android-cart"></i></a></li>
 
                                         </ul>

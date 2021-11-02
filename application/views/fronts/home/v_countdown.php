@@ -4,7 +4,8 @@
 				<?php foreach ($posts_promo as $post_new){  ?>
         		<div class="col-md-5 col-sm-12 p-0">
 							<img height="100%" src="<?php echo base_url()?>assets/frontend/promo/<?php echo $post_new->promo_gambar; ?>" alt="image">
-            </div>
+							
+						</div>
             <div class="col-md-7 col-sm-12">
             	<div class="h-100 d-flex align-items-center padding_eight_all">
                 	<div>
