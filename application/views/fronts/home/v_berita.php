@@ -13,7 +13,9 @@
             </div>
         </div>
         <div class="row blog_wrap justify-content-center">
-						<?php foreach ($posts_blogs as $post_new){  ?>
+						<?php foreach ($posts_blogs as $post_new){
+								$isi = character_limiter($post_new->blogs_desk,230);
+							 ?>
             <div class="col-lg-4 col-md-6 mb-md-4 mb-2 pb-2">
                 <div class="blog_post blog_style1">
                     <div class="blog_img">
@@ -41,7 +43,7 @@
 																</li>
                                 <li><?php echo $post_new->blogs_dibaca ?> Kunjungan</li>
                         	</ul>
-                            <p><?php echo $post_new->blogs_desk?></p>
+                            <p><?php echo $isi?></p>
                         </div>
                     </div>
                 </div>
