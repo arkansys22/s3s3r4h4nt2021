@@ -86,7 +86,7 @@
                       <span>Bagikan ke:</span>
                         <ul class="list_none social_icons">
                               <li><a href="http://www.facebook.com/sharer.php?u=<?php echo base_url("produk/$posts->templates_judul_seo ") ?>" onclick="window.open('https://www.facebook.com/sharer.php?u=<?php echo base_url("produk/$posts->templates_judul_seo ") ?>','newwindow','width=400,height=350');  return false;" title="Facebook" target="_blank"><i class="ion-social-facebook"></i></a></li>
-                              <li><a href="whatsapp://send?text=<?php echo $posts->templates_judul ?> | <?php echo base_url("$posts->templates_judul_seo ") ?>"><i class="ion-social-whatsapp"></i></a></li>
+                              <li><a href="whatsapp://send?text=<?php echo $posts->templates_judul ?> | <?php echo base_url("produk/$posts->templates_judul_seo ") ?>"><i class="ion-social-whatsapp"></i></a></li>
 
                         </ul>
                     </div>
