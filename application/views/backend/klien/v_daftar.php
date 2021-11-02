@@ -23,32 +23,32 @@
         <div class="col-12">
           <div class="card">
             <div class="card-header">
-              <h3 class="card-title"><a class="btn btn-success btn-sm" title="Edit Data" href="<?php echo base_url()?>aspanel/bisnis_tambahkan"><i class="fas fa-plus-circle"></i> Add</a></h3>
-              <h3 class="text-right"><a class="btn btn-danger btn-sm" title="Edit Data" href="<?php echo base_url()?>aspanel/bisnis_storage_bin"><i class="fas fa-trash"></i> Storage Bin</a></h3>
-            </div>
+              <h3 class="card-title"><a class="btn btn-success btn-sm" title="Tambahkan" href="<?php echo base_url()?>aspanel/klien_tambahkan"><i class="fas fa-plus-circle"></i></a></h3>
+              <h3 class="text-right"><a class="btn btn-outline-warning btn-sm" title="Sampah" href="<?php echo base_url()?>aspanel/klien_storage_bin"><i class="fas fa-trash"></i></a></h3>
+              </div>
             <div class="card-body">
               <table id="example1" class="table table-bordered table-striped">
                 <thead>
                 <tr>
-                  <th>Date</th>
+                  <th>Tanggal</th>
                   <th>Klien</th>
-                  <th>Action</th>
+                  <th>Aksi</th>
                 </tr>
                 </thead>
                 <tbody>
                 <?php
                 $no = 1;
                 foreach ($record as $row){
-                  $tgl_posting = $this->mylibrary->tgl_indo($row['bisnis_post_tanggal']);
+                  $tgl_posting = $this->mylibrary->tgl_indo($row['klien_post_tanggal']);
                   ?>
 
                 <tr>
                   <td><?=$tgl_posting?></td>
-                  <td><?=$row['bisnis_judul']?></td>
+                  <td><?=$row['klien_judul']?></td>
                   <td>
                     <?php
-                    echo"<a class='btn btn-primary btn-sm' title='Edit Data' href='".base_url()."aspanel/bisnis_update/$row[bisnis_id]'><i class='fas fa-edit'></i></a>
-                    <a class='btn btn-danger btn-sm' title='Delete Data' href='".base_url()."aspanel/bisnis_delete_temp/$row[bisnis_id]' onclick=\"return confirm('Are you sure want to delete this data?')\"><i class='fas fa-trash-alt'></i></a>";
+                    echo"<a class='btn btn-primary btn-sm' title='Edit Data' href='".base_url()."aspanel/klien_update/$row[klien_id]'><i class='fas fa-edit'></i></a>
+                    <a class='btn btn-danger btn-sm' title='Delete Data' href='".base_url()."aspanel/klien_delete_temp/$row[klien_id]' onclick=\"return confirm('Are you sure want to delete this data?')\"><i class='fas fa-trash-alt'></i></a>";
                     ?>
                   </td>
                 </tr>
@@ -57,9 +57,9 @@
                 </tbody>
                 <tfoot>
                 <tr>
-                  <th>Date</th>
-                  <th>Title</th>
-                  <th>Action</th>
+                  <th>Tanggal</th>
+                  <th>Klien</th>
+                  <th>Aksi</th>
                 </tr>
                 </tfoot>
               </table>

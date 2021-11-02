@@ -1985,73 +1985,59 @@ class Aspanel extends CI_Controller {
 		/*	Bagian untuk klien - Pembuka	*/
 		public function klien()
 		{
-
-					if ($this->session->level=='1'){
-							$data['record'] = $this->Crud_m->view_where_ordering('klien',array('klien_status'=>'publish'),'klien_id','DESC');
-					}else{
-							$data['record'] = $this->Crud_m->view_where_ordering('klien',array('klien_post_oleh'=>$this->session->username,'klien_status'=>'publish'),'klien_id','DESC');
-					}
-					cek_session_akses('klien',$this->session->id_session);
-					$this->load->view('backend/klien/v_daftar', $data);
+			if ($this->session->level=='1'){
+				cek_session_akses('klien',$this->session->id_session);
+				$data['record'] = $this->Crud_m->view_where_ordering('klien',array('klien_status'=>'publish'),'klien_id','DESC');
+				}elseif ($this->session->level=='2'){
+					cek_session_akses_admin('klien',$this->session->id_session);
+					$data['record'] = $this->Crud_m->view_where_ordering('klien',array('klien_status'=>'publish'),'klien_id','DESC');
+				}else{
+					cek_session_akses_staff('klien',$this->session->id_session);
+					$data['record'] = $this->Crud_m->view_where_ordering('klien',array('klien_post_oleh'=>$this->session->username,'klien_status'=>'publish'),'klien_id','DESC');
+				}
+				$this->load->view('backend/klien/v_daftar', $data);
 		}
 		public function klien_storage_bin()
 		{
-
-					if ($this->session->level=='1'){
-							$data['record'] = $this->Crud_m->view_where_ordering('klien',array('klien_status'=>'delete'),'klien_id','DESC');
-					}else{
-							$data['record'] = $this->Crud_m->view_where_ordering('klien',array('klien_post_oleh'=>$this->session->username,'klien_status'=>'delete'),'klien_id','DESC');
-					}
-					cek_session_akses('klien',$this->session->id_session);
-					$this->load->view('backend/klien/v_daftar_hapus', $data);
+			if ($this->session->level=='1'){
+				cek_session_akses('klien',$this->session->id_session);
+				$data['record'] = $this->Crud_m->view_where_ordering('klien',array('klien_status'=>'delete'),'klien_id','DESC');
+				}elseif ($this->session->level=='2'){
+					cek_session_akses_admin('klien',$this->session->id_session);
+					$data['record'] = $this->Crud_m->view_where_ordering('klien',array('klien_status'=>'delete'),'klien_id','DESC');
+				}else{
+					cek_session_akses_staff('klien',$this->session->id_session);
+					$data['record'] = $this->Crud_m->view_where_ordering('klien',array('klien_post_oleh'=>$this->session->username,'klien_status'=>'delete'),'klien_id','DESC');
+				}
+				$this->load->view('backend/klien/v_daftar_hapus', $data);
 		}
 		public function klien_tambahkan()
 		{
 			if (isset($_POST['submit'])){
 
-						$config['upload_path'] = 'assets/frontend/liniklien/';
+						$config['upload_path'] = 'assets/frontend/klien/';
 						$config['allowed_types'] = 'gif|jpg|png|JPG|JPEG';
 						$this->upload->initialize($config);
 						$this->upload->do_upload('gambar');
 						$hasil22=$this->upload->data();
 						$config['image_library']='gd2';
-						$config['source_image'] = './assets/frontend/liniklien/'.$hasil22['file_name'];
+						$config['source_image'] = './assets/frontend/klien/'.$hasil22['file_name'];
 						$config['create_thumb']= FALSE;
 						$config['maintain_ratio']= FALSE;
-						$config['quality']= '80%';
-						$config['new_image']= './assets/frontend/liniklien/'.$hasil22['file_name'];
+						$config['quality']= '95%';
+						$config['new_image']= './assets/frontend/klien/'.$hasil22['file_name'];
 						$this->load->library('image_lib', $config);
 						$this->image_lib->resize();
 
-						if ($this->input->post('klien_keyword')!=''){
-									$tag_seo = $this->input->post('klien_keyword');
-									$tag=implode(',',$tag_seo);
-							}else{
-									$tag = '';
-							}
-						$tag = $this->input->post('klien_keyword');
-						$tags = explode(",", $tag);
-						$tags2 = array();
-						foreach($tags as $t)
-						{
-							$sql = "select * from keyword where keyword_nama_seo = '" . $this->mylibrary->seo_title($t) . "'";
-							$a = $this->db->query($sql)->result_array();
-							if(count($a) == 0){
-								$data = array('keyword_nama'=>$this->db->escape_str($t),
-										'keyword_username'=>$this->session->username,
-										'keyword_nama_seo'=>$this->mylibrary->seo_title($t),
-										'count'=>'0');
-								$this->As_m->insert('keyword',$data);
-							}
-							$tags2[] = $this->mylibrary->seo_title($t);
-						}
-						$tags = implode(",", $tags2);
 						if ($hasil22['file_name']==''){
 										$data = array(
 														'klien_post_oleh'=>$this->session->username,
-														'klien_judul'=>$this->db->escape_str($this->input->post('klien_judul')),
-														'klien_judul_seo'=>$this->mylibrary->seo_title($this->input->post('klien_judul')),
-														'klien_desk'=>$this->input->post('klien_desk'),
+														'klien_nama_pemesan'=>$this->input->post('klien_nama_pemesan'),
+														'klien_nama_pasangan'=>$this->input->post('klien_nama_pasangan'),
+														'klien_whatsapp'=>$this->input->post('klien_whatsapp'),
+														'klien_instagram'=>$this->input->post('klien_instagram'),
+														'klien_alamat'=>$this->input->post('klien_alamat'),
+														'klien_produk'=>$this->input->post('klien_produk'),
 														'klien_post_hari'=>hari_ini(date('w')),
 														'klien_post_tanggal'=>date('Y-m-d'),
 														'klien_post_jam'=>date('H:i:s'),
@@ -2077,9 +2063,19 @@ class Aspanel extends CI_Controller {
 									$this->As_m->insert('klien',$data);
 									redirect('aspanel/klien');
 					}else{
-
-						cek_session_akses('klien',$this->session->id_session);
-						$data['tag'] = $this->Crud_m->view_ordering('keyword','keyword_id','DESC');
+						if ($this->session->level=='1'){
+								cek_session_akses('klien',$this->session->id_session);
+								$data['home_stat']   = '';
+								$data['tag'] = $this->Crud_m->view_ordering('keyword','keyword_id','DESC');
+							}elseif ($this->session->level=='2'){
+								cek_session_akses_admin('klien',$this->session->id_session);
+								$data['home_stat']   = '';
+								$data['tag'] = $this->Crud_m->view_ordering('keyword','keyword_id','DESC');
+							}else{
+								cek_session_akses_staff('klien',$this->session->id_session);
+								$data['home_stat']   = '';
+								$data['tag'] = $this->Crud_m->view_ordering('keyword','keyword_id','DESC');
+							}
 						$this->load->view('backend/klien/v_tambahkan', $data);
 					}
 		}
@@ -2166,37 +2162,87 @@ class Aspanel extends CI_Controller {
 				}else{
 						$proses = $this->As_m->edit('klien', array('klien_id' => $id, 'klien_post_oleh' => $this->session->username))->row_array();
 				}
-				$data = array('rows' => $proses);
-				cek_session_akses('klien',$this->session->id_session);
-				$data['tag'] = $this->Crud_m->view_ordering('keyword','keyword_id','DESC');
+
+				if ($this->session->level=='1'){
+						cek_session_akses('klien',$this->session->id_session);
+						$data['home_stat']   = '';
+						$data = array('rows' => $proses);
+						$data['tag'] = $this->Crud_m->view_ordering('keyword','keyword_id','DESC');
+					}elseif ($this->session->level=='2'){
+						cek_session_akses_admin('klien',$this->session->id_session);
+						$data['home_stat']   = '';
+						$data = array('rows' => $proses);
+						$data['tag'] = $this->Crud_m->view_ordering('keyword','keyword_id','DESC');
+					}else{
+						cek_session_akses_staff('klien',$this->session->id_session);
+						$data['home_stat']   = '';
+						$data = array('rows' => $proses);
+						$data['tag'] = $this->Crud_m->view_ordering('keyword','keyword_id','DESC');
+					}
 				$this->load->view('backend/klien/v_update', $data);
 			}
 		}
 		function klien_delete_temp()
 		{
-			cek_session_akses('klien',$this->session->id_session);
-				$data = array('klien_status'=>'delete');
-				$where = array('klien_id' => $this->uri->segment(3));
-				$this->db->update('klien', $data, $where);
-				redirect('aspanel/klien');
+			if ($this->session->level=='1'){
+					cek_session_akses('klien',$this->session->id_session);
+					$data = array('klien_status'=>'delete');
+		      $where = array('klien_id' => $this->uri->segment(3));
+					$this->db->update('klien', $data, $where);
+				}elseif ($this->session->level=='2'){
+					cek_session_akses_admin('klien',$this->session->id_session);
+					$data = array('klien_status'=>'delete');
+		      $where = array('klien_id' => $this->uri->segment(3));
+					$this->db->update('klien', $data, $where);
+				}else{
+					cek_session_akses_staff('klien',$this->session->id_session);
+					$data = array('klien_status'=>'delete');
+		      $where = array('klien_id' => $this->uri->segment(3));
+					$this->db->update('klien', $data, $where);
+				}
+			redirect('aspanel/klien');
 		}
 		function klien_restore()
 		{
-				cek_session_akses('klien',$this->session->id_session);
-				$data = array('klien_status'=>'Publish');
-				$where = array('klien_id' => $this->uri->segment(3));
-				$this->db->update('klien', $data, $where);
+			if ($this->session->level=='1'){
+					cek_session_akses('klien',$this->session->id_session);
+					$data = array('klien_status'=>'publish');
+					$where = array('klien_id' => $this->uri->segment(3));
+					$this->db->update('klien', $data, $where);
+				}elseif ($this->session->level=='2'){
+					cek_session_akses_admin('klien',$this->session->id_session);
+					$data = array('klien_status'=>'publish');
+					$where = array('klien_id' => $this->uri->segment(3));
+					$this->db->update('klien', $data, $where);
+				}else{
+					cek_session_akses_staff('klien',$this->session->id_session);
+					$data = array('klien_status'=>'publish');
+					$where = array('klien_id' => $this->uri->segment(3));
+					$this->db->update('klien', $data, $where);
+				}
 				redirect('aspanel/klien_storage_bin');
 		}
 		public function klien_delete()
 		{
-				cek_session_akses('klien',$this->session->id_session);
-				$id = $this->uri->segment(3);
-				$_id = $this->db->get_where('klien',['klien_id' => $id])->row();
-				 $query = $this->db->delete('klien',['klien_id'=>$id]);
-				if($query){
-								 unlink("./assets/frontend/liniklien/".$_id->klien_gambar);
-			 }
+			 if ($this->session->level=='1'){
+ 				 cek_session_akses('klien',$this->session->id_session);
+ 				 $id = $this->uri->segment(3);
+ 				 $_id = $this->db->get_where('klien',['klien_id' => $id])->row();
+ 					$query = $this->db->delete('klien',['klien_id'=>$id]);
+ 				 if($query){
+ 									unlink("./assets/frontend/liniklien/".$_id->klien_gambar);
+ 							}
+ 			 }elseif ($this->session->level=='2'){
+ 				 cek_session_akses_admin('klien',$this->session->id_session);
+ 				 $id = $this->uri->segment(3);
+ 				 $_id = $this->db->get_where('klien',['klien_id' => $id])->row();
+ 					$query = $this->db->delete('klien',['klien_id'=>$id]);
+ 				 if($query){
+ 									unlink("./assets/frontend/liniklien/".$_id->klien_gambar);
+ 							}
+ 			 }else{
+ 				 cek_session_akses_staff('klien',$this->session->id_session);
+ 			 }
 			redirect('aspanel/klien_storage_bin');
 		}
 		/*	Bagian untuk klien - Penutup	*/
@@ -2204,25 +2250,31 @@ class Aspanel extends CI_Controller {
 		/*	Bagian untuk note - Pembuka	*/
 		public function note()
 		{
-
-					if ($this->session->level=='1'){
-							$data['record'] = $this->Crud_m->view_where_ordering('note',array('note_status'=>'publish'),'note_id','DESC');
-					}else{
-							$data['record'] = $this->Crud_m->view_where_ordering('note',array('note_post_oleh'=>$this->session->username,'note_status'=>'publish'),'note_id','DESC');
-					}
-					cek_session_akses('note',$this->session->id_session);
-					$this->load->view('backend/note/v_daftar', $data);
+			if ($this->session->level=='1'){
+				cek_session_akses('note',$this->session->id_session);
+				$data['record'] = $this->Crud_m->view_where_ordering('note',array('note_status'=>'publish'),'note_id','DESC');
+				}elseif ($this->session->level=='2'){
+					cek_session_akses_admin('note',$this->session->id_session);
+					$data['record'] = $this->Crud_m->view_where_ordering('note',array('note_status'=>'publish'),'note_id','DESC');
+				}else{
+					cek_session_akses_staff('note',$this->session->id_session);
+					$data['record'] = $this->Crud_m->view_where_ordering('note',array('note_post_oleh'=>$this->session->username,'note_status'=>'publish'),'note_id','DESC');
+			}
+			$this->load->view('backend/note/v_daftar', $data);
 		}
 		public function note_storage_bin()
 		{
-
-					if ($this->session->level=='1'){
-							$data['record'] = $this->Crud_m->view_where_ordering('note',array('note_status'=>'delete'),'note_id','DESC');
-					}else{
-							$data['record'] = $this->Crud_m->view_where_ordering('note',array('note_post_oleh'=>$this->session->username,'note_status'=>'delete'),'note_id','DESC');
-					}
-					cek_session_akses('note',$this->session->id_session);
-					$this->load->view('backend/note/v_daftar_hapus', $data);
+			if ($this->session->level=='1'){
+				cek_session_akses('note',$this->session->id_session);
+				$data['record'] = $this->Crud_m->view_where_ordering('note',array('note_status'=>'delete'),'note_id','DESC');
+				}elseif ($this->session->level=='2'){
+					cek_session_akses_admin('note',$this->session->id_session);
+					$data['record'] = $this->Crud_m->view_where_ordering('note',array('note_status'=>'delete'),'note_id','DESC');
+				}else{
+					cek_session_akses_staff('note',$this->session->id_session);
+					$data['record'] = $this->Crud_m->view_where_ordering('note',array('note_post_oleh'=>$this->session->username,'note_status'=>'delete'),'note_id','DESC');
+			}
+			$this->load->view('backend/note/v_daftar_hapus', $data);
 		}
 		public function note_tambahkan()
 		{
@@ -2296,9 +2348,19 @@ class Aspanel extends CI_Controller {
 									$this->As_m->insert('note',$data);
 									redirect('aspanel/note');
 					}else{
-
-						cek_session_akses('note',$this->session->id_session);
-						$data['tag'] = $this->Crud_m->view_ordering('keyword','keyword_id','DESC');
+						if ($this->session->level=='1'){
+								cek_session_akses('note',$this->session->id_session);
+								$data['home_stat']   = '';
+								$data['tag'] = $this->Crud_m->view_ordering('keyword','keyword_id','DESC');
+							}elseif ($this->session->level=='2'){
+								cek_session_akses_admin('note',$this->session->id_session);
+								$data['home_stat']   = '';
+								$data['tag'] = $this->Crud_m->view_ordering('keyword','keyword_id','DESC');
+							}else{
+								cek_session_akses_staff('note',$this->session->id_session);
+								$data['home_stat']   = '';
+								$data['tag'] = $this->Crud_m->view_ordering('keyword','keyword_id','DESC');
+							}
 						$this->load->view('backend/note/v_tambahkan', $data);
 					}
 		}
@@ -2385,36 +2447,86 @@ class Aspanel extends CI_Controller {
 				}else{
 						$proses = $this->As_m->edit('note', array('note_id' => $id, 'note_post_oleh' => $this->session->username))->row_array();
 				}
-				$data = array('rows' => $proses);
-				cek_session_akses('note',$this->session->id_session);
-				$data['tag'] = $this->Crud_m->view_ordering('keyword','keyword_id','DESC');
+
+				if ($this->session->level=='1'){
+						cek_session_akses('note',$this->session->id_session);
+						$data['home_stat']   = '';
+						$data = array('rows' => $proses);
+						$data['tag'] = $this->Crud_m->view_ordering('keyword','keyword_id','DESC');
+					}elseif ($this->session->level=='2'){
+						cek_session_akses_admin('note',$this->session->id_session);
+						$data['home_stat']   = '';
+						$data = array('rows' => $proses);
+						$data['tag'] = $this->Crud_m->view_ordering('keyword','keyword_id','DESC');
+					}else{
+						cek_session_akses_staff('note',$this->session->id_session);
+						$data['home_stat']   = '';
+						$data = array('rows' => $proses);
+						$data['tag'] = $this->Crud_m->view_ordering('keyword','keyword_id','DESC');
+					}
 				$this->load->view('backend/note/v_update', $data);
 			}
 		}
 		function note_delete_temp()
 		{
-			cek_session_akses('note',$this->session->id_session);
-				$data = array('note_status'=>'delete');
-				$where = array('note_id' => $this->uri->segment(3));
-				$this->db->update('note', $data, $where);
+			if ($this->session->level=='1'){
+					cek_session_akses('note',$this->session->id_session);
+					$data = array('note_status'=>'delete');
+		      $where = array('note_id' => $this->uri->segment(3));
+					$this->db->update('note', $data, $where);
+				}elseif ($this->session->level=='2'){
+					cek_session_akses_admin('note',$this->session->id_session);
+					$data = array('note_status'=>'delete');
+		      $where = array('note_id' => $this->uri->segment(3));
+					$this->db->update('note', $data, $where);
+				}else{
+					cek_session_akses_staff('note',$this->session->id_session);
+					$data = array('note_status'=>'delete');
+		      $where = array('note_id' => $this->uri->segment(3));
+					$this->db->update('note', $data, $where);
+				}
 				redirect('aspanel/note');
 		}
 		function note_restore()
 		{
-				cek_session_akses('note',$this->session->id_session);
-				$data = array('note_status'=>'Publish');
-				$where = array('note_id' => $this->uri->segment(3));
-				$this->db->update('note', $data, $where);
+			if ($this->session->level=='1'){
+					cek_session_akses('note',$this->session->id_session);
+					$data = array('note_status'=>'Publish');
+					$where = array('note_id' => $this->uri->segment(3));
+					$this->db->update('note', $data, $where);
+				}elseif ($this->session->level=='2'){
+					cek_session_akses_admin('note',$this->session->id_session);
+					$data = array('note_status'=>'Publish');
+					$where = array('note_id' => $this->uri->segment(3));
+					$this->db->update('note', $data, $where);
+				}else{
+					cek_session_akses_staff('note',$this->session->id_session);
+					$data = array('note_status'=>'Publish');
+					$where = array('note_id' => $this->uri->segment(3));
+					$this->db->update('note', $data, $where);
+				}
 				redirect('aspanel/note_storage_bin');
 		}
 		public function note_delete()
 		{
-				cek_session_akses('note',$this->session->id_session);
-				$id = $this->uri->segment(3);
-				$_id = $this->db->get_where('note',['note_id' => $id])->row();
-				 $query = $this->db->delete('note',['note_id'=>$id]);
-				if($query){
-								 unlink("./assets/frontend/lininote/".$_id->note_gambar);
+			if ($this->session->level=='1'){
+				 cek_session_akses('note',$this->session->id_session);
+				 $id = $this->uri->segment(3);
+				 $_id = $this->db->get_where('note',['note_id' => $id])->row();
+					$query = $this->db->delete('note',['note_id'=>$id]);
+				 if($query){
+									unlink("./assets/frontend/lininote/".$_id->note_gambar);
+							}
+			 }elseif ($this->session->level=='2'){
+				 cek_session_akses_admin('note',$this->session->id_session);
+				 $id = $this->uri->segment(3);
+				 $_id = $this->db->get_where('note',['note_id' => $id])->row();
+					$query = $this->db->delete('note',['note_id'=>$id]);
+				 if($query){
+									unlink("./assets/frontend/lininote/".$_id->note_gambar);
+							}
+			 }else{
+				 cek_session_akses_staff('note',$this->session->id_session);
 			 }
 			redirect('aspanel/note_storage_bin');
 		}
