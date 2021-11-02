@@ -38,10 +38,29 @@
                 <div class="col-sm-12  col-lg-4 col-md-6 mb-4 mb-lg-0">
                 	<h6 class="widget_title">Syarat & Ketentuan</h6>
                     <ul class="list_none widget_links">
-                    	<li><a href="#">Pendaftaran</a></li>
-                      <li><a href="#">Pengantaran</a></li>
-                      <li><a href="#">Catatan Penting!</a></li>
+											<?php foreach ($posts_note as $post_new){  ?>
+                    	<li><a href="<?php echo base_url("syarat-ketentuan/$post_new->note_judul_seo ") ?>"><?php echo $post_new->note_judul; ?></a></li>
+										<?php } ?>
                     </ul>
+										<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+		                  <div class="modal-dialog modal-dialog-centered" role="document">
+		                    <div class="modal-content">
+		                      <div class="modal-header">
+		                        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+		                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+		                          <span aria-hidden="true">&times;</span>
+		                        </button>
+		                      </div>
+		                      <div class="modal-body">
+		                       <p>am eget neque pellentesque, efficitur neque at, ornare orci. Morbi convallis a eros fermentum rhoncus. Morbi convallis a eros fermentum rhoncus lorem. Vestibulum ligula orci, volutpat id aliquet eget, consectetur eget ante. Duis pharetra for nec rhoncus felis sagittis nec amet ultricies lorem.</p>
+		                      </div>
+		                      <div class="modal-footer">
+		                        <button type="button" class="btn btn-black" data-dismiss="modal">Close</button>
+		                        <button type="button" class="btn btn-default">Save changes</button>
+		                      </div>
+		                    </div>
+		                  </div>
+		                </div>
                 </div>
             </div>
         </div>
