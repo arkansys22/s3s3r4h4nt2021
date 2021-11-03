@@ -27,6 +27,7 @@ class Templates extends CI_Controller {
 					$data['posts']            = $this->Crud_m->get_by_id_post($id,'templates_id','templates','templates_judul_seo');
           $data['posts_templates_category']= $this->Crud_m->view_one_limit('templates_category','templates_cat_status','templates_cat_id','ASC',$dari,'10');
           $data['menu'] = 'produk';
+          $this->add_count_templates($id);
 					$data['identitas']= $this->Crud_m->get_by_id_identitas($id='1');
           $this->load->view('fronts/produk/v_detail', $data);
 				}
@@ -69,7 +70,7 @@ class Templates extends CI_Controller {
 			$check_visitor = $this->input->cookie(urldecode($id), FALSE);
 			$ip = $this->input->ip_address();
 			if ($check_visitor == false) {
-					$cookie = array("name" => urldecode($id), "value" => "$ip", "expire" => time() + 10, "secure" => false);
+					$cookie = array("name" => urldecode($id), "value" => "$ip", "expire" => 3600, "secure" => false);
 					$this->input->set_cookie($cookie);
 					$this->Crud_m->update_counter(urldecode($id),'templates','templates_judul_seo','templates_dibaca');
 			}
