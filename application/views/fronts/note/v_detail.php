@@ -7,20 +7,20 @@
 <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
 <meta content="crudbiz" name="author">
 <meta NAME="ROBOTS" CONTENT="INDEX, FOLLOW">
-<title><?php echo $posts->blogs_judul ?> - <?php echo $posts->blogs_keyword ?> - <?php echo $identitas->slogan?></title>
-<meta name="title" content="<?php echo $posts->blogs_judul ?> - <?php echo $posts->blogs_keyword ?> | <?php echo $identitas->nama_website?>">
-<meta property="og:title" content="<?php echo $posts->blogs_judul ?> - <?php echo $posts->blogs_keyword ?> | <?php echo $identitas->nama_website?>">
-<meta name="site_url" content="<?php echo base_url()?><?=$menu?>/<?php echo $posts->blogs_judul_seo ?>">
-<meta name="description" content="<?php echo $posts->blogs_meta_desk ?>">
-<meta name="keywords" content="<?php echo $posts->blogs_keyword ?>">
+<title><?php echo $posts->note_judul ?> - <?php echo $posts->note_keyword ?> - <?php echo $identitas->slogan?></title>
+<meta name="title" content="<?php echo $posts->note_judul ?> - <?php echo $posts->note_keyword ?> | <?php echo $identitas->nama_website?>">
+<meta property="og:title" content="<?php echo $posts->note_judul ?> - <?php echo $posts->note_keyword ?> | <?php echo $identitas->nama_website?>">
+<meta name="site_url" content="<?php echo base_url()?><?=$menu?>/<?php echo $posts->note_judul_seo ?>">
+<meta name="description" content="<?php echo $posts->note_meta_desk ?>">
+<meta name="keywords" content="<?php echo $posts->note_keyword ?>">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
-<link rel="alternate" href="<?php echo base_url()?><?=$menu?>/<?php echo $posts->blogs_judul_seo ?>" hreflang="id" />
-<link href='<?php echo base_url()?>blogs/<?php echo $posts->blogs_judul_seo ?>' rel='canonical'/>
+<link rel="alternate" href="<?php echo base_url()?><?=$menu?>/<?php echo $posts->note_judul_seo ?>" hreflang="id" />
+<link href='<?php echo base_url()?><?=$menu?>/<?php echo $posts->note_judul_seo ?>' rel='canonical'/>
 <meta property="og:site_name" content="<?php echo $identitas->nama_website?>">
-<meta property="og:description" content="<?php echo $posts->blogs_meta_desk ?>">
-<meta property="og:url" content="<?php echo base_url()?><?=$menu?>/<?php echo $posts->blogs_judul_seo ?>">
-<meta property="og:image" content="<?php echo base_url()?>assets/frontend/produk/<?php echo $posts->blogs_gambar ?>">
-<meta property="og:image:url" content="<?php echo base_url()?>assets/frontend/produk/<?php echo $posts->blogs_gambar ?>">
+<meta property="og:description" content="<?php echo $posts->note_meta_desk ?>">
+<meta property="og:url" content="<?php echo base_url()?><?=$menu?>/<?php echo $posts->note_judul_seo ?>">
+<meta property="og:image" content="<?php echo base_url()?>assets/frontend/lininote/<?php echo $posts->note_gambar ?>">
+<meta property="og:image:url" content="<?php echo base_url()?>assets/frontend/lininote/<?php echo $posts->note_gambar ?>">
 <meta property="og:type" content="article">
 <link rel="shortcut icon" href="<?php echo base_url()?>assets/frontend/campur/<?php echo $identitas->favicon?>" type="image/x-icon">
 <?php $this->load->view('fronts/analytics')?>
@@ -35,39 +35,17 @@
       <div class="row">
           <div class="col-lg-9">
               <div class="single_post">
-                    <div class="blog_img">
-                        <a href="#">
-                          <?php
-                          if(empty($posts->blogs_gambar)) {
-                            echo "";
-                          }else{
-                            echo "<img src='".base_url()."assets/frontend/blogs/".$posts->blogs_gambar."'> ";}
-                          ?>
-                        </a>
-                    </div>
                     <div class="blog_content bg-white">
                         <div class="blog_text">
-                            <h2><?php echo $posts->blogs_judul; ?></h2>
-                            <ul class="list_none blog_meta">
-                                <li><a href="#"><i class="ion-calendar"></i>
-                                <?php echo $posts->blogs_post_tanggal ?>
-                                </a></li>
-                                <li>by
-                                  <?php
-                                  if(empty($posts->blogs_update_oleh)) {
-                                    echo "$posts->blogs_post_oleh";
-                                  }else {
-                                    echo "$posts->blogs_update_oleh";}
-                                  ?></li>
-                            </ul>
-                            <p><?php echo $posts->blogs_desk ?></p>
+                            <h2><?php echo $posts->note_judul; ?></h2>
+                            <p><?php echo $posts->note_desk ?></p>
                             <div class="py-4 blog_post_footer">
                                 <div class="row justify-content-between align-items-center">
                                     <div class="col-md-8 mb-3 mb-md-0">
                                       <span>Bagikan ke:</span>
                                         <ul class="list_none social_icons border_social rounded_social">
-                                          <li><a href="http://www.facebook.com/sharer.php?u=<?php echo base_url("tips/$posts->blogs_judul_seo ") ?>" onclick="window.open('https://www.facebook.com/sharer.php?u=<?php echo base_url("tips/$posts->blogs_judul_seo ") ?>','newwindow','width=400,height=350');  return false;" title="Facebook" target="_blank"><i class="ion-social-facebook"></i></a></li>
-                                          <li><a href="whatsapp://send?text=<?php echo $posts->blogs_judul ?> | <?php echo base_url("tips/$posts->blogs_judul_seo ") ?>"><i class="ion-social-whatsapp"></i></a></li>
+                                          <li><a href="http://www.facebook.com/sharer.php?u=<?php echo base_url("syarat-ketentuan/$posts->note_judul_seo ") ?>" onclick="window.open('https://www.facebook.com/sharer.php?u=<?php echo base_url("syarat-ketentuan/$posts->note_judul_seo ") ?>','newwindow','width=400,height=350');  return false;" title="Facebook" target="_blank"><i class="ion-social-facebook"></i></a></li>
+                                          <li><a href="whatsapp://send?text=<?php echo $posts->note_judul ?> | <?php echo base_url("syarat-ketentuan/$posts->note_judul_seo ") ?>"><i class="ion-social-whatsapp"></i></a></li>
                                         </ul>
                                     </div>
                                     <div class="col-md-4">

@@ -1,6 +1,6 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
-class Berita extends CI_Controller {
+class Note extends CI_Controller {
 
     function __construct()
   {
@@ -57,13 +57,11 @@ class Berita extends CI_Controller {
   }
 
 
-
-
   public function detail($id)
 	{
 
 			$config['per_page'] = 4;
-			$row = $this->Crud_m->get_by_id_post($id,'blogs_id','blogs','blogs_judul_seo');
+			$row = $this->Crud_m->get_by_id_post($id,'note_id','note','note_judul_seo');
 			if ($this->uri->segment('4')==''){
 				$dari = 0;
 				}else{
@@ -75,11 +73,11 @@ class Berita extends CI_Controller {
           $data['posts_produk'] = $this->Crud_m->view_where_order('templates',array('templates_status'=>'publish'),'templates_id','desc');
           $data['posts_blogs'] = $this->Crud_m->view_where_order('blogs',array('blogs_status'=>'publish'),'blogs_id','desc');
           $data['posts_templates_category']= $this->Crud_m->view_one_limit('templates_category','templates_cat_status','templates_cat_id','ASC',$dari,'10');
-          $data['menu'] = 'berita';
-					$data['posts']            = $this->Crud_m->get_by_id_post($id,'blogs_id','blogs','blogs_judul_seo');
-					$this->add_count_blogs($id);
+          $data['menu'] = 'syarat-ketentuan';
+					$data['posts']            = $this->Crud_m->get_by_id_post($id,'note_id','note','note_judul_seo');
+					$this->add_count_note($id);
 					$data['identitas']= $this->Crud_m->get_by_id_identitas($id='1');
-          $this->load->view('fronts/beritas/v_detail', $data);
+          $this->load->view('fronts/note/v_detail', $data);
 				}
 				else
 						{
@@ -89,18 +87,14 @@ class Berita extends CI_Controller {
 						}
 	}
 
-  function add_count_blogs($id)
+  function add_count_note($id)
 	{
 			$check_visitor = $this->input->cookie(urldecode($id), FALSE);
 			$ip = $this->input->ip_address();
 			if ($check_visitor == false) {
-					$cookie = array(
-            "name" => urldecode($id),
-            "value" => "$ip",
-            "expire" => 3600,
-            "secure" => false);
+					$cookie = array("name" => urldecode($id), "value" => "$ip", "expire" => 3600, "secure" => false);
 					$this->input->set_cookie($cookie);
-					$this->Crud_m->update_counter(urldecode($id),'blogs','blogs_judul_seo','blogs_dibaca');
+					$this->Crud_m->update_counter(urldecode($id),'note','note_judul_seo','note_dibaca');
 			}
 	}
 

@@ -307,6 +307,7 @@ class Crud_m extends CI_model{
             $this->db->where('blogs_judul_seo', urldecode($id));
             $this->db->select('blogs_dibaca');
             $count = $this->db->get('blogs')->row();
+            $this->db->reset_query();
             // then increase by one
             $this->db->where('blogs_judul_seo', urldecode($id));
             $this->db->set('blogs_dibaca', ($count->blogs_dibaca + 1));
