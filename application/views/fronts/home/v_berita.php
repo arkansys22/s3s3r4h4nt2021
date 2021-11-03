@@ -19,7 +19,7 @@
             <div class="col-lg-4 col-md-6 mb-md-4 mb-2 pb-2">
                 <div class="blog_post blog_style1">
                     <div class="blog_img">
-                        <a href="<?php echo base_url() ?>blogs/<?php echo $post_new->blogs_judul_seo ?>">
+                        <a href="<?php echo base_url() ?>tips/<?php echo $post_new->blogs_judul_seo ?>">
 													<img <?php
 																if(empty($post_new->blogs_gambar)) {
 																	echo "<img src='".base_url()."assets/frontend/default-1920-1080.jpg' alt='image'>";
