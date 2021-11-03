@@ -31,7 +31,7 @@
                     </div>
                     <div class="blog_content bg-white">
                         <div class="blog_text">
-                            <h6 class="blog_title"><a href="<?php echo base_url() ?>blogs/<?php echo $post_new->blogs_judul_seo ?>"><?php echo $post_new->blogs_judul ?></a></h6>
+                            <h6 class="blog_title"><a href="<?php echo base_url() ?>tips/<?php echo $post_new->blogs_judul_seo ?>"><?php echo $post_new->blogs_judul ?></a></h6>
                             <ul class="list_none blog_meta">
                                 <li>by
 																	<?php
@@ -43,7 +43,7 @@
 																</li>
                                 <li><?php echo $post_new->blogs_dibaca ?> Kunjungan</li>
                         	</ul>
-                            <p><?php echo $isi?><a href="<?php echo base_url() ?>blogs/<?php echo $post_new->blogs_judul_seo ?>">...Lanjutkan</a></p>
+                            <p><?php echo $isi?><a href="<?php echo base_url() ?>tips/<?php echo $post_new->blogs_judul_seo ?>">...Lanjutkan</a></p>
                         </div>
                     </div>
                 </div>
