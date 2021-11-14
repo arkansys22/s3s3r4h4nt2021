@@ -1,6 +1,6 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
-$route['default_controller'] = 'Soon';
+$route['default_controller'] = 'Main';
 $route['login'] = "Aspanel/login";
 /* Controller Frontend - Pembuka*/
 $route['main'] = "Main/index";
