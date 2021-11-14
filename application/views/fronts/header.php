@@ -34,7 +34,7 @@
 															<?php $posts_templates = $this->Crud_m->view_where_order('templates',array('templates_status'=>'publish', 'templates_cat_id'=>$post_new->templates_cat_id),'templates_id','desc'); ?>
 															<?php foreach ($posts_templates as $post_new2){  ?>
                             	<li>
-																<a class="dropdown-item menu-link" href="<?php echo base_url()?><?php echo $post_new2->templates_judul_seo; ?>"><?php echo $post_new2->templates_judul; ?></a>
+																<a class="dropdown-item menu-link" href="<?php echo base_url()?>produk/<?php echo $post_new2->templates_judul_seo; ?>"><?php echo $post_new2->templates_judul; ?></a>
                               </li>
 														<?php } ?>
                             </ul>
