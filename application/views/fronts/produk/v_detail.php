@@ -67,11 +67,16 @@
                       </div>
                       <div class="product_price float-left">
                         <?php
-                        if(empty($posts->templates_harga_diskon)) {
-                          echo "<ins>Rp$posts->templates_harga</ins>";
-                        }else if($a = $posts->templates_harga - ($posts->templates_harga * ($posts->templates_harga_diskon/100))){
-                          echo "<del>Rp$posts->templates_harga</del><ins>Rp$a</ins>";}
-                        ?>
+                        if(empty($posts->templates_harga_diskon)) { ?>
+                        <ins>Rp<?php echo number_format($posts->templates_harga,0,',','.')?></ins>
+
+                        <?php }else if($a = $posts->templates_harga - ($posts->templates_harga * ($posts->templates_harga_diskon/100))){?>
+                          <del>Rp<?php echo number_format($posts->templates_harga,0,',','.') ?></del><ins>Rp<?php echo number_format($a,0,',','.')?></ins>
+                        <?php }?>
+                      </div>
+                      <div class="clearfix"></div>
+                      <div align="left">
+                          <span><?php echo $posts->templates_dibeli; ?> Terjual</span>
                       </div>
                       <div class="clearfix"></div>
                       <hr />
@@ -122,7 +127,7 @@
 
                         <div class="item">
                       	<div class="shop-item">
-                              <div class="product text-center">
+                              <div class="product">
                                   <div class="product_img">
                                       <img src="<?php echo base_url()?>assets/frontend/produk/<?php echo $post_new->templates_gambar; ?>" alt="image">
                                       <?php
@@ -138,20 +143,21 @@
                                           </ul>
                                       </div>
                                   </div>
-                                  <div class="product_info">
+                                  <div class="product_info" >
                                       <div class="product_title">
                                           <h5><a href="#"><?php echo $post_new->templates_judul; ?></a></h5>
                                       </div>
                                       <div class="product_price">
                                         <?php
-                                        if(empty($post_new->templates_harga_diskon)) {
-                                          echo "<ins>Rp$post_new->templates_harga</ins>";
-                                        }else if($a = $post_new->templates_harga - ($post_new->templates_harga * ($post_new->templates_harga_diskon/100))){
-                                          echo "<del>Rp$post_new->templates_harga</del><ins>Rp$a</ins>";}
-                                        ?>
+                                        if(empty($post_new->templates_harga_diskon)) { ?>
+                                        <ins>Rp<?php echo number_format($post_new->templates_harga,0,',','.')?></ins>
+
+                                        <?php }else if($a = $post_new->templates_harga - ($post_new->templates_harga * ($post_new->templates_harga_diskon/100))){?>
+                                          <del>Rp<?php echo number_format($post_new->templates_harga,0,',','.') ?></del><ins>Rp<?php echo number_format($a,0,',','.')?></ins>
+                                        <?php }?>
                                       </div>
                                       <div align="left">
-                                          <span>99 Terjual</span>
+                                          <span><?php echo $post_new->templates_dibeli; ?> Terjual</span>
                                       </div>
                                   </div>
                               </div>

@@ -64,11 +64,17 @@
                       </div>
                       <div class="product_price float-left">
                         <?php
-                        if(empty($posts->templates_harga_diskon)) {
-                          echo "<ins>Rp$posts->templates_harga</ins>";
-                        }else if($a = $posts->templates_harga - ($posts->templates_harga * ($posts->templates_harga_diskon/100))){
-                          echo "<del>Rp$posts->templates_harga</del><ins>Rp$a</ins>";}
-                        ?>
+                        if(empty($posts->templates_harga_diskon)) { ?>
+                        <ins>Rp<?php echo number_format($posts->templates_harga,0,',','.')?></ins>
+
+                        <?php }else if($a = $posts->templates_harga - ($posts->templates_harga * ($posts->templates_harga_diskon/100))){?>
+                          <del>Rp<?php echo number_format($posts->templates_harga,0,',','.') ?></del><ins>Rp<?php echo number_format($a,0,',','.')?></ins>
+                        <?php }?>
+
+                      </div>
+                      <div class="clearfix"></div>
+                      <div align="left">
+                          <span><?php echo $posts->templates_dibeli; ?> Terjual</span>
                       </div>
                       <div class="clearfix"></div>
                       <hr />

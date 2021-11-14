@@ -54,7 +54,7 @@
 
                                                     </div>
                                                     <div align="left">
-                                                        <span>99 Terjual</span>
+                                                        <span><?php echo $post_new2->templates_dibeli; ?> Terjual</span>
                                                     </div>
                                                 </div>
                                             </div>
