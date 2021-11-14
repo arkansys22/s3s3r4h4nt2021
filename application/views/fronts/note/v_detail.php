@@ -114,7 +114,7 @@
                                     </div>
                                     <div class="post_content">
                                         <h6><a href="<?php echo base_url() ?>produk/<?php echo $post_new->templates_judul_seo ?>"><?php echo $post_new->templates_judul; ?></a></h6>
-                                        <p class="small m-0">99 Terjual</p>
+                                        <p class="small m-0"><?php echo $post_new->templates_dibeli; ?> Terjual</p>
                                     </div>
                                 </div>
                             </li>
