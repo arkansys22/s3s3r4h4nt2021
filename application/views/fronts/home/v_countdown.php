@@ -4,7 +4,7 @@
 				<?php foreach ($posts_promo as $post_new){  ?>
         		<div class="col-md-5 col-sm-12 p-0">
 							<img height="100%" src="<?php echo base_url()?>assets/frontend/promo/<?php echo $post_new->promo_gambar; ?>" alt="image">
-							
+
 						</div>
             <div class="col-md-7 col-sm-12">
             	<div class="h-100 d-flex align-items-center padding_eight_all">
@@ -19,16 +19,34 @@
                               <h4><a href="#"><?php echo $post_new->templates_judul; ?></a></h4>
                             </div>
                             <div class="product_price float-left">
-                                <del>Rp<?php echo $post_new->templates_harga; ?></del>
+                                <del>Rp<?php echo number_format($post_new->templates_harga,0,',','.') ?></del>
 																<?php ($a = $post_new->templates_harga - ($post_new->templates_harga * ($post_new->promo_harga/100))); ?>
-                                <ins>Rp<?php echo $a ?></ins>
+                                <ins>Rp<?php echo number_format($a,0,',','.') ?></ins>
                             </div>
-                            <div class="product-rate float-right">
-                                <span><?php echo $post_new->promo_limit; ?> Kuota Tersisa </span>
-                            </div>
+														<div class="clearfix"></div>
+	                          <span><?php echo $post_new->promo_limit; ?> Kuota Tersisa </span>
                             <div class="clearfix"></div>
-                            <hr>
-                            <p><?php echo $post_new->templates_desk; ?></p>
+														<br>
+														<button type="button" class="btn btn-outline-primary mb-0" data-toggle="modal" data-target="#exampleModal">Detail Promo</button>
+                            <p></p>
+														<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+						                  <div class="modal-dialog modal-dialog-centered" role="document">
+						                    <div class="modal-content">
+						                      <div class="modal-header">
+						                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						                          <span aria-hidden="true">&times;</span>
+						                        </button>
+						                      </div>
+						                      <div class="modal-body">
+						                       <p><?php echo $post_new->templates_desk; ?></p>
+						                      </div>
+						                      <div class="modal-footer">
+						                        <button type="button" class="btn btn-black" data-dismiss="modal">Kembali</button>
+						                      </div>
+						                    </div>
+						                  </div>
+						                </div>
+
                           </div>
                           <hr>
                             <div class="cart_btn">

@@ -44,11 +44,12 @@
                                                     <div class="product_price">
 
                                                         <?php
-                      																	if(empty($post_new2->templates_harga_diskon)) {
-                      																		echo "<ins>Rp$post_new2->templates_harga</ins>";
-                      																	}else if($a = $post_new2->templates_harga - ($post_new2->templates_harga * ($post_new2->templates_harga_diskon/100))){
-                      																		echo "<del>Rp$post_new2->templates_harga</del><ins>Rp$a</ins>";}
-                      																	?>
+                      																	if(empty($post_new2->templates_harga_diskon)) { ?>
+                      																		<ins>Rp<?php echo number_format($post_new2->templates_harga,0,',','.')?></ins>
+                      																	<?php
+                                                      }else if($a = $post_new2->templates_harga - ($post_new2->templates_harga * ($post_new2->templates_harga_diskon/100))){?>
+                      																	<del>Rp<?php echo number_format($post_new2->templates_harga,0,',','.')?></del><ins>Rp<?php echo number_format($a,0,',','.')?></ins>
+                                                      <?php }?>
 
 
                                                     </div>
