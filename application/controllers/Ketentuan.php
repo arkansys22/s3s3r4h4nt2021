@@ -21,7 +21,7 @@ class Ketentuan extends CI_Controller {
 			}
 			if ($row)
 				{
-          $data['posts_produk'] = $this->Crud_m->view_where_order('templates',array('templates_status'=>'publish'),'templates_id','desc');
+          $data['posts_produk'] = $this->Crud_m->view_where_order_limit('templates',array('templates_status'=>'publish'),'templates_id','desc',$dari,'5');
 					$data['posts']            = $this->Crud_m->get_by_id_post($id,'templates_id','templates','templates_judul_seo');
           $data['posts_templates_category']= $this->Crud_m->view_one_limit('templates_category','templates_cat_status','templates_cat_id','ASC',$dari,'10');
 
